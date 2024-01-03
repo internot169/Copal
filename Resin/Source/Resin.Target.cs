@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class ResinTarget : TargetRules
 {
-	public ResinTarget(TargetInfo Target) : base(Target)
+	public ResinTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("Resin");
+		ExtraModuleNames.AddRange( new string[] { "Resin" } );
 	}
 }

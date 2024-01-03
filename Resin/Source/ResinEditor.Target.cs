@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class ResinEditorTarget : TargetRules
 {
-	public ResinEditorTarget(TargetInfo Target) : base(Target)
+	public ResinEditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("Resin");
+		ExtraModuleNames.AddRange( new string[] { "Resin" } );
 	}
 }
