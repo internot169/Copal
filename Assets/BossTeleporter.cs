@@ -1,19 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
-using Unity.VisualScripting;
 using UnityEngine;
 
-
-
-public class Teleporter : MonoBehaviour
+public class BossTeleporter : Teleporter
 {
-    public int x = 0;
-    public int y = 0;
-    public int z = 0;
-
-    public bool isOn = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +18,16 @@ public class Teleporter : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
+        // still inherits the x y z if you want to put some failsafe values from Teleporter 
         // change this to player idiots
         if(other.name == "Capsule" && isOn){
-            // teleports to a random location with the same y
             other.transform.position = new Vector3 (x, y, z);
+            SpawnBoss();
         }
+    }
+
+    void SpawnBoss(){
+        Debug.Log("spawn the boss using game manager");
+        // GameManager.SpawnBoss() or something
     }
 }
