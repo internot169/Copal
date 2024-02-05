@@ -4,24 +4,13 @@ using UnityEngine;
 
 public class BossTeleporter : Teleporter
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter (Collider other)
     {
         // still inherits the x y z if you want to put some failsafe values from Teleporter 
         // change this to player idiots
         if(other.name == "Capsule" && isOn){
-            other.transform.position = new Vector3 (x, y, z);
+            other.transform.position = next.spawnLocation.position;
             SpawnBoss();
         }
     }

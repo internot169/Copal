@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class BatTeleporter : Teleporter
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter (Collider other)
     {
         // still inherits the x y z if you want to put some failsafe values from Teleporter 
@@ -28,6 +16,7 @@ public class BatTeleporter : Teleporter
 
     void MoveRandomRoom(Collider other)
     {
+        // TODO: make it pick a random room and move you there
         other.transform.position = new Vector3 (Random.Range(-10f, 10f), other.transform.position.y, Random.Range(-10f, 10f));
         Debug.Log("Tps you to the main room random pos, can be changed");
     }
