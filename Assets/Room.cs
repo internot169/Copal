@@ -10,6 +10,9 @@ public class Room : MonoBehaviour
 
     public string info = "";
 
+    // TODO: Visited var
+    public bool visited = false;
+
     // TODO: Make an active room system
     public void Awake(){
         Debug.Log(adjacencyCheck());
