@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -772,8 +772,8 @@ Rigidbody:
   m_GameObject: {fileID: 803102189}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.5
-  m_AngularDrag: 0.5
+  m_Drag: 5
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -868,11 +868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5964b298e5481f45866c26893cfe086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 7
-  AccelRate: 20
-  DecelRate: 20
-  AirborneAccel: 5
-  JumpSpeed: 5
+  MovementSpeed: 11
+  AccelRate: 5000
+  DecelRate: 50
+  AirborneAccel: 100
+  JumpSpeed: 20
   FudgeExtra: 0.5
   MaximumSlope: 45
 --- !u!136 &803102199
@@ -1126,8 +1126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 803102194}
-  sensitivityX: 100
-  sensitivityY: 100
+  sensitivityX: 200
+  sensitivityY: 200
   minimumX: -360
   maximumX: 360
   minimumY: -60
