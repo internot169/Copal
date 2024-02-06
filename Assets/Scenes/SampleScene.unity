@@ -347,7 +347,7 @@ MonoBehaviour:
   AccelRate: 5000
   DecelRate: 50
   AirborneAccel: 100
-  JumpSpeed: 20
+  JumpSpeed: 27
   FudgeExtra: 0.5
   MaximumSlope: 45
 --- !u!136 &803102199
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 803102194}
-  sensitivityX: 200
-  sensitivityY: 200
+  sensitivityX: 1750
+  sensitivityY: 1750
   minimumX: -360
   maximumX: 360
   minimumY: -60
