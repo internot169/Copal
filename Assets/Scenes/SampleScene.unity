@@ -558,7 +558,7 @@ MonoBehaviour:
   AccelRate: 5000
   DecelRate: 50
   AirborneAccel: 100
-  JumpSpeed: 20
+  JumpSpeed: 27
   FudgeExtra: 0.5
   MaximumSlope: 45
 --- !u!136 &803102199
