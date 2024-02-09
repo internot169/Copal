@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.WSA;
 
 
 
 public class Teleporter : MonoBehaviour
 {
-    public int x = 0;
-    public int y = 0;
-    public int z = 0;
+    RoomManager nextRoom;
 
     public bool isOn = true;
     // Start is called before the first frame update
@@ -25,13 +24,24 @@ public class Teleporter : MonoBehaviour
     {
         
     }
+    
+    // set destination room.
+    public void SetRoom(RoomManager room){
+        nextRoom = room;
+    }
 
     void OnTriggerEnter (Collider other)
     {
         // change this to player idiots
         if(other.name == "Capsule" && isOn){
-            // teleports to a random location with the same y
-            other.transform.position = new Vector3 (x, y, z);
+            // pick a room using GM which should return this
+            ActivateUnique(nextRoom);
+            nextRoom.Enter(other);
         }
+    }
+
+    // normal teleporters don't need anything
+    public virtual void ActivateUnique(RoomManager nextRoom){
+        return;
     }
 }
