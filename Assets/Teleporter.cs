@@ -10,6 +10,7 @@ using UnityEngine.WSA;
 
 public class Teleporter : MonoBehaviour
 {
+
     RoomManager nextRoom;
 
     public bool isOn = true;
