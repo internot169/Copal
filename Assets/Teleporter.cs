@@ -19,6 +19,8 @@ public class Teleporter : MonoBehaviour
         if(other.name == "Capsule" && isOn){
             // teleports to a random location with the same y
             MovePlayer(other);
+            // check the next rooms for obstacles
+            next.adjacencyCheck();
         }
     }
 

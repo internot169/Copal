@@ -18,22 +18,29 @@ public class Room : MonoBehaviour
     // TODO: Make an active room system
     // Why is this even a thing
     public void Awake(){
-        Debug.Log(adjacencyCheck());
         // clears upon entering for testing. 
         ClearRoom();
     }
 
 
-    // I think we should consider check the types of doors, and make GameManager spawn them in as we go. 
-    // this also requires the next room to be preloaded with its doors, when we only need the doors of rooms
-    // that we have visited. 
-    public string adjacencyCheck(){
-        string adjacent = "";
+    public bool[] adjacencyCheck(){
+        // first place is bat, second is pit, third is boss. 
+        // boolean array over string, easier to check. 
+        bool[] adjacent = new bool[3];
+        // divider
+        Debug.Log("--------");
         for (int i = 0; i < doors.Length; i++)
-        {
-            if (doors[i].next.info != ""){
-                adjacent += doors[i].next.info;
-                adjacent += " ";
+        {   
+            
+            // Instead of infinitely cascading larger tree explorations we just check door type.
+            if (doors[i] is BatTeleporter){
+                Debug.Log("I hear wings");
+                adjacent[0] = true;
+            }else if(doors[i] is BossTeleporter){
+                Debug.Log("I smell a wumpus");
+                adjacent[2] = true;
+            }else{
+                Debug.Log("normal tp");
             }
         }
         return adjacent;
