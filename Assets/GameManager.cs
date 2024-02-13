@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {   
     Room cur;
 
+    int visitedCount = 0;
+
     HashSet<Room> visited = new HashSet<Room>();
     Room[] rooms;
     // Start is called before the first frame update
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
         }
         // add to visited list. Assume we mark the first room. 
         visited.Add(newRoom);
+        // measure for score. 
+        visitedCount++;
         // return the room back to the room object to define its teleporters. 
         return newRoom;
     }
