@@ -7,16 +7,15 @@ using UnityEngine;
 
 
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : PlayerCollider
 {
     public Room next;
     
     public bool isOn = true;
 
-    void OnTriggerEnter (Collider other)
+    public override void InteractPlayer(Collider other)
     {
-        // change this to player please
-        if(other.name == "Capsule" && isOn){
+        if(isOn){
             // teleports to a random location with the same y
             MovePlayer(other);
             // check the next rooms for obstacles
