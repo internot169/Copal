@@ -25,6 +25,7 @@ public class PlayerInfo : MonoBehaviour
             currentHealth -= damage;
             HealthBar.value = currentHealth;
         }
+        Debug.Log("Took damage, now at: " + currentHealth);
     }
 
     void Update()
