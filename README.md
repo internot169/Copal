@@ -3,4 +3,4 @@ Anmol - Player Movement and UI
 Yile - Room Basecode
 Ryan - 3D modeling
 Everyone else - idk
-Jack and Rishay - senior fools
+Seamus and Jack and Rishay - senior fools
