@@ -744,6 +744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eedc1cafc147014d80898e3f0919710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_in: 0
 --- !u!65 &1026271482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1767,6 +1768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 0}
+  roomLength: 0
+  roomBuffer: 0
 --- !u!1 &1999196197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2047,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1126130094}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 318624881463649963, guid: 0547d267e77084e4982d3473c85b66db, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4384939126004553459, guid: 0547d267e77084e4982d3473c85b66db, type: 3}
       insertIndex: 4
