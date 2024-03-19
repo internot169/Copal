@@ -29,7 +29,6 @@ public class PlayerInfo : MonoBehaviour
             Debug.Log("owch");
             TimeSinceHurt = 0;
         }
-        Debug.Log("Took damage, now at: " + currentHealth);
     }
 
     void Update()
