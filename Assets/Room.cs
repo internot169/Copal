@@ -8,6 +8,8 @@ public class Room : MonoBehaviour
     // Spawn location, relative to the center of the room
     public Transform spawnLocation;
     public Teleporter[] doors;
+    
+    public int nextToAssign = 0;
 
     public string info = "";
 
@@ -19,7 +21,7 @@ public class Room : MonoBehaviour
     // Why is this even a thing
     public void Awake(){
         // clears upon entering for testing. 
-        ClearRoom();
+        SetRoom();
     }
 
 
@@ -48,8 +50,8 @@ public class Room : MonoBehaviour
 
     // does all the things when you clear the room
     // I think instead of physical wall we should disable TPs but up to you. 
-    public void ClearRoom(){
+    public void SetRoom(){
         // please rename this thing
-        transform.Find("RoomBase/teast1").gameObject.SetActive(false);
+
     }
 }
