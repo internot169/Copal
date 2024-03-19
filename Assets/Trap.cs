@@ -12,10 +12,14 @@ public class Trap : PlayerCollider
         
     }
 
+    // if interacting with player, then player is inside. 
+    // Allow children to handle differently based on case. 
     public override void InteractPlayer(Collider other)
     {
         player_in = true;
     }
+
+    // introduce detection for when the player leaves the trap. 
 
     public void OnTriggerExit(Collider other)
     {

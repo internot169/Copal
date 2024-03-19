@@ -7,6 +7,7 @@ public class Room : MonoBehaviour
 {
     // Spawn location, relative to the center of the room
     public Transform spawnLocation;
+    // doors of the room. 
     public Teleporter[] doors;
     
     public int nextToAssign = 0;
@@ -15,6 +16,9 @@ public class Room : MonoBehaviour
 
     // TODO: Visited var
     // Why not mark this in GM?
+    
+    // Actually we totally should mark this in GM, so do that when 
+    // we actually have MVP fully going -YS
     public bool visited = false;
 
     // TODO: Make an active room system

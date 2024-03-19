@@ -5,6 +5,8 @@ using UnityEngine;
 public class PitTeleporter : Teleporter
 {
 
+    // inherits most of the logic from teleporter, just needs to add
+    // conditional for trivia. 
     public override void MovePlayer(Collider other)
     {
         // call trivia thing whatever we want to do 

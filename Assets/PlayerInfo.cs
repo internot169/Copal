@@ -19,8 +19,11 @@ public class PlayerInfo : MonoBehaviour
         currentHealth = Health;
     }
 
+    // Take damage script for other objects to interact. 
     public void TakeDamage(float damage)
     {
+        // if it's been a quarter second since last tick, then
+        // damage again. 
         if (TimeSinceHurt > 0.25)
         {
             currentHealth = Math.Max(currentHealth - damage, 0);
@@ -31,8 +34,10 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
+    // continuously damage the player
     void Update()
     {
+        // testing script for manual damaging. 
         if (TimeSinceHurt > 0.25)
         {
             if (Input.GetKey("m"))
@@ -44,7 +49,7 @@ public class PlayerInfo : MonoBehaviour
                 TimeSinceHurt = 0;
             }
         }
-
+        // increment timer. 
         TimeSinceHurt += 0.25 * Time.deltaTime;
     }
 }

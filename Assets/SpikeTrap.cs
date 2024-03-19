@@ -9,6 +9,7 @@ public class SpikeTrap : Trap
     GameObject player;
     void Start()
     {
+        // find reference to player
         player = GameObject.Find("Player");
     }
 
@@ -16,8 +17,9 @@ public class SpikeTrap : Trap
     // Update is called once per frame
     void Update()
     {
+        // if player is in the trap, take damage. 
         if(player_in){
-            player.GetComponent<PlayerInfo>().TakeDamage(20);
+            player.GetComponent<PlayerInfo>().TakeDamage(10);
         }
         
     }
