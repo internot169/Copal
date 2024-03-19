@@ -13,7 +13,8 @@ public class PlayerCollider : MonoBehaviour
     void OnTriggerEnter (Collider other)
     {
         // change this to player please
-        if(other.name == "Capsule"){
+        // I believe in you Yile
+        if(other.name == "Player"){
             InteractPlayer(other);
         }
     }
