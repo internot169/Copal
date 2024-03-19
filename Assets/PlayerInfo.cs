@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
+using System;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -20,10 +21,13 @@ public class PlayerInfo : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (TimeSinceHurt > 1)
+        if (TimeSinceHurt > 0.25)
         {
-            currentHealth -= damage;
+            currentHealth = Math.Max(currentHealth - damage, 0);
             HealthBar.value = currentHealth;
+            numberHealth.text = currentHealth.ToString();
+            Debug.Log("owch");
+            TimeSinceHurt = 0;
         }
         Debug.Log("Took damage, now at: " + currentHealth);
     }
