@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// base player collider class, which handles trigger enter and 
+// other various things to add more clear inheritance. 
 public class PlayerCollider : MonoBehaviour
 {
     // Start is called before the first frame update
