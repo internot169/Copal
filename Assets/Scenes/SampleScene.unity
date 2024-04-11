@@ -2214,7 +2214,7 @@ MonoBehaviour:
   fireRate: 0.25
   weaponRange: 50
   hitForce: 100
-  gunEnd: {fileID: 1313969921}
+  gunEnd: {fileID: 853372800}
   BulletTrail: {fileID: 1940992884}
 --- !u!1 &1351984156
 GameObject:
@@ -3051,7 +3051,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
 --- !u!1 &1946115736
