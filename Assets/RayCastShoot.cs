@@ -10,15 +10,18 @@ public class RayCastShoot : MonoBehaviour
     public float hitForce = 100f;
     public Transform gunEnd;
 
+    [SerializeField]
+    private TrailRenderer BulletTrail;
+
     private Camera fpsCam;
-    private WaitForSeconds shotDuration = new WaitForSeconds(0.01f);
+    private float shotDuration = 0.01f;
     private AudioSource gunAudio;
     private LineRenderer laserLine;
     private float nextFire;
 
     void Start()
     {
-        laserLine = GetComponent<LineRenderer>();
+        // laserLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         fpsCam = GetComponentInParent<Camera>();
     }
@@ -28,14 +31,16 @@ public class RayCastShoot : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            ShotEffect();
+            // laserLine.enabled = true;
             Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit hit;
-            laserLine.SetPosition(0, gunEnd.position);
+            // laserLine.SetPosition(0, gunEnd.position);
 
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
             {
-                laserLine.SetPosition(1, hit.point);
+                TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 ShootableBox health = hit.collider.GetComponent<ShootableBox>();
 
                 if (health != null)
@@ -50,17 +55,32 @@ public class RayCastShoot : MonoBehaviour
             }
             else
             {
-                laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * weaponRange));
+                TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, gunEnd.position + transform.forward.normalized, Vector3.zero, false));
             }
+            
         }
     }
 
-    private IEnumerator ShotEffect()
+    private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
     {
-        gunAudio.Play();
-        laserLine.enabled = true;
-        yield return shotDuration;
-        laserLine.enabled = false;
-        yield return null;
+        // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
+        // moving slowly when hitting something close, and not
+        Vector3 startPosition = Trail.transform.position;
+        float distance = Vector3.Distance(Trail.transform.position, HitPoint);
+        float remainingDistance = distance;
+
+        while (remainingDistance > 0)
+        {
+            Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
+
+            remainingDistance -= 200f * Time.deltaTime;
+
+            yield return null;
+        }
+        Trail.transform.position = HitPoint;
+
+        Destroy(Trail.gameObject, Trail.time);
     }
 }
