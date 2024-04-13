@@ -75,7 +75,7 @@ public class RayCastShoot : MonoBehaviour
         {
             Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
 
-            remainingDistance -= 70f * Time.deltaTime;
+            remainingDistance -= 200f * Time.deltaTime;
 
             yield return null;
         }
