@@ -6,8 +6,10 @@ using System.Threading;
 
 public class PlayerInfo : MonoBehaviour
 {
+    public int roomNum;
     public Slider HealthBar;
     public Text numberHealth;
+    public Text currentRoom;
     public float Health = 100;
     public double TimeSinceHurt = 0;
 
@@ -16,6 +18,12 @@ public class PlayerInfo : MonoBehaviour
     void Start()
     {
         currentHealth = Health;
+        ChangeRoom(1);
+    }
+
+    public void ChangeRoom(int i){
+        roomNum = i;
+        currentRoom.text = "Room " + roomNum.ToString();
     }
 
     public void TakeDamage(float damage)
