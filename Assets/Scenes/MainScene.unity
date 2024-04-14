@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 849054435}
   - component: {fileID: 849054434}
   m_Layer: 0
-  m_Name: RoomGenerator
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,7 +885,6 @@ GameObject:
   - component: {fileID: 1062259675}
   - component: {fileID: 1062259674}
   - component: {fileID: 1062259673}
-  - component: {fileID: 1062259672}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -915,20 +914,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1062259672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062259670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc3a3e9f47529334abc624e1d123f25b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  next: {fileID: 0}
-  isOn: 1
 --- !u!114 &1062259673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,8 +1050,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 114.1, y: 16.8}
-  m_SizeDelta: {x: 34.3353, y: 34.3353}
+  m_AnchoredPosition: {x: 25.2, y: 33.5}
+  m_SizeDelta: {x: 12.0494, y: 12.0494}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135489607
 MonoBehaviour:
@@ -1146,10 +1131,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1182,8 +1167,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.579926, y: 16.799995}
-  m_SizeDelta: {x: 72.447, y: 27.5221}
+  m_AnchoredPosition: {x: -7.9, y: 34.442}
+  m_SizeDelta: {x: 43.4753, y: 27.0764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1259156008
 GameObject:
@@ -1286,8 +1271,8 @@ Transform:
   m_GameObject: {fileID: 1326327559}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.21353, y: 17.11808, z: 0}
-  m_LocalScale: {x: 352.15, y: 390.25, z: 1}
+  m_LocalPosition: {x: -6.8205, y: 34.8, z: 0}
+  m_LocalScale: {x: 160.14465, y: 160.4708, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1134983694}
@@ -1376,10 +1361,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1926045917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 72.44699, y: 27.522095}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -28.372618, y: -14.983}
+  m_SizeDelta: {x: 73.7238, y: 27.5221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1499446046
 MonoBehaviour:
@@ -1403,7 +1388,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1571,8 +1556,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.58481, y: 16.802528}
-  m_SizeDelta: {x: 179.3741, y: 65.5006}
+  m_AnchoredPosition: {x: -6.6692, y: 34.4416}
+  m_SizeDelta: {x: 82.866, y: 30.2225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840301293
 MonoBehaviour:
@@ -1660,8 +1645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.456604, y: -26.059402}
-  m_SizeDelta: {x: 100.91321, y: 52.118805}
+  m_AnchoredPosition: {x: -29.01075, y: -14.9832}
+  m_SizeDelta: {x: 58.0215, y: 29.9664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1926045918
 MonoBehaviour:
@@ -1846,10 +1831,10 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2144619044}
-  - {fileID: 551596288}
   - {fileID: 849054435}
   - {fileID: 1062259671}
   - {fileID: 22602472}
   - {fileID: 476158526}
   - {fileID: 454954902}
+  - {fileID: 2144619044}
+  - {fileID: 551596288}

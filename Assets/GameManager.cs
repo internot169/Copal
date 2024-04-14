@@ -6,6 +6,12 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {   
+    public void win(){
+        // Calculate score and stuff
+        // Load to server
+    }
+    /*
+    We don't need any of this code
     Room cur;
 
     int visitedCount = 0;
@@ -39,4 +45,5 @@ public class GameManager : MonoBehaviour
         // return the room back to the room object to define its teleporters. 
         return newRoom;
     }
+    */
 }
