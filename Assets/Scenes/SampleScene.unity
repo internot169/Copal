@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2664,10 +2664,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunDamage: 1
+  altFireDamage: 2
   fireRate: 0.25
+  altFireRate: 2
+  altFireAOE: 2.5
   weaponRange: 50
   hitForce: 100
   gunEnd: {fileID: 1366537811}
+  prefab: {fileID: 8165200480275990248, guid: 69a7c8299c8689647a5184a51fb4f011, type: 3}
   BulletTrail: {fileID: 1940992884}
 --- !u!1 &1348946657
 GameObject:

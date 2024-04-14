@@ -5,10 +5,14 @@ using System.Threading;
 public class RayCastShoot : MonoBehaviour
 {
     public int gunDamage = 1;
+    public int altFireDamage = 2;
     public float fireRate = 0.25f;
+    public float altFireRate = 2f;
+    public float altFireAOE = 2.5f;
     public float weaponRange = 50f;
     public float hitForce = 100f;
     public Transform gunEnd;
+    public Object prefab;
 
     [SerializeField]
     private TrailRenderer BulletTrail;
@@ -18,6 +22,7 @@ public class RayCastShoot : MonoBehaviour
     private AudioSource gunAudio;
     private LineRenderer laserLine;
     private float nextFire;
+    private float nextAltFire;
 
     void Start()
     {
@@ -61,8 +66,53 @@ public class RayCastShoot : MonoBehaviour
             }
             
         }
-    }
+        if (Input.GetButtonDown("AltFire") && Time.time > nextAltFire)
+        {
+            nextAltFire = Time.time + altFireRate;
 
+            Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+            RaycastHit hit;
+            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange)){
+                // If something is hit. stores information in the variable hit from RaycastHit
+
+                // Different from above, we instantiate a explosion at the location
+                // OverlapSphere returns all colliders within the area
+                // center is hit.point
+                // radius is predetermined
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, altFireAOE);
+                Instantiate(prefab, hit.point, Quaternion.identity);
+
+                foreach (var hitCollider in hitColliders)
+                {
+                    // check if is player
+                    PlayerInfo health = hitCollider.GetComponent<PlayerInfo>();
+                    if (health != null){
+                        if (health != null)
+                        {
+                            health.TakeDamage(altFireDamage);
+                        }
+                    }
+                    else{
+                        ShootableBox bhealth = hitCollider.GetComponent<ShootableBox>();
+
+                        if (bhealth != null)
+                        {
+                            bhealth.Damage(altFireDamage);
+                        }
+
+                    }
+
+                    if (hitCollider.gameObject.GetComponent<Rigidbody>() != null)
+                    {
+                        Vector3 closePoint = hitCollider.ClosestPoint(hit.point);
+                        Vector3 forceVector = closePoint - hit.point;
+                        hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(forceVector * hitForce * 10f);
+                    }
+                }
+            }
+        }
+    }
+    
     private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
     {
         // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
