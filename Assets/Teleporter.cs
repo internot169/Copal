@@ -32,5 +32,6 @@ public class Teleporter : PlayerCollider
         // patch to make sure i stop clipping into the ground. 
         // we should use a different transform so its cleaner. 
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+        other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
     }
 }

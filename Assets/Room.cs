@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public int roomNum;
     // Spawn location, relative to the center of the room
     public Transform spawnLocation;
     // doors of the room. 
     public Teleporter[] doors;
+    public int[] connectedTo;
     
     public int nextToAssign = 0;
 

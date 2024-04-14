@@ -23,30 +23,42 @@ public class RoomGenerator : MonoBehaviour
             nextRoomPos += roomLength + roomBuffer;
             ob.name = "Room " + ((int) i + 1).ToString();
             rooms[i] = (Room) ob.GetComponent<Room>();
+            rooms[i].roomNum = i + 1;
+            rooms[i].connectedTo = new int[3] {-1, -1, -1};
         }
         for (int i = 0; i < 30; i++)
         {
-            Room curr = rooms[i];
             for (int j = rooms[i].nextToAssign; j < 3; j++)
             {
                 // Pick a random room, add it to connectedTo
                 int rand = Random.Range(0, 30);
-                Debug.Log(rand);
-                // Keep generating until find an empty room
-                while (rooms[rand].nextToAssign > 2){
+                // Keep generating until find a non-full room that has not been already connected to by this node
+                // Mathematically, this should always have a termination condition
+                while (rooms[rand].nextToAssign > 2 || roomAlreadyConnected(rand, rooms[i].connectedTo)){
                     rand = Random.Range(0, 30);
                 }
-
-                // TODO: UNIQUENESS
                 
                 // This indiscriminately adds doors to rooms (without regards to boss)
                 rooms[i].doors[j].next = rooms[rand];
+                rooms[i].connectedTo[j] = rand;
 
                 // This indiscriminately adds doors to rooms (without regards to boss)
                 // IE, the boss system is currently not working and we need some reinstantiation logic if we have a room that is a boss
+                // THe backwards logic is a bit buggy
                 rooms[rand].doors[rooms[rand].nextToAssign].next = rooms[i];
+                rooms[rand].connectedTo[rooms[rand].nextToAssign] = i;
                 rooms[rand].nextToAssign++;
             }
         }
+    }
+
+    private bool roomAlreadyConnected(int check, int[] connected){
+        for (int i = 0; i < 3; i++)
+        {
+            if (connected[i] == check){
+                return true;
+            }
+        }
+        return false;
     }
 }
