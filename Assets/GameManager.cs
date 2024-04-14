@@ -6,6 +6,10 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {   
+    public void win(){
+        // Calculate score and stuff
+        // Load to server
+    }
     /*
     We don't need any of this code
     Room cur;
