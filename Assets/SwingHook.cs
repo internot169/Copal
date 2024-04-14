@@ -16,7 +16,7 @@ public class SwingHook : MonoBehaviour
     public LayerMask whatIsGrappleable;
 
     [Header("Swinging")]
-    private float maxSwingDist = 25f;
+    private float maxSwingDist = 35f;
     private Vector3 swingPoint;
     private SpringJoint joint;
     // Start is called before the first frame update
