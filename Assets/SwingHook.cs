@@ -56,7 +56,7 @@ public class SwingHook : MonoBehaviour
     }
 
     private void checkForSwingPoints(){
-        if (joint !=null) return;
+        if (joint != null) return;
 
         RaycastHit sphereCastHit;
         Physics.SphereCast(cam.position, predictionSphereCastRadius, cam.forward, out sphereCastHit, maxSwingDist, whatIsGrappleable);
