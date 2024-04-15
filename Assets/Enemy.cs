@@ -9,12 +9,19 @@ public class Enemy : Shootable
 
     NavMeshAgent agent;
 
-    [SerializeField] LayerMask groundLayer, playerLayer;
+    [Header("Navigation")]
+    [SerializeField] LayerMask groundLayer;
+    LayerMask playerLayer;
 
     Vector3 destPoint;
     bool walkpointSet;
     [SerializeField] float range;
     // Start is called before the first frame update
+
+    [Header("AugmentModifications")]
+    int slow_tier;
+    int slow_timer;
+    float apply_timer;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -34,6 +41,14 @@ public class Enemy : Shootable
 
         // if i'm close to dest, reset destination. 
         if(Vector3.Distance(transform.position, destPoint) < 10) walkpointSet = false;
+        // if it's been an eight second since last tick, then
+        // apply again. 
+        if (apply_timer > 0.125)
+        {
+            ApplyEffects();
+            apply_timer = 0;
+        }
+        apply_timer += Time.deltaTime;
     }
 
     void SearchForDest()
@@ -48,5 +63,33 @@ public class Enemy : Shootable
         {
             walkpointSet = true;
         }
+    }
+
+    public void MarkSlows()
+    {
+        slow_timer = 10;
+        if(slow_tier < 10)
+        {
+            slow_tier += 1;
+        }
+        Debug.Log("" + slow_timer);
+    }
+
+    public void ApplyEffects()
+    {
+        // Apply slows
+        agent.speed = 12 - slow_tier;
+        if (slow_timer == 0){
+            // busy writing, theoretically we should add a case
+            // where we do nothing if both are 0, but i'm lazy. 
+            slow_tier = 0;
+        }else{
+            // to be honest, it doesn't matter if the slow
+            // timer ticks to negative, but its better to be
+            // safe in case of overflow. 
+            slow_timer -= 1;
+        }
+        Debug.Log(slow_timer + " " + slow_tier);
+            
     }
 }
