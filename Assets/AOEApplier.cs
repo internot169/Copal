@@ -18,13 +18,10 @@ public class AOEApplier : MonoBehaviour
         apply_timer = 0;
     }
 
-    // if interacting with player, then player is inside. 
-    // Allow children to handle differently based on case. 
-    public void MarkStacks(Collider other)
+    // mark the stacks to be applied by this aoe applicator.  
+    public virtual void MarkStacks(Collider other)
     {
-        GameObject gameObject = other.gameObject;
-        // apply slow logic for now. 
-        gameObject.GetComponent<Enemy>().MarkSlows();
+        return;
     }
     
     //called when something enters the trigger

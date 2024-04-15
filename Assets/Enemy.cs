@@ -78,7 +78,7 @@ public class Enemy : Shootable
     public void ApplyEffects()
     {
         // Apply slows
-        agent.speed = 12 - slow_tier;
+        agent.speed = 10 - slow_tier;
         if (slow_timer == 0){
             // busy writing, theoretically we should add a case
             // where we do nothing if both are 0, but i'm lazy. 

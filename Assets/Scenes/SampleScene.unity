@@ -2429,7 +2429,7 @@ GameObject:
   - component: {fileID: 1088587325}
   - component: {fileID: 1088587328}
   m_Layer: 0
-  m_Name: AOEApplier
+  m_Name: SlowApplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2532,7 +2532,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1088587323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d70b8cf4edc9cbf4fa156abe0584693c, type: 3}
+  m_Script: {fileID: 11500000, guid: 24d8008aff6a99b4eab81f719d5eca70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1126130088
