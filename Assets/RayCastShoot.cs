@@ -46,7 +46,7 @@ public class RayCastShoot : MonoBehaviour
                 TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
-                ShootableBox health = hit.collider.GetComponent<ShootableBox>();
+                Shootable health = hit.collider.GetComponent<Shootable>();
 
                 if (health != null)
                 {
@@ -93,7 +93,7 @@ public class RayCastShoot : MonoBehaviour
                         }
                     }
                     else{
-                        ShootableBox bhealth = hitCollider.GetComponent<ShootableBox>();
+                        Shootable bhealth = hitCollider.GetComponent<Shootable>();
 
                         if (bhealth != null)
                         {
