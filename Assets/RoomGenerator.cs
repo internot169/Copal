@@ -12,6 +12,7 @@ public class RoomGenerator : MonoBehaviour
         // Make the base room
         createRooms();
     }
+    int wumpusRoom = Random.Range(0, 30);
     public void createRooms(){
         // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
@@ -28,26 +29,31 @@ public class RoomGenerator : MonoBehaviour
         }
         for (int i = 0; i < 30; i++)
         {
-            for (int j = rooms[i].nextToAssign; j < 3; j++)
+            // Build a circle first
+            // Test mod 30 logic
+            rooms[i].doors[0].next = rooms[(i + 1) % 30];
+            rooms[i].connectedTo[0] = (i + 1) % 30;
+            if ((i + 1) % 30 == wumpusRoom) {
+                // cast rooms[i].doors[j] as BossTeleporter
+            }
+
+            // Load the rest of the links randomly
+            // One feature is to include really necessary rooms at high-degree nodes
+            for (int j = 1; j < 3; j++)
             {
                 // Pick a random room, add it to connectedTo
                 int rand = Random.Range(0, 30);
-                // Keep generating until find a non-full room that has not been already connected to by this node
-                // Mathematically, this should always have a termination condition
-                while (rooms[rand].nextToAssign > 2 || roomAlreadyConnected(rand, rooms[i].connectedTo)){
+                // Keep generating until find a room that has not been already connected to by this node
+                while (roomAlreadyConnected(rand, rooms[i].connectedTo)){
                     rand = Random.Range(0, 30);
                 }
                 
                 // This indiscriminately adds doors to rooms (without regards to boss)
                 rooms[i].doors[j].next = rooms[rand];
                 rooms[i].connectedTo[j] = rand;
-
-                // This indiscriminately adds doors to rooms (without regards to boss)
-                // IE, the boss system is currently not working and we need some reinstantiation logic if we have a room that is a boss
-                // THe backwards logic is a bit buggy
-                rooms[rand].doors[rooms[rand].nextToAssign].next = rooms[i];
-                rooms[rand].connectedTo[rooms[rand].nextToAssign] = i;
-                rooms[rand].nextToAssign++;
+                if (rand == wumpusRoom){
+                    // cast rooms[i].doors[j] as BossTeleporter
+                }
             }
         }
     }

@@ -6,44 +6,32 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {   
+    public GameObject wumpusObj;
+
+    public static GameManager instance;
+
+    private bool fighting = false;
+ 
+    void Start(){
+        instance = this;
+    }
+    public void bossFight(){
+        wumpusObj.SetActive(true);
+        fighting = true;
+    }
+
     public void win(){
         // Calculate score and stuff
         // Load to server
-    }
-    /*
-    We don't need any of this code
-    Room cur;
-
-    int visitedCount = 0;
-
-    HashSet<Room> visited = new HashSet<Room>();
-    Room[] rooms;
-    // Start is called before the first frame update
-    void Start()
-    {
-        // make a variable that has all rooms or call. 
+        Debug.Log("YOU WON");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    Room PickNextRoom(){
-        // make a new room
-        Room newRoom = rooms[Random.Range(0, rooms.Length)];
-        // check if the room has already been visited. 
-        // if so, then generate a new room. 
-        while (!visited.Contains(newRoom)){
-            newRoom = rooms[Random.Range(0, rooms.Length)];
+    public void Update(){
+        if (fighting) {
+            if (wumpusObj.GetComponent<ShootableBox>().currentHealth <= 0){
+                win();
+                fighting = false;
+            }
         }
-        // add to visited list. Assume we mark the first room. 
-        visited.Add(newRoom);
-        // measure for score. 
-        visitedCount++;
-        // return the room back to the room object to define its teleporters. 
-        return newRoom;
     }
-    */
 }
