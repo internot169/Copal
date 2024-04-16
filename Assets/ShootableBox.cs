@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShootableBox : MonoBehaviour
+public class Shootable : MonoBehaviour
 {
-
+    [Header("Shootable")]
     //The box's current health point total
     public int currentHealth = 3;
 
