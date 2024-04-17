@@ -19,8 +19,12 @@ public class Enemy : Shootable
     // Start is called before the first frame update
 
     [Header("AugmentModifications")]
+    [Header("Slow")]
     int slow_tier;
     int slow_timer;
+    [Header("Burn")]
+    int burn_tier;
+    int burn_timer;
     float apply_timer;
     void Start()
     {
@@ -72,7 +76,15 @@ public class Enemy : Shootable
         {
             slow_tier += 1;
         }
-        Debug.Log("" + slow_timer);
+    }
+
+    public void MarkBurns()
+    {
+        burn_timer = 10;
+        if(burn_tier < 10)
+        {
+            burn_tier += 1;
+        }
     }
 
     public void ApplyEffects()
@@ -89,7 +101,24 @@ public class Enemy : Shootable
             // safe in case of overflow. 
             slow_timer -= 1;
         }
+        Debug.Log("slow");
         Debug.Log(slow_timer + " " + slow_tier);
+        // Apply burn
+        if (burn_timer % 2 == 0){
+            Damage(burn_tier/2);
+        }
+        if (burn_timer == 0){
+            // busy writing, theoretically we should add a case
+            // where we do nothing if both are 0, but i'm lazy. 
+            burn_tier = 0;
+        }else{
+            // to be honest, it doesn't matter if the slow
+            // timer ticks to negative, but its better to be
+            // safe in case of overflow. 
+            burn_timer -= 1;
+        }
+        Debug.Log("burn");
+        Debug.Log(burn_timer + " " + burn_tier);
             
     }
 }
