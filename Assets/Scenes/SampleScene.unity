@@ -1120,6 +1120,7 @@ GameObject:
   - component: {fileID: 389274439}
   - component: {fileID: 389274438}
   - component: {fileID: 389274437}
+  - component: {fileID: 389274440}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -1213,6 +1214,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389274435}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &389274440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389274435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfc40b311c04be4b903d4a88efd8ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &499819300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1734,7 @@ Transform:
   - {fileID: 963194228}
   - {fileID: 1088587324}
   - {fileID: 1255757601}
+  - {fileID: 389274436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &803102198
