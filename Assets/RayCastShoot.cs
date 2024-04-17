@@ -50,6 +50,8 @@ public class RayCastShoot : MonoBehaviour
                 TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                // call drone trail
+                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
                 Shootable health = hit.collider.GetComponent<Shootable>();
 
                 if (health != null)
@@ -67,7 +69,8 @@ public class RayCastShoot : MonoBehaviour
                 TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, gunEnd.position + transform.forward.normalized, Vector3.zero, false));
-                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(trail, hit.point, Vector3.zero));  
+                // call drone trail
+                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, Vector3.zero));  
             }
             
         }
@@ -122,6 +125,7 @@ public class RayCastShoot : MonoBehaviour
     {
         // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
         // moving slowly when hitting something close, and not
+
         Vector3 startPosition = Trail.transform.position;
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
         float remainingDistance = distance;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DroneCode : MonoBehaviour
 {
-    public IEnumerator SpawnDroneTrail(TrailRenderer Trail, Vector3 HitPosition, Vector3 HitNormal)
+    public IEnumerator SpawnDroneTrail(TrailRenderer BulletTrail, Vector3 HitPoint, Vector3 HitNormal)
     {
         // This has been updated from the video implementation to fix a commonly raised issue about the bullet trails
         // moving slowly when hitting something close, and not
-        Vector3 HitPoint = HitPosition - transform.position;
-        HitPoint.Normalize();
+        TrailRenderer Trail = Instantiate(BulletTrail, transform.position, Quaternion.identity);
+        Debug.Log("Drone Drawn");
         Vector3 startPosition = Trail.transform.position;
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
         float remainingDistance = distance;
