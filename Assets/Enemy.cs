@@ -76,7 +76,6 @@ public class Enemy : Shootable
         {
             slow_tier += 1;
         }
-        Debug.Log("" + slow_timer);
     }
 
     public void MarkBurns()
@@ -86,7 +85,6 @@ public class Enemy : Shootable
         {
             burn_tier += 1;
         }
-        Debug.Log("" + burn_timer);
     }
 
     public void ApplyEffects()
@@ -106,7 +104,9 @@ public class Enemy : Shootable
         Debug.Log("slow");
         Debug.Log(slow_timer + " " + slow_tier);
         // Apply burn
-        currentHealth -= burn_tier;
+        if (burn_timer % 2 == 0){
+            Damage(burn_tier/2);
+        }
         if (burn_timer == 0){
             // busy writing, theoretically we should add a case
             // where we do nothing if both are 0, but i'm lazy. 
