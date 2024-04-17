@@ -23,12 +23,16 @@ public class RayCastShoot : MonoBehaviour
     private LineRenderer laserLine;
     private float nextFire;
     private float nextAltFire;
+    
+    [Header("Augments")]
+    private GameObject drone;
 
     void Start()
     {
         // laserLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         fpsCam = GetComponentInParent<Camera>();
+        drone = GameObject.Find("Drone");
     }
 
     void Update()
@@ -63,6 +67,7 @@ public class RayCastShoot : MonoBehaviour
                 TrailRenderer trail = Instantiate(BulletTrail, gunEnd.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, gunEnd.position + transform.forward.normalized, Vector3.zero, false));
+                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(trail, hit.point, Vector3.zero));  
             }
             
         }

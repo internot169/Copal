@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 389274438}
   - component: {fileID: 389274437}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
