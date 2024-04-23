@@ -20,7 +20,6 @@ public class RayCastShoot : MonoBehaviour
     private Camera fpsCam;
     private float shotDuration = 0.01f;
     private AudioSource gunAudio;
-    private LineRenderer laserLine;
     private float nextFire;
     private float nextAltFire;
     
@@ -32,6 +31,7 @@ public class RayCastShoot : MonoBehaviour
         // laserLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         fpsCam = GetComponentInParent<Camera>();
+        // should honestly make it a public field but im lazy. 
         drone = GameObject.Find("Drone");
     }
 
