@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         if (fighting) {
-            if (wumpusObj.GetComponent<ShootableBox>().currentHealth <= 0){
+            if (wumpusObj.GetComponent<Shootable>().currentHealth <= 0){
                 win();
                 fighting = false;
             }
