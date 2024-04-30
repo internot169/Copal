@@ -1,6 +1,3 @@
-Angad - Player Mechanics
-Anmol - Player Movement and UI
-Yile - Literally everything but 3D modeling
-Ryan - 3D modeling
-Everyone else - idk
+Yile, Angad, Ryan - Hard Carrying \\
+Anmol - Senior Code Stealer \\
 Seamus and Jack and Rishay - senior fools
