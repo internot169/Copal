@@ -9,6 +9,11 @@ public class Enemy : Shootable
 
     NavMeshAgent agent;
 
+    float rangedAggroDistance = 5.0f;
+
+    bool noticedPlayer = true;
+    bool isRangedEnemy = true;
+
     [Header("Navigation")]
     [SerializeField] LayerMask groundLayer;
     LayerMask playerLayer;
@@ -26,6 +31,7 @@ public class Enemy : Shootable
     int burn_tier;
     int burn_timer;
     float apply_timer;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -35,24 +41,33 @@ public class Enemy : Shootable
     // Update is called once per frame
     void Update()
     {   
-        // if I have a dest, set the destination
-        if (walkpointSet)
-        {
-            agent.SetDestination(destPoint);
-        }else{
+        // two situations: Noticed player and not
+        if (noticedPlayer){
+            // the goal is to move closer to the player. but the amt varies
+            Vector3 vTPWalk;
+
+            // the way this is implemented is to first find vector length
+            Vector3 vectToPlayer = player.transform.position - transform.position;
+            float magnitude = vectToPlayer.magnitude;
+            if (isRangedEnemy){
+                // if ranged, it would want to move to a set radius around the player
+                // then we cast the vector to given distance to walk to player
+                vectToPlayer.Normalize();
+                vTPWalk = vectToPlayer * (magnitude - rangedAggroDistance) / magnitude;
+                Debug.Log(magnitude);
+            } else {
+                // if melee, it would walk straight at the player
+                // then we cast the vector to given distance to walk to player
+                vTPWalk = vectToPlayer;
+            }
+
+            // then we move an amt based on that vector, cast at a small dist
+            vTPWalk = vTPWalk * 0.5f;
+            agent.SetDestination(transform.position + vTPWalk);
+        } else{
+            // the two archetypes behave the same: patrolling a random-ish route
             SearchForDest();
         }
-
-        // if i'm close to dest, reset destination. 
-        if(Vector3.Distance(transform.position, destPoint) < 10) walkpointSet = false;
-        // if it's been an eight second since last tick, then
-        // apply again. 
-        if (apply_timer > 0.125)
-        {
-            ApplyEffects();
-            apply_timer = 0;
-        }
-        apply_timer += Time.deltaTime;
     }
 
     void SearchForDest()
