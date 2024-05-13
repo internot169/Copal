@@ -7,6 +7,8 @@ public class SpikeTrap : Trap
     // Start is called before the first frame update
 
     GameObject player;
+
+    public int damage;
     void Start()
     {
         // find reference to player
@@ -19,7 +21,7 @@ public class SpikeTrap : Trap
     {
         // if player is in the trap, take damage. 
         if(player_in){
-            player.GetComponent<PlayerInfo>().TakeDamage(10);
+            player.GetComponent<PlayerInfo>().TakeDamage(damage);
         }
         
     }
