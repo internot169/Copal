@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stomp : MonoBehaviour
 {
     // just a check for stomping later. 
-    public bool playerIn;
+    public bool playerIn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,14 @@ public class Stomp : MonoBehaviour
 
     // updater for dealing stomp damage after. 
     void OnTriggerEnter(Collider other){
-        playerIn = other.gameObject.name == "Player";
+        if (other.gameObject.name == "Player"){
+            playerIn = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if (other.gameObject.name == "Player"){
+            playerIn = false;
+        }
     }
 }

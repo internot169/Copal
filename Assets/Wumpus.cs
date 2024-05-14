@@ -10,10 +10,15 @@ public class Wumpus : MonoBehaviour
     public float KnockBackForce;
 
     GameObject Player;
+
+    public GameObject StompArea;
+
+    public GameObject StompWarning;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player");
+        StartCoroutine(Stomp());
     }
 
     // Update is called once per frame
@@ -26,11 +31,30 @@ public class Wumpus : MonoBehaviour
         Collider collider = collision.collider;
         GameObject player = collider.gameObject;
         Debug.Log(player.name);
-        Vector3 direction = player.transform.position - transform.position;
-        rb.AddForce(direction * KnockBackForce * Time.deltaTime);
+        ApplyForce();
         // do damage based on roaming, charging, and stomp
         Player.GetComponent<PlayerInfo>().TakeDamage(20);
 
+    }
+
+    void ApplyForce(){
+        Vector3 direction = Player.transform.position - transform.position;
+        rb.AddForce(direction * KnockBackForce * Time.deltaTime);
+    }
+
+    IEnumerator Stomp(){
+        // show
+        Debug.Log("Charging");
+        StompWarning.SetActive(true);
+        yield return new WaitForSeconds(5);
+        StompWarning.SetActive(false);
+        Debug.Log("Stomping");
+        if (StompArea.GetComponent<Stomp>().playerIn == true){
+            Player.GetComponent<PlayerInfo>().TakeDamage(20);
+            ApplyForce();
+        }
+
+        StartCoroutine(Stomp());
     }
 
     
