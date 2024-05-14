@@ -17,7 +17,6 @@ public class SpikeTrap : Trap
     {
         // find reference to player
         player = GameObject.Find("Player");
-        Debug.Log("" + player.name);
 
     }
 
@@ -30,7 +29,8 @@ public class SpikeTrap : Trap
             player.GetComponent<PlayerInfo>().TakeDamage(damage);
             timer = 0;
         }
+
+        // keep timer
         timer += Time.deltaTime;
-        Debug.Log("" + timer);
     }
 }
