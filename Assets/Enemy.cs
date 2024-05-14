@@ -20,7 +20,8 @@ public class Enemy : Shootable
     Vector3 destPoint;
     bool walkpointSet = false;
     int pauseiteration = 0;
-    float scale = 5.0f;
+    float scale = 2.5f;
+    float nextMove;
     [SerializeField] float range;
     // Start is called before the first frame update
 
@@ -65,7 +66,7 @@ public class Enemy : Shootable
 
             if (walkpointSet){
                 agent.SetDestination(destPoint);
-            } else{
+            } else if (Time.time > nextMove){
                 destPoint = GenerateRandomPoint();
                 walkpointSet = true;
             }
@@ -74,10 +75,17 @@ public class Enemy : Shootable
             // first, tell the agent to stop moving for a couple of iterations
             // then, we unset walkpoint and wait until next iteration to 
             // set the next walkpoint
-            if (Vector3.Distance(transform.position, destPoint) < 2){
+            if (Vector3.Distance(transform.position, destPoint) < 2 && Time.time > nextMove){
                 walkpointSet = false;
+                // tell it to stop for a while
+                nextMove = Time.time + 2.0f;
+                Debug.Log(nextMove);
             }
             
+        }
+
+        if (currentHealth == 0){
+            Object.Destroy(this.gameObject);
         }
     }
 
