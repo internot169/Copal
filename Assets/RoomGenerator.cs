@@ -8,11 +8,13 @@ public class RoomGenerator : MonoBehaviour
     // TODO: Make it room specific
     public float roomLength;
     public float roomBuffer;
+    int wumpusRoom;
     public void Awake(){
+        wumpusRoom = Random.Range(0, 30);
         // Make the base room
         createRooms();
     }
-    int wumpusRoom = Random.Range(0, 30);
+    
     public void createRooms(){
         // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
