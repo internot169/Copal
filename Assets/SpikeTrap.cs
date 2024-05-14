@@ -9,10 +9,16 @@ public class SpikeTrap : Trap
     GameObject player;
 
     public int damage;
+
+    public float time_length;
+
+    float timer = 0;
     void Start()
     {
         // find reference to player
         player = GameObject.Find("Player");
+        Debug.Log("" + player.name);
+
     }
 
 
@@ -20,9 +26,11 @@ public class SpikeTrap : Trap
     void Update()
     {
         // if player is in the trap, take damage. 
-        if(player_in){
+        if(player_in && timer >= time_length){
             player.GetComponent<PlayerInfo>().TakeDamage(damage);
+            timer = 0;
         }
-        
+        timer += Time.deltaTime;
+        Debug.Log("" + timer);
     }
 }

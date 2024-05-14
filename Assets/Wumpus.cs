@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.UI;
+using UnityEngine;
+
+public class Wumpus : MonoBehaviour
+{   
+    public Rigidbody rb;
+    public float KnockBackForce;
+
+    GameObject Player;
+    // Start is called before the first frame update
+    void Start()
+    {
+        Player = GameObject.Find("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void OnCollisionEnter(Collision collision){
+        Collider collider = collision.collider;
+        GameObject player = collider.gameObject;
+        Debug.Log(player.name);
+        Vector3 direction = player.transform.position - transform.position;
+        rb.AddForce(direction * KnockBackForce * Time.deltaTime);
+        // do damage based on roaming, charging, and stomp
+        Player.GetComponent<PlayerInfo>().TakeDamage(20);
+
+    }
+
+    
+}
