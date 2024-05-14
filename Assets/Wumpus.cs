@@ -18,7 +18,6 @@ public class Wumpus : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-        StartCoroutine(Stomp());
     }
 
     // Update is called once per frame
@@ -53,8 +52,6 @@ public class Wumpus : MonoBehaviour
             Player.GetComponent<PlayerInfo>().TakeDamage(20);
             ApplyForce();
         }
-
-        StartCoroutine(Stomp());
     }
 
     
