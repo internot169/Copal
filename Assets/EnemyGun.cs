@@ -5,14 +5,18 @@ using UnityEngine;
 public class EnemyGun : MonoBehaviour
 {
     [Header("Gun Stats")]
-    public float damage;
+    public float gunDamage;
     public float reloadTime;
     public float range;
     
     [Header("General Gun Information")]
     public Transform gunEnd;
-    private TrailRenderer BulletTrail;
+    public TrailRenderer BulletTrail;
     private float nextFire;
+
+    public bool isInRange = false;
+    GameObject player;
+    public RaycastHit shot;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +29,10 @@ public class EnemyGun : MonoBehaviour
     {
         // add to this the state flip to tell it. 
         // you should call this and do the timer within enemy. 
-        if (Time.time > nextFire){
+        if (Time.time > nextFire && isInRange){
             // this should also be removed since it's a timer
             nextFire = reloadTime + Time.time;
-            Shoot();
+            Shoot(shot);
         }
     }
 
@@ -61,12 +65,12 @@ public class EnemyGun : MonoBehaviour
         
         TrailRenderer trail = Instantiate(BulletTrail, transform.position, Quaternion.identity);
 
-        StartCoroutine(WarnPlayer(trail, hit.point, hit.normal, true));
+        StartCoroutine(WarnPlayer(trail, hit.point, hit.normal, true, hit));
     }
 
     // This just shows a trail to warn the player, and then will
     // shoot the bullet. 
-    private IEnumerator WarnPlayer(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
+    private IEnumerator WarnPlayer(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact, RaycastHit hit)
     {
         Vector3 startPosition = Trail.transform.position;
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
@@ -88,7 +92,7 @@ public class EnemyGun : MonoBehaviour
 
         // this basically means that we will wait for the trail to disappear completely 
         // to shoot the player with damage. 
-        yield return Destroy(Trail.gameObject, Trail.time);
+        yield return new WaitForSeconds(0.5f);
 
         StartCoroutine(DealDamage(hit));
     }
@@ -105,5 +109,6 @@ public class EnemyGun : MonoBehaviour
         {
             health.TakeDamage(gunDamage);
         }
+        yield break;
     }
 }

@@ -11,7 +11,9 @@ public class Enemy : Shootable
 
     float restingDistance = 5.0f;
 
-    bool noticedPlayer = false;
+    public EnemyGun enemyGun;
+
+    bool noticedPlayer = true;
 
     [Header("Navigation")]
     [SerializeField] LayerMask groundLayer;
@@ -43,23 +45,42 @@ public class Enemy : Shootable
     // Update is called once per frame
     void Update()
     {   
+        Vector3 vectToPlayer = player.transform.position - transform.position;
+
         // two situations: Noticed player and not
         if (noticedPlayer){
-            // the goal is to move closer to the player. but the amt varies
-            Vector3 vTPWalk;
+            // if player is noticed and is in range
+            // ALWAYS be looking at the player
+            transform.LookAt( player.transform );
 
-            // the way this is implemented is to first find vector length
-            Vector3 vectToPlayer = player.transform.position - transform.position;
-            float magnitude = vectToPlayer.magnitude;
+            if (vectToPlayer.magnitude < restingDistance + 1.0f){
+                // this tells the gun to shoot
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, vectToPlayer, out hit, restingDistance+1.0f)){
+                    enemyGun.isInRange = true;
+                    enemyGun.shot = hit;
+                }
+            } else{
+                // this tells the gun to not shoot
+                enemyGun.isInRange = false;
 
-            // it would want to move to a set radius around the player
-            // then we cast the vector to given distance to walk to player
-            vectToPlayer.Normalize();
-            vTPWalk = vectToPlayer * (magnitude - restingDistance) / magnitude;
+                // and now, let's move the AI
 
-            // then we move an amt based on that vector, cast at a small dist
-            vTPWalk = vTPWalk * 0.5f;
-            agent.SetDestination(transform.position + vTPWalk);
+                // the goal is to move closer to the player. but the amt varies
+                Vector3 vTPWalk;
+
+                // the way this is implemented is to first find vector length
+                float magnitude = vectToPlayer.magnitude;
+
+                // it would want to move to a set radius around the player
+                // then we cast the vector to given distance to walk to player
+                vectToPlayer.Normalize();
+                vTPWalk = vectToPlayer * (magnitude - restingDistance) / magnitude;
+
+                // then we move an amt based on that vector, cast at a small dist
+                vTPWalk = vTPWalk * 0.5f;
+                agent.SetDestination(transform.position + vTPWalk);
+            }
         } else{
             // we are going to have the ai randomly roam to random locations
             // first, check if it is currently roaming.
