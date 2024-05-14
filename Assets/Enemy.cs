@@ -9,17 +9,18 @@ public class Enemy : Shootable
 
     NavMeshAgent agent;
 
-    float rangedAggroDistance = 5.0f;
+    float restingDistance = 5.0f;
 
-    bool noticedPlayer = true;
-    bool isRangedEnemy = true;
+    bool noticedPlayer = false;
 
     [Header("Navigation")]
     [SerializeField] LayerMask groundLayer;
     LayerMask playerLayer;
 
     Vector3 destPoint;
-    bool walkpointSet;
+    bool walkpointSet = false;
+    int pauseiteration = 0;
+    float scale = 5.0f;
     [SerializeField] float range;
     // Start is called before the first frame update
 
@@ -49,24 +50,34 @@ public class Enemy : Shootable
             // the way this is implemented is to first find vector length
             Vector3 vectToPlayer = player.transform.position - transform.position;
             float magnitude = vectToPlayer.magnitude;
-            if (isRangedEnemy){
-                // if ranged, it would want to move to a set radius around the player
-                // then we cast the vector to given distance to walk to player
-                vectToPlayer.Normalize();
-                vTPWalk = vectToPlayer * (magnitude - rangedAggroDistance) / magnitude;
-                Debug.Log(magnitude);
-            } else {
-                // if melee, it would walk straight at the player
-                // then we cast the vector to given distance to walk to player
-                vTPWalk = vectToPlayer;
-            }
+
+            // it would want to move to a set radius around the player
+            // then we cast the vector to given distance to walk to player
+            vectToPlayer.Normalize();
+            vTPWalk = vectToPlayer * (magnitude - restingDistance) / magnitude;
 
             // then we move an amt based on that vector, cast at a small dist
             vTPWalk = vTPWalk * 0.5f;
             agent.SetDestination(transform.position + vTPWalk);
         } else{
-            // the two archetypes behave the same: patrolling a random-ish route
-            SearchForDest();
+            // we are going to have the ai randomly roam to random locations
+            // first, check if it is currently roaming.
+
+            if (walkpointSet){
+                agent.SetDestination(destPoint);
+            } else{
+                destPoint = GenerateRandomPoint();
+                walkpointSet = true;
+            }
+
+            // keep moving until the distance gets relatively close. 
+            // first, tell the agent to stop moving for a couple of iterations
+            // then, we unset walkpoint and wait until next iteration to 
+            // set the next walkpoint
+            if (Vector3.Distance(transform.position, destPoint) < 2){
+                walkpointSet = false;
+            }
+            
         }
     }
 
@@ -82,6 +93,18 @@ public class Enemy : Shootable
         {
             walkpointSet = true;
         }
+    }
+    
+    Vector3 GenerateRandomPoint(){
+        // select a random degree
+        float angle = Random.Range(0f, 2f * Mathf.PI);
+        Vector3 direction = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+        NavMeshHit NavHit;
+        if(NavMesh.SamplePosition(direction, out NavHit, 100 , NavMesh.AllAreas))
+        {
+            direction = NavHit.position;
+        }
+        return direction * scale;
     }
 
     public void MarkSlows()
