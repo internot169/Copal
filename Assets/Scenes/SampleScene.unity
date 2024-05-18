@@ -2276,6 +2276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
+  damage: 10
+  time_length: 1
 --- !u!65 &1026271482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4750,7 +4752,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 33b22d5723753d847a2335ca9899987a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 26e5550afa5a4d04eab0d6288d4eb340, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2008062060
 GameObject:
