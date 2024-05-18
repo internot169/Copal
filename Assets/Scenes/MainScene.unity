@@ -1756,9 +1756,9 @@ MonoBehaviour:
   sensitivityX: 400
   sensitivityY: 400
   minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
+  maximumX: 180
+  minimumY: -90
+  maximumY: 90
 --- !u!81 &1185092482
 AudioListener:
   m_ObjectHideFlags: 0
