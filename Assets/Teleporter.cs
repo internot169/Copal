@@ -19,6 +19,10 @@ public class Teleporter : PlayerCollider
     // override the interact player script to do teleportation instead. 
     public override void InteractPlayer(Collider other)
     {
+        // we need to free the player when we open this ui or something. 
+        GameObject ui = GameObject.Find("ArrowUI");
+        ui.SetActive(true);
+        // show the UI. 
         if(isOn){
             // move the player to the next room. 
             MovePlayer(other);
@@ -34,6 +38,7 @@ public class Teleporter : PlayerCollider
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
         other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
 
+        // WHY WE HAVE A BOSS TELEPORTER SCRIPT JUST CHANGE IT THERE??!??!?!?!
         // TODO: randomly make rooms wumpus rooms and make not every room have a boss teleporter
         // Then, move wumpus to that room's location
         if(this is BossTeleporter){
