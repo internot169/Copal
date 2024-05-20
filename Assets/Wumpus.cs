@@ -11,21 +11,24 @@ public class Wumpus : MonoBehaviour
 
     GameObject Player;
 
+    UnityEngine.AI.NavMeshAgent agent;
+
     public GameObject StompArea;
 
     public GameObject StompWarning;
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
+    }
+    
     void OnCollisionEnter(Collision collision){
         Collider collider = collision.collider;
         GameObject player = collider.gameObject;

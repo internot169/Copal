@@ -24,7 +24,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void ChangeRoom(int i){
         roomNum = i;
-        currentRoom.text = "Room " + roomNum.ToString();
+        //currentRoom.text = "Room " + roomNum.ToString();
     }
 
     // Take damage script for other objects to interact. 

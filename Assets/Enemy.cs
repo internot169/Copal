@@ -9,7 +9,9 @@ public class Enemy : Shootable
 
     NavMeshAgent agent;
 
-    float restingDistance = 5.0f;
+    public float restingDistance = 5.0f;
+
+    public float speed = 10.0f;
 
     public EnemyGun enemyGun;
 
@@ -52,17 +54,20 @@ public class Enemy : Shootable
             // if player is noticed and is in range
             // ALWAYS be looking at the player
             transform.LookAt( player.transform );
+            transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
 
             if (vectToPlayer.magnitude < restingDistance + 1.0f){
                 // this tells the gun to shoot
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, vectToPlayer, out hit, restingDistance+1.0f)){
+                if (enemyGun != null && Physics.Raycast(transform.position, vectToPlayer, out hit, restingDistance+1.0f)){
                     enemyGun.isInRange = true;
                     enemyGun.shot = hit;
                 }
             } else{
-                // this tells the gun to not shoot
-                enemyGun.isInRange = false;
+                if (enemyGun != null){
+                    // this tells the gun to not shoot
+                    enemyGun.isInRange = false;
+                }
 
                 // and now, let's move the AI
 
@@ -78,7 +83,7 @@ public class Enemy : Shootable
                 vTPWalk = vectToPlayer * (magnitude - restingDistance) / magnitude;
 
                 // then we move an amt based on that vector, cast at a small dist
-                vTPWalk = vTPWalk * 0.5f;
+                vTPWalk = vTPWalk * speed;
                 agent.SetDestination(transform.position + vTPWalk);
             }
         } else{
@@ -110,19 +115,19 @@ public class Enemy : Shootable
         }
     }
 
-    void SearchForDest()
-    {
-        // pick spot to roam
-        float Z = Random.Range(-range, range);
-        float X = Random.Range(-range, range);
+    // void SearchForDest()
+    // {
+    //     // pick spot to roam
+    //     float Z = Random.Range(-range, range);
+    //     float X = Random.Range(-range, range);
 
-        destPoint = new Vector3(transform.position.x + X, transform.position.y, transform.position.z + Z);
+    //     destPoint = new Vector3(transform.position.x + X, transform.position.y, transform.position.z + Z);
 
-        if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
-        {
-            walkpointSet = true;
-        }
-    }
+    //     if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
+    //     {
+    //         walkpointSet = true;
+    //     }
+    // }
     
     Vector3 GenerateRandomPoint(){
         // select a random degree
