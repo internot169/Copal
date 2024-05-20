@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Threading;
+using System;
 
 public class RayCastShoot : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class RayCastShoot : MonoBehaviour
     public float weaponRange = 50f;
     public float hitForce = 100f;
     public Transform gunEnd;
-    public Object prefab;
+    public GameObject prefab;
 
     [SerializeField]
     private TrailRenderer BulletTrail;
@@ -23,6 +24,13 @@ public class RayCastShoot : MonoBehaviour
     private LineRenderer laserLine;
     private float nextFire;
     private float nextAltFire;
+    
+    // increment as needed. 
+    private int main_modify = 0;
+
+    private int alt_modify = 0;
+
+    private bool has_drone = false;
     
     [Header("Augments")]
     private GameObject drone;
@@ -51,12 +59,14 @@ public class RayCastShoot : MonoBehaviour
 
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 // call drone trail
-                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
+                if (has_drone){
+                    StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
+                }
                 Shootable health = hit.collider.GetComponent<Shootable>();
 
                 if (health != null)
                 {
-                    health.Damage(gunDamage);
+                    health.Damage(gunDamage + main_modify);
                 }
 
                 if (hit.rigidbody != null)
@@ -97,7 +107,7 @@ public class RayCastShoot : MonoBehaviour
                     if (health != null){
                         if (health != null)
                         {
-                            health.TakeDamage(altFireDamage);
+                            health.TakeDamage(altFireDamage + alt_modify);
                         }
                     }
                     else{

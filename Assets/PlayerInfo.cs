@@ -16,10 +16,16 @@ public class PlayerInfo : MonoBehaviour
 
     private float currentHealth = 100;
 
+    private GameObject slowField;
+
+    private GameObject DOTField;
+
     void Start()
     {
         currentHealth = Health;
         ChangeRoom(1);
+        DOTField = GameObject.Find("DOTApplier");
+        slowField = GameObject.Find("SlowApplier");
     }
 
     public void ChangeRoom(int i){
