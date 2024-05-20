@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyGun : MonoBehaviour
 {
     [Header("Gun Stats")]
-    public float gunDamage;
-    public float reloadTime;
-    public float range;
+    public int gunDamage = 5;
+    public float reloadTime = 1.0f;
+    public float range = 5.0f;
     
     [Header("General Gun Information")]
     public Transform gunEnd;
@@ -15,7 +15,7 @@ public class EnemyGun : MonoBehaviour
     private float nextFire;
 
     public bool isInRange = false;
-    GameObject player;
+    public GameObject player;
     public RaycastHit shot;
 
     // Start is called before the first frame update
@@ -100,15 +100,11 @@ public class EnemyGun : MonoBehaviour
     // deals damage after giving warning. 
     private IEnumerator DealDamage(RaycastHit hit)
     {
-        PlayerInfo health = hit.collider.GetComponent<PlayerInfo>();
-        
         // I think this holds the hit from the beginning. 
         // Consider recalculating the raycast at this moment, which means you need to pass
         // in values from the beginning of the shot. 
-        if (health != null)
-        {
-            health.TakeDamage(gunDamage);
-        }
+        player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+        
         yield break;
     }
 }
