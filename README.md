@@ -1,3 +1,5 @@
-Yile, Angad, Ryan - Hard Carrying \\
-Anmol - Senior Code Stealer \\
-Seamus and Jack and Rishay - senior fools
+# Welcome to Copal
+Yile, Ryan and Angad - actually committing
+Angad - late on MVP
+Anmol - stolen code
+Jack and Rishay - doing absolutely 0
