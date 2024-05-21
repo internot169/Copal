@@ -23,7 +23,6 @@ public class Wumpus : MonoBehaviour
         StompWarning = GameObject.Find("StompWarn");
         StompWarning.SetActive(false);
         StompArea = GameObject.Find("StompArea");
-        StompArea.SetActive(false);
     }
 
     // Update is called once per frame

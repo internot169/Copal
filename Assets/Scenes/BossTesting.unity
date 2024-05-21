@@ -4320,7 +4320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 512974680}
-  KnockBackForce: 35000
+  KnockBackForce: 15000
   StompArea: {fileID: 763050541}
   StompWarning: {fileID: 75742637}
 --- !u!1 &1695633204

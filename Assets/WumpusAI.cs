@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,12 +23,22 @@ public class WumpusAi : MonoBehaviour
         Charge_Warn.SetActive(false);
         wumpus = GetComponentInChildren<Wumpus>();
 
-        StartCoroutine(Charge());
+        StartCoroutine(Pick_Action());
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    IEnumerator Pick_Action(){
+        float pick = UnityEngine.Random.Range(0f, 1f);
+        if(pick < 0.5f){
+            StartCoroutine(Charge());
+        }else if(pick < 1f){
+            StartCoroutine(Stomp());
+        }
+        yield return null;
     }
 
     IEnumerator Charge(){
@@ -44,9 +55,12 @@ public class WumpusAi : MonoBehaviour
         }
         agent.acceleration = 8;
         agent.speed = 5;
+
+        StartCoroutine(Pick_Action());
     }
 
     IEnumerator Stomp(){
         yield return StartCoroutine(wumpus.Stomp());
+        StartCoroutine(Pick_Action());
     }
 }
