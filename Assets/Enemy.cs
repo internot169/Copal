@@ -31,11 +31,11 @@ public class Enemy : Shootable
 
     [Header("AugmentModifications")]
     [Header("Slow")]
-    int slow_tier;
-    int slow_timer;
+    public int slow_tier;
+    public int slow_timer;
     [Header("Burn")]
-    int burn_tier;
-    int burn_timer;
+    public int burn_tier;
+    public int burn_timer;
     float apply_timer;
 
     void Start()
