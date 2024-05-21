@@ -11,10 +11,10 @@ public class PlayerInfo : MonoBehaviour
     public Slider HealthBar;
     public Text numberHealth;
     public Text currentRoom;
-    public float Health = 100;
+    public float Health = 100.0f;
     public double TimeSinceHurt = 0;
 
-    private float currentHealth = 100;
+    private float currentHealth;
 
     private GameObject slowField;
 
@@ -30,7 +30,7 @@ public class PlayerInfo : MonoBehaviour
 
     public void ChangeRoom(int i){
         roomNum = i;
-        currentRoom.text = "Room " + roomNum.ToString();
+        //currentRoom.text = "Room " + roomNum.ToString();
     }
 
     // Take damage script for other objects to interact. 
@@ -44,6 +44,7 @@ public class PlayerInfo : MonoBehaviour
             HealthBar.value = currentHealth;
             numberHealth.text = currentHealth.ToString();
             Debug.Log("owch");
+            Debug.Log(currentHealth);
             TimeSinceHurt = 0;
         }
     }
