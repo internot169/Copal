@@ -101,8 +101,6 @@ public class Enemy : Shootable
             // safe in case of overflow. 
             slow_timer -= 1;
         }
-        Debug.Log("slow");
-        Debug.Log(slow_timer + " " + slow_tier);
         // Apply burn
         if (burn_timer % 2 == 0){
             Damage(burn_tier/2);
@@ -117,8 +115,6 @@ public class Enemy : Shootable
             // safe in case of overflow. 
             burn_timer -= 1;
         }
-        Debug.Log("burn");
-        Debug.Log(burn_timer + " " + burn_tier);
             
     }
 }
