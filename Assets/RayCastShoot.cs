@@ -31,6 +31,14 @@ public class RayCastShoot : MonoBehaviour
     private int alt_modify = 0;
 
     private bool has_drone = false;
+
+    // main fire. 
+    private bool has_main_freeze;
+    private bool has_main_dot;
+
+    // alt fire
+    private bool has_alt_freeze;
+    private bool has_alt_dot;
     
     [Header("Augments")]
     private GameObject drone;
@@ -61,6 +69,12 @@ public class RayCastShoot : MonoBehaviour
                 // call drone trail
                 if (has_drone){
                     StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
+                }
+                if (has_main_freeze){
+                    hit.collider.gameObject.GetComponent<Enemy>().MarkSlows();
+                }
+                if (has_main_dot){
+                    hit.collider.gameObject.GetComponent<Enemy>().MarkBurns();
                 }
                 Shootable health = hit.collider.GetComponent<Shootable>();
 
@@ -116,6 +130,12 @@ public class RayCastShoot : MonoBehaviour
                         if (bhealth != null)
                         {
                             bhealth.Damage(altFireDamage);
+                            if (has_main_freeze){
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkSlows();
+                            }
+                            if (has_main_dot){
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
+                            }
                         }
 
                     }
