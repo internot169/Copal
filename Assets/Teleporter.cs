@@ -30,14 +30,8 @@ public class Teleporter : PlayerCollider
     // helps clean up inheritance code. 
     public virtual void MovePlayer(Collider other){
         // patch to make sure i stop clipping into the ground. 
-        // we should use a different transform so its cleaner. 
+        // we should use a different transform so its cleaner.
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
         other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
-
-        // TODO: randomly make rooms wumpus rooms and make not every room have a boss teleporter
-        // Then, move wumpus to that room's location
-        if(this is BossTeleporter){
-            GameObject.Find("GameManager").GetComponent<GameManager>().bossFight();
-        }
     }
 }

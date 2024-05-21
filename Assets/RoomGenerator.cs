@@ -8,6 +8,7 @@ public class RoomGenerator : MonoBehaviour
     // TODO: Make it room specific
     public float roomLength;
     public float roomBuffer;
+    public Room[] rooms = new Room[30];
     int wumpusRoom;
     public void Awake(){
         wumpusRoom = Random.Range(0, 30);
@@ -19,7 +20,7 @@ public class RoomGenerator : MonoBehaviour
         // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
         float nextRoomPos = 0f;
-        Room[] rooms = new Room[30];
+        
         for (int i = 0; i < 30; i++)
         {
             GameObject ob = Instantiate(roomPrefab, new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
