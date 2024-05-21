@@ -76,6 +76,7 @@ public class RayCastShoot : MonoBehaviour
                 if (has_main_dot){
                     hit.collider.gameObject.GetComponent<Enemy>().MarkBurns();
                 }
+
                 Shootable health = hit.collider.GetComponent<Shootable>();
 
                 if (health != null)
