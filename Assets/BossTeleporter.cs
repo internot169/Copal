@@ -8,8 +8,8 @@ public class BossTeleporter : Teleporter
     // move the player, but add a boss calling script for that. 
     public override void MovePlayer(Transform other)
     {
-        // spawn the boss or something. 
+        // spawn the boss
+        GameObject.Find("GameManager").GetComponent<GameManager>().bossFight();
         base.MovePlayer(other);
-        // should call to either gm or to room to spawn boss. 
     }
 }
