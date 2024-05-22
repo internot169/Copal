@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Threading;
+using System;
 
 public class RayCastShoot : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class RayCastShoot : MonoBehaviour
     public float weaponRange = 50f;
     public float hitForce = 100f;
     public Transform gunEnd;
-    public Object prefab;
+    public GameObject prefab;
 
     [SerializeField]
     private TrailRenderer BulletTrail;
@@ -23,8 +24,29 @@ public class RayCastShoot : MonoBehaviour
     private float nextFire;
     private float nextAltFire;
     
+    // increment as needed. 
+    private int main_modify = 0;
+
+    private int alt_modify = 0;
+
+    private bool has_drone = false;
+
+    // main fire. 
+    private bool has_main_freeze;
+    private bool has_main_dot;
+
+    private bool has_main_vamp;
+
+    // alt fire
+    private bool has_alt_freeze;
+    private bool has_alt_dot;
+
+    private bool has_alt_vamp;
+    
     [Header("Augments")]
     private GameObject drone;
+
+    private GameObject player;
 
     void Start()
     {
@@ -33,6 +55,7 @@ public class RayCastShoot : MonoBehaviour
         fpsCam = GetComponentInParent<Camera>();
         // should honestly make it a public field but im lazy. 
         drone = GameObject.Find("Drone");
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -51,12 +74,25 @@ public class RayCastShoot : MonoBehaviour
 
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                 // call drone trail
-                StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
+                if (has_drone){
+                    StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, hit.normal));  
+                }
+                if (has_main_freeze){
+                    hit.collider.gameObject.GetComponent<Enemy>().MarkSlows();
+                }
+                if (has_main_dot){
+                    hit.collider.gameObject.GetComponent<Enemy>().MarkBurns();
+                }
+
+                if(has_main_vamp){
+                    player.GetComponent<PlayerInfo>().Heal(10f);
+                }
+
                 Shootable health = hit.collider.GetComponent<Shootable>();
 
                 if (health != null)
                 {
-                    health.Damage(gunDamage);
+                    health.Damage(gunDamage + main_modify);
                 }
 
                 if (hit.rigidbody != null)
@@ -97,7 +133,7 @@ public class RayCastShoot : MonoBehaviour
                     if (health != null){
                         if (health != null)
                         {
-                            health.TakeDamage(altFireDamage);
+                            health.TakeDamage(altFireDamage + alt_modify);
                         }
                     }
                     else{
@@ -106,6 +142,12 @@ public class RayCastShoot : MonoBehaviour
                         if (bhealth != null)
                         {
                             bhealth.Damage(altFireDamage);
+                            if (has_main_freeze){
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkSlows();
+                            }
+                            if (has_main_dot){
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
+                            }
                         }
 
                     }
@@ -141,5 +183,25 @@ public class RayCastShoot : MonoBehaviour
         Trail.transform.position = HitPoint;
 
         Destroy(Trail.gameObject, Trail.time);
+    }
+
+    // augment flippers
+
+    public void ChangeSlowMain(bool state){
+        has_main_freeze = state;
+    }
+
+    public void ChangeDOTMain(bool state){
+        has_main_dot = state;
+    }
+    public void ChangeSlowAlt(bool state){
+        has_alt_freeze = state;
+    }
+    public void ChangeDOTAlt(bool state){
+        has_alt_dot = state;
+    }
+
+    public void ChangeVampMain(bool state){
+        has_main_vamp = state;
     }
 }

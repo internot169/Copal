@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -14,6 +15,8 @@ public class Room : MonoBehaviour
     public int[] inLinks;
     public string info = "";
 
+    public GameManager gameManager;
+
     // TODO: Visited var
     // Why not mark this in GM?
     
@@ -26,6 +29,7 @@ public class Room : MonoBehaviour
     public void Awake(){
         // clears upon entering for testing. 
         SetRoom();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -33,22 +37,28 @@ public class Room : MonoBehaviour
         // first place is bat, second is pit, third is boss. 
         // boolean array over string, easier to check. 
         bool[] adjacent = new bool[3];
-        // divider
-        Debug.Log("--------");
+        String warnings = "";
         for (int i = 0; i < doors.Length; i++)
         {   
             
             // Instead of infinitely cascading larger tree explorations we just check door type.
             if (doors[i] is BatTeleporter){
-                Debug.Log("I hear wings");
+                // concat into the collector. 
+                warnings += "I smell a bat.";
                 adjacent[0] = true;
             }else if(doors[i] is BossTeleporter){
-                Debug.Log("I smell a wumpus");
+                warnings += "I smell a wumpus";
                 adjacent[2] = true;
             }else{
-                Debug.Log("normal tp");
+                warnings += "normal tp";
+            }
+            // add whitespace if not the end. 
+            if (i != 2){
+                warnings += "\n";
             }
         }
+        // update through gamemanager. 
+        gameManager.UpdateWarnings(warnings);
         return adjacent;
     }
 

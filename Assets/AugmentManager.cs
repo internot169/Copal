@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class AugmentManager : MonoBehaviour
 {
+    GameObject weapon;
     // Start is called before the first frame update
     void Start()
     {
-        
+       weapon = GameObject.Find("Gun");
     }
 
     // Update is called once per frame
@@ -17,12 +18,16 @@ public class AugmentManager : MonoBehaviour
         
     }
 
+    // Example Flipper
+
+    public void ChangeSlowMain(bool state){
+        weapon.GetComponent<RayCastShoot>().ChangeSlowMain(state);
+    }
+    // do also for slow alt, vamp main, dot main, dot alt as well. 
+    // @rishaypuri
+
+
     public void modifyPlayerSpeed(float newSpeed){
         gameObject.GetComponent<CrankyRigidBodyController>().MovementSpeed = newSpeed;
-    }
-
-    public void modifyVampirism(Boolean hasVampirism){
-        // add to gun script later. 
-        return;
     }
 }

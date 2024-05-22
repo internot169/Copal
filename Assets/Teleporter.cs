@@ -14,18 +14,37 @@ public class Teleporter : PlayerCollider
     // should be changed to false when we have detection for room end. 
     public bool isOn = true;
 
+    public GameObject ui;
+
+    public GameManager gameManager;
+
+    public void Awake(){
+        ui = GameObject.Find("ArrowUI");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
     // override the interact player script to do teleportation instead. 
     public override void InteractPlayer(Collider other)
     {
+        
+        // show the UI. 
         if(isOn){
+            // we need to free the player when we open this ui or something. 
+            ui.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            // disable the camera
+            other.GetComponentInChildren<MouseLook>().enabled = false;
             // move the player to the next room. 
-            MovePlayer(other);
+            // MovePlayer(other.transform);
             // check the next rooms for obstacles
             next.adjacencyCheck();
+            // tell the gamemanager that you are teleporting off this door. 
+            gameManager.UpdateTp(this);
         }
     }
 
-    // helps clean up inheritance code. 
     public virtual void MovePlayer(Collider other){
         GameManager mg = GetComponent<GameManager>();
         mg.roomNum = next.roomNum;

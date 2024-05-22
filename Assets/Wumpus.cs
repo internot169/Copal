@@ -19,17 +19,18 @@ public class Wumpus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Player = GameObject.Find("Player");
+        StompWarning = GameObject.Find("StompWarn");
+        StompWarning.SetActive(false);
+        StompArea = GameObject.Find("StompArea");
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
     
-    void OnCollisionEnter(Collision collision){
+    void OnCollisionStay(Collision collision){
         Collider collider = collision.collider;
         GameObject player = collider.gameObject;
         Debug.Log(player.name);
@@ -44,7 +45,7 @@ public class Wumpus : MonoBehaviour
         rb.AddForce(direction * KnockBackForce * Time.deltaTime);
     }
 
-    IEnumerator Stomp(){
+    public IEnumerator Stomp(){
         // show
         Debug.Log("Charging");
         StompWarning.SetActive(true);
