@@ -18,6 +18,8 @@ public class PitTeleporter : Teleporter
             base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
             base.MovePlayer(other);
             base.next = temp;
+        } else {
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose();
         }
     }
 }

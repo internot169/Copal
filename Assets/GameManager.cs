@@ -11,7 +11,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {   
-    
     public int roomNum = 0;
     public TMP_Text roomText;
     public GameObject wumpusObj;
@@ -54,15 +53,16 @@ public class GameManager : MonoBehaviour
     public void lose(){
         // Calculate score and stuff
         Debug.Log("YOU LOST");
-    public void Shoot(){
+    }
+    public void shoot(){
         //shoot wumpus;
         Debug.Log("shoot");
         // move the player
         // do the custom handling here. 
-        Move();
+        move();
     }
 
-    public void Move(){
+    public void move(){
         Debug.Log("move");
         // hide ui
         ArrowUI.SetActive(false);
