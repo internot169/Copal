@@ -14,7 +14,10 @@ public class PitTeleporter : Teleporter
 
         // leaving in if condition for trivia pass. 
         if (true){
+            Room temp = base.next;
+            base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
             base.MovePlayer(other);
+            base.next = temp;
         }
     }
 }

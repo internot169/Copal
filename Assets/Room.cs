@@ -11,6 +11,7 @@ public class Room : MonoBehaviour
     // doors of the room. 
     public Teleporter[] doors;
     public int[] connectedTo;
+    public int[] inLinks;
     public string info = "";
 
     // TODO: Visited var

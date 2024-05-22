@@ -20,6 +20,16 @@ public class RoomGenerator : MonoBehaviour
         // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
         float nextRoomPos = 0f;
+
+        int wumpusRoom = Random.Range(0, 30);
+        int batRoom = -1;
+        int pitRoom = -1;
+        while (batRoom != wumpusRoom){
+            batRoom = Random.Range(0, 30);
+        }
+        while (pitRoom != wumpusRoom && pitRoom != batRoom){
+            pitRoom = Random.Range(0, 30);
+        }
         
         for (int i = 0; i < 30; i++)
         {
@@ -33,12 +43,8 @@ public class RoomGenerator : MonoBehaviour
         for (int i = 0; i < 30; i++)
         {
             // Build a circle first
-            // Test mod 30 logic
             rooms[i].doors[0].next = rooms[(i + 1) % 30];
             rooms[i].connectedTo[0] = (i + 1) % 30;
-            if ((i + 1) % 30 == wumpusRoom) {
-                // cast rooms[i].doors[j] as BossTeleporter
-            }
 
             // Load the rest of the links randomly
             // One feature is to include really necessary rooms at high-degree nodes
@@ -54,8 +60,20 @@ public class RoomGenerator : MonoBehaviour
                 // This indiscriminately adds doors to rooms (without regards to boss)
                 rooms[i].doors[j].next = rooms[rand];
                 rooms[i].connectedTo[j] = rand;
+
+                // This should for all links to the specific room change the teleporter to the correct type
                 if (rand == wumpusRoom){
-                    // cast rooms[i].doors[j] as BossTeleporter
+                    GameObject obj = rooms[i].doors[j].gameObject;
+                    Destroy(obj.GetComponent<Teleporter>());
+                    obj.AddComponent<BossTeleporter>();
+                } else if (rand == batRoom){
+                    GameObject obj = rooms[i].doors[j].gameObject;
+                    Destroy(obj.GetComponent<Teleporter>());
+                    obj.AddComponent<BatTeleporter>();
+                } else if (rand == pitRoom) {
+                    GameObject obj = rooms[i].doors[j].gameObject;
+                    Destroy(obj.GetComponent<Teleporter>());
+                    obj.AddComponent<PitTeleporter>();
                 }
             }
         }

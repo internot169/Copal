@@ -32,8 +32,12 @@ public class GameManager : MonoBehaviour
 
     public void win(){
         // Calculate score and stuff
-        // Load to server
         Debug.Log("YOU WON");
+    }
+
+    public void lose(){
+        // Calculate score and stuff
+        Debug.Log("YOU LOST");
     }
 
     public void Update(){
