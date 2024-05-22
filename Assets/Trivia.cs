@@ -40,7 +40,6 @@ public class Trivia : MonoBehaviour
     public Question[] questions;
     void Awake(){
         LoadData();
-        StartCoroutine(LoadTrivia(5, 3));
     }
     void LoadData(){
         var csvFile = Resources.Load<TextAsset>(path);
@@ -55,7 +54,7 @@ public class Trivia : MonoBehaviour
     int questionIndex = 0;
     bool answered = false;
     bool correct = false;
-    IEnumerator LoadTrivia(int count, int needed){
+    public IEnumerator LoadTrivia(int count, int needed){
         triviaUI.SetActive(true);
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){

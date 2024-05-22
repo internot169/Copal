@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,7 +71,8 @@ public class GameManager : MonoBehaviour
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
         // should we null the tp after?
-        tp.GetComponent<Teleporter>().MovePlayer(Player.transform);
+        ///tp.GetComponent<Teleporter>().MovePlayer(Player.transform);
+        /// Don't do this - it breaks everything.
     }
 
     public void Update(){
@@ -90,7 +89,7 @@ public class GameManager : MonoBehaviour
         tp = teleporter;
     }
 
-    public void UpdateWarnings(String warnings){
+    public void UpdateWarnings(string warnings){
         warning.SetText(warnings);
     }
 }
