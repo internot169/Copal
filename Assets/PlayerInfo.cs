@@ -49,6 +49,12 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
+    public void Heal(float healing){
+        currentHealth = Math.Min(100, currentHealth+healing);
+        HealthBar.value = currentHealth;
+        numberHealth.text = currentHealth.ToString();
+    }
+
     // continuously damage the player
     void Update()
     {

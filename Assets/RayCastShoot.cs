@@ -35,12 +35,18 @@ public class RayCastShoot : MonoBehaviour
     private bool has_main_freeze;
     private bool has_main_dot;
 
+    private bool has_main_vamp;
+
     // alt fire
     private bool has_alt_freeze;
     private bool has_alt_dot;
+
+    private bool has_alt_vamp;
     
     [Header("Augments")]
     private GameObject drone;
+
+    private GameObject player;
 
     void Start()
     {
@@ -49,6 +55,7 @@ public class RayCastShoot : MonoBehaviour
         fpsCam = GetComponentInParent<Camera>();
         // should honestly make it a public field but im lazy. 
         drone = GameObject.Find("Drone");
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -75,6 +82,10 @@ public class RayCastShoot : MonoBehaviour
                 }
                 if (has_main_dot){
                     hit.collider.gameObject.GetComponent<Enemy>().MarkBurns();
+                }
+
+                if(has_main_vamp){
+                    player.GetComponent<PlayerInfo>().Heal(10f);
                 }
 
                 Shootable health = hit.collider.GetComponent<Shootable>();
@@ -172,5 +183,25 @@ public class RayCastShoot : MonoBehaviour
         Trail.transform.position = HitPoint;
 
         Destroy(Trail.gameObject, Trail.time);
+    }
+
+    // augment flippers
+
+    public void ChangeSlowMain(bool state){
+        has_main_freeze = state;
+    }
+
+    public void ChangeDOTMain(bool state){
+        has_main_dot = state;
+    }
+    public void ChangeSlowAlt(bool state){
+        has_alt_freeze = state;
+    }
+    public void ChangeDOTAlt(bool state){
+        has_alt_dot = state;
+    }
+
+    public void ChangeVampMain(bool state){
+        has_main_vamp = state;
     }
 }
