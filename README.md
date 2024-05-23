@@ -1,5 +1,6 @@
 # Welcome to Copal
-Yile, Ryan and Angad - actually committing \
+Yile - hard carry \
 Angad - late on MVP \
-Anmol - stolen code \
+Ryan - doing independent study rather than this \
+Anmol - never showed up until 5/21 and doing rooms \
 Jack and Rishay - doing absolutely 0 
