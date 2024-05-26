@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyGun : MonoBehaviour
@@ -14,9 +15,14 @@ public class EnemyGun : MonoBehaviour
     public TrailRenderer BulletTrail;
     private float nextFire;
 
+
+    [Header("Shooting information")]
     public bool isInRange = false;
     public GameObject player;
     public RaycastHit shot;
+
+    public Vector3 directionOfHit;
+    public Vector3 positionOfHit;
 
     // Start is called before the first frame update
     void Start()
@@ -92,7 +98,7 @@ public class EnemyGun : MonoBehaviour
 
         // this basically means that we will wait for the trail to disappear completely 
         // to shoot the player with damage. 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(5);
 
         StartCoroutine(DealDamage(hit));
     }
@@ -103,7 +109,12 @@ public class EnemyGun : MonoBehaviour
         // I think this holds the hit from the beginning. 
         // Consider recalculating the raycast at this moment, which means you need to pass
         // in values from the beginning of the shot. 
-        player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+
+        RaycastHit check;
+        Physics.Raycast(positionOfHit, directionOfHit, out check, range + 1.0f);
+        if (GameObject.ReferenceEquals(check.collider.gameObject, player)){
+            player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+        }
         
         yield break;
     }
