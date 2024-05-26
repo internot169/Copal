@@ -14,6 +14,10 @@ public class WumpusAi : MonoBehaviour
 
     GameObject Charge_Warn;
 
+    GameObject Sky_Warn;
+
+    GameObject Sky_Beam;
+
     Wumpus wumpus;
     void Start()
     {
@@ -21,6 +25,10 @@ public class WumpusAi : MonoBehaviour
         Player = GameObject.Find("Player");
         Charge_Warn = GameObject.Find("ChargeWarn");
         Charge_Warn.SetActive(false);
+        Sky_Beam = GameObject.Find("SkyBeam");
+        Sky_Beam.SetActive(false);
+        Sky_Warn = GameObject.Find("SkyBeamWarn");
+        Sky_Warn.SetActive(false);
         wumpus = GetComponentInChildren<Wumpus>();
 
         StartCoroutine(Pick_Action());
@@ -33,10 +41,12 @@ public class WumpusAi : MonoBehaviour
 
     IEnumerator Pick_Action(){
         float pick = UnityEngine.Random.Range(0f, 1f);
-        if(pick < 0.5f){
+        if(pick < 0.33f){
             StartCoroutine(Charge());
-        }else if(pick < 1f){
+        }else if(pick < 0.66f){
             StartCoroutine(Stomp());
+        }else if (pick < 1f){
+            StartCoroutine(SkyBeam());
         }
         yield return null;
     }
@@ -61,6 +71,18 @@ public class WumpusAi : MonoBehaviour
 
     IEnumerator Stomp(){
         yield return StartCoroutine(wumpus.Stomp());
+        StartCoroutine(Pick_Action());
+    }
+
+    IEnumerator SkyBeam(){
+        Sky_Warn.transform.position = new Vector3(Player.transform.position.x, 1, Player.transform.position.z);
+        Sky_Warn.SetActive(true);
+        yield return new WaitForSeconds(5);
+        Sky_Warn.SetActive(false);
+        Sky_Beam.SetActive(true);
+        Sky_Beam.transform.position = new Vector3(Sky_Warn.transform.position.x, Sky_Warn.transform.position.y + 20, Sky_Warn.transform.position.z);
+        yield return new WaitForSeconds(2);
+        Sky_Beam.SetActive(false);
         StartCoroutine(Pick_Action());
     }
 }
