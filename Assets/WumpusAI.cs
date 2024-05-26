@@ -75,13 +75,14 @@ public class WumpusAi : MonoBehaviour
     }
 
     IEnumerator SkyBeam(){
-        Sky_Warn.transform.position = Player.transform.position;
+        Sky_Warn.transform.position = new Vector3(Player.transform.position.x, 1, Player.transform.position.z);
         Sky_Warn.SetActive(true);
         yield return new WaitForSeconds(5);
         Sky_Warn.SetActive(false);
         Sky_Beam.SetActive(true);
-        Sky_Beam.transform.position = Sky_Warn.transform.position;
+        Sky_Beam.transform.position = new Vector3(Sky_Warn.transform.position.x, Sky_Warn.transform.position.y + 20, Sky_Warn.transform.position.z);
         yield return new WaitForSeconds(2);
         Sky_Beam.SetActive(false);
+        StartCoroutine(Pick_Action());
     }
 }

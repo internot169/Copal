@@ -4,7 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UI;
 using UnityEngine;
 
-public class Wumpus : MonoBehaviour
+public class Wumpus : Shootable
 {   
     public Rigidbody rb;
     public float KnockBackForce;
