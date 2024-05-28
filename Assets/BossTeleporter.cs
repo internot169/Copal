@@ -6,6 +6,8 @@ public class BossTeleporter : Teleporter
 {
 
     // move the player, but add a boss calling script for that. 
+    // these inheritances will do the special behavior for this room and then 
+    // call the normal behavior that it inherits. 
     public override void MovePlayer(Collider other)
     {
         // spawn the boss

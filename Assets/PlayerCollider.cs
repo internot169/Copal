@@ -12,15 +12,16 @@ public class PlayerCollider : MonoBehaviour
         
     }
 
+    // all of these should act as triggers, so detect for it. 
     void OnTriggerEnter (Collider other)
     {
-        // change this to player please
-        // I believe in you Yile
+        // if entered by the player then call the interact script. 
         if(other.name == "Player"){
             InteractPlayer(other);
         }
     }
 
+    // this is an abstract class, so no definition. 
     public virtual void InteractPlayer(Collider other)
     {
         return;
