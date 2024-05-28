@@ -21,10 +21,46 @@ public class AugmentManager : MonoBehaviour
     // Example Flipper
 
     public void ChangeSlowMain(bool state){
+        ResetMainAll();
         weapon.GetComponent<RayCastShoot>().ChangeSlowMain(state);
     }
-    // do also for slow alt, vamp main, dot main, dot alt as well. 
-    // @rishaypuri
+    public void ChangeSlowAlt(bool state){
+        ResetAltAll();
+        weapon.GetComponent<RayCastShoot>().ChangeSlowAlt(state);
+    }
+    public void ChangeVampMain(bool state){
+        ResetMainAll();
+        weapon.GetComponent<RayCastShoot>().ChangeVampMain(state);
+    }
+    public void ChangeDOTMain(bool state){
+        ResetMainAll();
+        weapon.GetComponent<RayCastShoot>().ChangeDOTMain(state);
+    }
+    public void ChangeDOTAlt(bool state){
+        ResetAltAll();
+        weapon.GetComponent<RayCastShoot>().ChangeDOTAlt(state);
+    }
+
+    public void ChangeVampAlt(bool state){
+        ResetAltAll();
+        weapon.GetComponent<RayCastShoot>().ChangeVampAlt(state);
+    }
+    // todo: flip aoe stuff, which is easy. 
+    // add movement buffs
+    // add ultimates. 
+    public void ResetMainAll()
+    {
+        // call at the start
+        ChangeDOTMain(false);
+        ChangeSlowMain(false);
+        ChangeVampMain(false);
+    }
+
+    public void ResetAltAll(){
+        ChangeDOTAlt(false);
+        ChangeSlowAlt(false);
+        ChangeVampAlt(false);
+    }
 
 
     public void modifyPlayerSpeed(float newSpeed){

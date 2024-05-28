@@ -114,6 +114,10 @@ public class RayCastShoot : MonoBehaviour
         {
             nextAltFire = Time.time + altFireRate;
 
+            if (has_alt_vamp){
+                player.GetComponent<PlayerInfo>().TakeDamage(10);
+            }
+
             Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange)){
@@ -142,10 +146,18 @@ public class RayCastShoot : MonoBehaviour
                         if (bhealth != null)
                         {
                             bhealth.Damage(altFireDamage);
-                            if (has_main_freeze){
+                            if (has_alt_freeze){
                                 hitCollider.gameObject.GetComponent<Enemy>().MarkSlows();
                             }
-                            if (has_main_dot){
+                            if (has_alt_dot){
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
+                            }
+                            if(has_alt_dot){
+                                // didn't have foresight to make it mark off function, so just gonna have to do it this way. 
+                                // could change, but would require too many sweepgin changes to be worth it imo. 
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
+                                hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
                                 hitCollider.gameObject.GetComponent<Enemy>().MarkBurns();
                             }
                         }
@@ -203,5 +215,9 @@ public class RayCastShoot : MonoBehaviour
 
     public void ChangeVampMain(bool state){
         has_main_vamp = state;
+    }
+
+    public void ChangeVampAlt(bool state){
+        has_alt_vamp = state;
     }
 }
