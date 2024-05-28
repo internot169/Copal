@@ -9,6 +9,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {   
+    public int turns = 0;
+    public int arrows = 0;
     public int coins = 0;
     public int roomNum = 0;
     public TMP_Text roomText;
@@ -47,19 +49,22 @@ public class GameManager : MonoBehaviour
 
     public void spend(int amount){
         if (coins == 0){
-            lose();
+            lose(0);
         } else {
             coins -= amount;
         }
     }
 
-    public void win(){
-        // Calculate score and stuff
-        Debug.Log("YOU WON");
+    public void win(int wumpus){
+        score(wumpus);
     }
-    public void lose(){
-        // Calculate score and stuff
-        Debug.Log("YOU LOST");
+    public void lose(int wumpus){
+        score(wumpus);
+    }
+    public void score(int wumpus) {
+        int score = 100 - turns + coins + (5 * arrows) + wumpus;
+        Debug.Log(score);
+        // Write to file, rank the scores, remove if not top 10, name, seed
     }
     public void shoot(){
         //shoot wumpus;
@@ -86,7 +91,7 @@ public class GameManager : MonoBehaviour
         roomText.text = "Room " + roomNum.ToString();
         if (fighting) {
             if (wumpusObj.GetComponent<Shootable>().currentHealth <= 0){
-                win();
+                win(50);
                 fighting = false;
             }
         }
