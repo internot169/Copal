@@ -48,6 +48,10 @@ public class RayCastShoot : MonoBehaviour
 
     private GameObject player;
 
+    private int droneDamageMain;
+
+    private int droneDamageAlt;
+
     void Start()
     {
         // laserLine = GetComponent<LineRenderer>();
@@ -92,7 +96,7 @@ public class RayCastShoot : MonoBehaviour
 
                 if (health != null)
                 {
-                    health.Damage(gunDamage + main_modify);
+                    health.Damage(gunDamage + main_modify + droneDamage);
                 }
 
                 if (hit.rigidbody != null)
@@ -145,7 +149,7 @@ public class RayCastShoot : MonoBehaviour
 
                         if (bhealth != null)
                         {
-                            bhealth.Damage(altFireDamage);
+                            bhealth.Damage(altFireDamage + droneDamageAlt);
                             if (has_alt_freeze){
                                 hitCollider.gameObject.GetComponent<Enemy>().MarkSlows();
                             }
@@ -219,5 +223,13 @@ public class RayCastShoot : MonoBehaviour
 
     public void ChangeVampAlt(bool state){
         has_alt_vamp = state;
+    }
+
+    public void ChangeDroneMain(bool state){
+        droneDamageMain = state ? 5: 0;
+    }
+
+    public void ChangeDroneAlt(bool state){
+        droneDamageAlt = state ? 3 : 0;
     }
 }
