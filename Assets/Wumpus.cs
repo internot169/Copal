@@ -20,6 +20,7 @@ public class Wumpus : Shootable
     void Start()
     {
         Player = GameObject.Find("Player");
+        Player.GetComponent<PlayerInfo>().TimeSinceHurtLimit = 0f;
         StompWarning = GameObject.Find("StompWarn");
         StompWarning.SetActive(false);
         StompArea = GameObject.Find("StompArea");

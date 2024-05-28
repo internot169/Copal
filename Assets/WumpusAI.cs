@@ -18,6 +18,10 @@ public class WumpusAi : MonoBehaviour
 
     GameObject Sky_Beam;
 
+    public RaycastHit hit;
+
+    public GameObject DronesParent;
+
     Wumpus wumpus;
     void Start()
     {
@@ -41,10 +45,12 @@ public class WumpusAi : MonoBehaviour
 
     IEnumerator Pick_Action(){
         float pick = UnityEngine.Random.Range(0f, 1f);
-        if(pick < 0.33f){
-            StartCoroutine(Charge());
-        }else if(pick < 0.66f){
+        if(pick < 0.25f){
+            StartCoroutine(DroneBarrage());
+        }else if(pick < 0.50f){
             StartCoroutine(Stomp());
+        }else if(pick < 0.75f){
+            StartCoroutine(Charge());
         }else if (pick < 1f){
             StartCoroutine(SkyBeam());
         }
@@ -71,6 +77,23 @@ public class WumpusAi : MonoBehaviour
 
     IEnumerator Stomp(){
         yield return StartCoroutine(wumpus.Stomp());
+        StartCoroutine(Pick_Action());
+    }
+
+    IEnumerator DroneBarrage(){
+        for (int times = 0; times < 5; times++)
+        {
+            foreach (Transform DroneChild in DronesParent.transform){
+                WumpusDroneGun Script = DroneChild.GetComponent<WumpusDroneGun>();
+                Vector3 vectToPlayer = Player.transform.position - DroneChild.GetChild(0).transform.position;
+                if (Physics.Raycast(Script.gunEnd.position, vectToPlayer, out hit, Mathf.Infinity)){
+                    Script.positionOfHit = Script.gunEnd.position;
+                    Script.directionOfHit = vectToPlayer;
+                    DroneChild.GetComponent<WumpusDroneGun>().Shoot(hit);
+                }
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
         StartCoroutine(Pick_Action());
     }
 
