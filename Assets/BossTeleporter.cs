@@ -11,5 +11,6 @@ public class BossTeleporter : Teleporter
         // spawn the boss
         GameObject.Find("GameManager").GetComponent<GameManager>().bossFight();
         base.MovePlayer(other);
+        base.traverseMetaLogic();
     }
 }

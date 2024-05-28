@@ -8,6 +8,7 @@ public class Question
     public string question;
     public int answer = 0;
     public string[] choices;
+    public bool hasAnswered = false;
     public Question(string lorePrereq, string question, string answer1, string answer2, string answer3, string answer4){
         this.lorePrereq = lorePrereq;
         this.question = question;

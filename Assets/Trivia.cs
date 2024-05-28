@@ -55,12 +55,18 @@ public class Trivia : MonoBehaviour
     bool answered = false;
     bool correct = false;
     public IEnumerator LoadTrivia(int count, int needed){
+        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
+        mg.spend(count);
         triviaUI.SetActive(true);
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
             // TODO: pre req needs to be numerical and regenerate
             questionIndex = Random.Range(0, questions.Length);
+            while (questions[questionIndex].hasAnswered){
+                questionIndex = Random.Range(0, questions.Length);
+            }
             questionText.text = questions[questionIndex].question;
+            questions[questionIndex].hasAnswered = true;
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }

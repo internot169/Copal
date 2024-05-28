@@ -46,11 +46,17 @@ public class Teleporter : PlayerCollider
     }
 
     public virtual void MovePlayer(Collider other){
-        GameManager mg = GetComponent<GameManager>();
+        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.roomNum = next.roomNum;
         // patch to make sure i stop clipping into the ground. 
         // we should use a different transform so its cleaner.
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
         other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
+        traverseMetaLogic();
+    }
+
+    public void traverseMetaLogic(){
+        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
+        mg.coins++;
     }
 }

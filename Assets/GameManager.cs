@@ -9,6 +9,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {   
+    public int coins = 0;
     public int roomNum = 0;
     public TMP_Text roomText;
     public GameObject wumpusObj;
@@ -42,6 +43,14 @@ public class GameManager : MonoBehaviour
         roomNum = Random.Range(0, rooms.Length);
         Room random = rooms[roomNum];
         other.transform.position = new Vector3(random.spawnLocation.position.x, random.spawnLocation.position.y+5, random.spawnLocation.position.z);
+    }
+
+    public void spend(int amount){
+        if (coins == 0){
+            lose();
+        } else {
+            coins -= amount;
+        }
     }
 
     public void win(){

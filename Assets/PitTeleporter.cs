@@ -10,6 +10,7 @@ public class PitTeleporter : Teleporter
     public override void MovePlayer(Collider other)
     {
         StartCoroutine(callTrivia(other));
+        base.traverseMetaLogic();
     }
 
     IEnumerator callTrivia(Collider other){
