@@ -96,8 +96,7 @@ public class RayCastShoot : MonoBehaviour
 
                 if (health != null)
                 {
-                    // + droneDamage IT DOESNT EXIST
-                    health.Damage(gunDamage + main_modify);
+                    health.Damage(gunDamage + main_modify + droneDamageMain);
                 }
 
                 if (hit.rigidbody != null)
