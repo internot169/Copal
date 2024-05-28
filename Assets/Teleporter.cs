@@ -50,8 +50,7 @@ public class Teleporter : PlayerCollider
     
     // all teleporters deal with moving the player, so this will change the player and doo everything. 
     public virtual void MovePlayer(Collider other){
-        // find the endpoint of this edge. 
-        GameManager mg = GetComponent<GameManager>();
+        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.roomNum = next.roomNum;
         // patch to make sure i stop clipping into the ground. 
         // we should use a different transform so its cleaner.
@@ -65,5 +64,11 @@ public class Teleporter : PlayerCollider
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
         // change the room for player. 
         other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
+        traverseMetaLogic();
+    }
+
+    public void traverseMetaLogic(){
+        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
+        mg.coins++;
     }
 }

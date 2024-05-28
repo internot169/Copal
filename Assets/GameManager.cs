@@ -9,6 +9,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {   
+    public int coins = 0;
     public int roomNum = 0;
     public TMP_Text roomText;
     public GameObject wumpusObj;
@@ -44,6 +45,14 @@ public class GameManager : MonoBehaviour
         other.transform.position = new Vector3(random.spawnLocation.position.x, random.spawnLocation.position.y+5, random.spawnLocation.position.z);
     }
 
+    public void spend(int amount){
+        if (coins == 0){
+            lose();
+        } else {
+            coins -= amount;
+        }
+    }
+
     public void win(){
         // Calculate score and stuff
         Debug.Log("YOU WON");
@@ -70,9 +79,7 @@ public class GameManager : MonoBehaviour
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
-        // should we null the tp after?
-        ///tp.GetComponent<Teleporter>().MovePlayer(Player.transform);
-        /// Don't do this - it breaks everything.
+        tp.MovePlayer(Player.GetComponent<Collider>());
     }
 
     public void Update(){
