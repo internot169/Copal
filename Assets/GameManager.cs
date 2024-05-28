@@ -70,9 +70,7 @@ public class GameManager : MonoBehaviour
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
-        // should we null the tp after?
-        ///tp.GetComponent<Teleporter>().MovePlayer(Player.transform);
-        /// Don't do this - it breaks everything.
+        tp.MovePlayer(Player.GetComponent<Collider>());
     }
 
     public void Update(){
