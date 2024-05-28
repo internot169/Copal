@@ -62,6 +62,8 @@ public class Enemy : Shootable
                 if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, restingDistance+1.0f)){
                     enemyGun.isInRange = true;
                     enemyGun.shot = hit;
+                    enemyGun.positionOfHit = enemyGun.gunEnd.position;
+                    enemyGun.directionOfHit = vectToPlayer;
                 }
             } else{
                 if (enemyGun != null){

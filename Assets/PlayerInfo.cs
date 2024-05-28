@@ -12,7 +12,8 @@ public class PlayerInfo : MonoBehaviour
     public Text numberHealth;
     public Text currentRoom;
     public float Health = 100.0f;
-    public double TimeSinceHurt = 0;
+    public double TimeSinceHurt = 0f;
+    public double TimeSinceHurtLimit = 0.25f;
 
     private float currentHealth;
 
@@ -38,7 +39,7 @@ public class PlayerInfo : MonoBehaviour
     {
         // if it's been a quarter second since last tick, then
         // damage again. 
-        if (TimeSinceHurt > 0.25)
+        if (TimeSinceHurt > TimeSinceHurtLimit)
         {
             currentHealth = Math.Max(currentHealth - damage, 0);
             HealthBar.value = currentHealth;
