@@ -7,7 +7,8 @@ public class Shootable : MonoBehaviour
     //The box's current health point total
     public int currentHealth = 3;
 
-    public void Damage(int damageAmount)
+    // virtual because Wumpus overrides it for parent inactive instead of self
+    public virtual void Damage(int damageAmount)
     {
         //subtract damage amount when Damage function is called
         currentHealth -= damageAmount;

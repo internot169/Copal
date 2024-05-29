@@ -29,6 +29,19 @@ public class Wumpus : Shootable
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public override void Damage(int damageAmount){
+        //subtract damage amount when Damage function is called
+        currentHealth -= damageAmount;
+
+        //Check if health has fallen below zero
+        if (currentHealth <= 0)
+        {
+            //if health has fallen below zero, deactivate it 
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
     
     void OnCollisionStay(Collision collision){
