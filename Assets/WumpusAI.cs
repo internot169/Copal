@@ -25,7 +25,7 @@ public class WumpusAi : MonoBehaviour
     bool isCharging = false;
 
     public float Speed = 75.0f;
-    public float Accel = 200.0f;
+    public float Accel = 2000.0f;
 
     Wumpus wumpus;
     void Start()
@@ -51,8 +51,6 @@ public class WumpusAi : MonoBehaviour
     {
         if (!isCharging)
         {
-            Vector3 vectToPlayer = Player.transform.position - transform.position;
-
             // wumpus doesn't random roam, cause it notices player upon entering
 
             // if player is noticed and is in range
@@ -61,7 +59,14 @@ public class WumpusAi : MonoBehaviour
             transform.LookAt( Player.transform );
             transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
 
-            agent.SetDestination(transform.position + vectToPlayer);
+            agent.SetDestination(Player.transform.position);
+
+            // if distance to player is less than 8.5, wumpus is JUST TOUCHING player
+            Vector3 vectToPlayer = Player.transform.position - transform.position;
+            // so stop it immediately by having it "reach its destination" immediately
+            if (vectToPlayer.magnitude < 8.5f){
+                agent.SetDestination( transform.position );
+            }
         }
     }
 
@@ -82,6 +87,8 @@ public class WumpusAi : MonoBehaviour
     IEnumerator Charge(){
         isCharging = true;
         transform.LookAt(Player.transform.position);
+        Vector3 distance =  Player.transform.position - transform.position;
+        Charge_Warn.GetComponent<ChargeWarnScale>().Scale(distance.magnitude);
         Charge_Warn.SetActive(true);
         agent.SetDestination(Player.transform.position);
         agent.speed = 0;
