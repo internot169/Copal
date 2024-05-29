@@ -22,10 +22,18 @@ public class WumpusAi : MonoBehaviour
 
     public GameObject DronesParent;
 
+    bool isCharging = false;
+
+    public float Speed = 75.0f;
+    public float Accel = 200.0f;
+
     Wumpus wumpus;
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.speed = Speed;
+        agent.acceleration = Accel;
+
         Player = GameObject.Find("Player");
         Charge_Warn = GameObject.Find("ChargeWarn");
         Charge_Warn.SetActive(false);
@@ -41,6 +49,20 @@ public class WumpusAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isCharging)
+        {
+            Vector3 vectToPlayer = Player.transform.position - transform.position;
+
+            // wumpus doesn't random roam, cause it notices player upon entering
+
+            // if player is noticed and is in range
+            // ALWAYS be looking at the player
+            // however, never shift z angle because that makes stuff cringe
+            transform.LookAt( Player.transform );
+            transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
+
+            agent.SetDestination(transform.position + vectToPlayer);
+        }
     }
 
     IEnumerator Pick_Action(){
@@ -58,20 +80,23 @@ public class WumpusAi : MonoBehaviour
     }
 
     IEnumerator Charge(){
+        isCharging = true;
         transform.LookAt(Player.transform.position);
         Charge_Warn.SetActive(true);
         agent.SetDestination(Player.transform.position);
         agent.speed = 0;
         yield return new WaitForSeconds(5);
         Charge_Warn.SetActive(false);
-        agent.acceleration = 100;
-        agent.speed = 120;
+        agent.acceleration = 5000f; // we want it to be speedy and stop immediately
+        agent.speed = 120f;
         while(agent.remainingDistance != 0){
             yield return null;
         }
-        agent.acceleration = 8;
-        agent.speed = 5;
+        Debug.Log("reset");
+        agent.speed = Speed;
+        agent.acceleration = Accel;
 
+        isCharging = false;
         StartCoroutine(Pick_Action());
     }
 
