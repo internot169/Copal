@@ -20,6 +20,13 @@ public class RoomGenerator : MonoBehaviour
         int room = 0;
         if (mobType == "Bat"){
             room = Random.Range(0, 30);
+        } else if (mobType == "Wumpus"){
+            int range = Random.Range(2, 4);
+            // Randomly traverse the graph two rooms forward
+            for (int i = 0; i < range; i++)
+            {
+                room = rooms[room].connectedTo[Random.Range(0, 3)];
+            }
         }
         for (int i = 0; i < 30; i++)
         {

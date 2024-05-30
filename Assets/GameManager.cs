@@ -70,7 +70,10 @@ public class GameManager : MonoBehaviour
         //shoot wumpus;
         Debug.Log("shoot");
         // move the player
-        // do the custom handling here. 
+        // do the custom handling here.
+        if (tp is BossTeleporter){
+            bossFight();
+        }
         move();
     }
 

@@ -70,5 +70,6 @@ public class Teleporter : PlayerCollider
     public void traverseMetaLogic(){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.coins++;
+        // Secret or do it with warnings
     }
 }

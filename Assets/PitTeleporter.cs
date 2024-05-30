@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class PitTeleporter : Teleporter
 {
+    Collider otherCollider;
 
-    // inherits most of the logic from teleporter, just needs to add
-    // conditional for trivia. 
-    public override void MovePlayer(Collider other)
-    {
-        StartCoroutine(callTrivia(other));
-        base.traverseMetaLogic();
-    }
-
-    IEnumerator callTrivia(Collider other){
-        Coroutine cd = StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2));
-        if (true){
+    public void receive(bool correct){
+        Debug.Log("Received");
+        if (correct){
             Room temp = base.next;
             base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
-            base.MovePlayer(other);
+            base.MovePlayer(otherCollider);
+            base.traverseMetaLogic();
             base.next = temp;
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose(0);
         }
-        return null;
+    }
+
+    public override void MovePlayer(Collider other)
+    {
+        otherCollider = other;
+        Callback receiver;
+        receiver = receive;
+        GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver);
     }
 }

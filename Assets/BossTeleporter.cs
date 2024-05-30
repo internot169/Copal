@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class BossTeleporter : Teleporter
 {
+    Collider otherCollider;
 
-    // move the player, but add a boss calling script for that. 
-    // these inheritances will do the special behavior for this room and then 
-    // call the normal behavior that it inherits. 
+    public void receive(bool correct){
+        Debug.Log("Received");
+        if (correct){
+            base.MovePlayer(otherCollider);
+            base.traverseMetaLogic();
+            // Wumpus move away
+        } else {
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose(0);
+        }
+    }
+
     public override void MovePlayer(Collider other)
     {
-        // spawn the boss
-        GameObject.Find("GameManager").GetComponent<GameManager>().bossFight();
-        base.MovePlayer(other);
-        base.traverseMetaLogic();
+        otherCollider = other;
+        Callback receiver;
+        receiver = receive;
+        GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver);
     }
 }

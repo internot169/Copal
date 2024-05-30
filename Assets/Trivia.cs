@@ -28,6 +28,8 @@ Level system + good looking prefab
 Minimap + wumpus fight
 */
 
+public delegate void Callback(bool answer);
+
 public class Trivia : MonoBehaviour
 {
     public string path;
@@ -54,19 +56,20 @@ public class Trivia : MonoBehaviour
     int questionIndex = 0;
     bool answered = false;
     bool correct = false;
-    public IEnumerator LoadTrivia(int count, int needed){
+    public IEnumerator LoadTrivia(int count, int needed, Callback callback){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.spend(count);
         triviaUI.SetActive(true);
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
-            // TODO: pre req needs to be numerical and regenerate
+            // TODO: pre req based on what is known
             questionIndex = Random.Range(0, questions.Length);
             while (questions[questionIndex].hasAnswered){
                 questionIndex = Random.Range(0, questions.Length);
             }
             questionText.text = questions[questionIndex].question;
             questions[questionIndex].hasAnswered = true;
+            // TODO: randomize choices
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
@@ -79,10 +82,10 @@ public class Trivia : MonoBehaviour
         }
         triviaUI.SetActive(false);
         if (correctlyAnswered >= needed){
-            yield return true;
+            callback(true);
         }
         else{
-            yield return false;
+            callback(false);
         }
     }    
 
