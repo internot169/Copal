@@ -4013,6 +4013,7 @@ GameObject:
   - component: {fileID: 1688488915}
   - component: {fileID: 1688488914}
   - component: {fileID: 1688488916}
+  - component: {fileID: 1688488917}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -4147,6 +4148,28 @@ CapsuleCollider:
   m_Height: 12.073876
   m_Direction: 1
   m_Center: {x: 0.030355215, y: -1.6996846, z: 1.2715553e-17}
+--- !u!64 &1688488917
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688488909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 293055ef06559fc4bb0da140cbd7fe73, type: 3}
 --- !u!1 &1695633204
 GameObject:
   m_ObjectHideFlags: 0

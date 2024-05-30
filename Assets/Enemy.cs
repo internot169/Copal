@@ -9,9 +9,7 @@ public class Enemy : Shootable
 
     NavMeshAgent agent;
 
-    public float restingDistance = 5.0f;
-
-    public float speed = 10.0f;
+    public float Speed = 0.5f;
 
     public EnemyGun enemyGun;
 
@@ -42,6 +40,8 @@ public class Enemy : Shootable
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
+        agent.speed = Speed;
+        agent.acceleration = 2000f;
     }
 
     // Update is called once per frame
@@ -56,10 +56,11 @@ public class Enemy : Shootable
             transform.LookAt( player.transform );
             transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
 
-            if (vectToPlayer.magnitude < restingDistance + 1.0f){
+            // player is in range
+            if (vectToPlayer.magnitude < enemyGun.range + 1.0f){
                 // this tells the gun to shoot
                 RaycastHit hit;
-                if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, restingDistance+1.0f)){
+                if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, enemyGun.range+1.0f)){
                     enemyGun.isInRange = true;
                     enemyGun.shot = hit;
                     enemyGun.positionOfHit = enemyGun.gunEnd.position;
@@ -70,24 +71,18 @@ public class Enemy : Shootable
                     // this tells the gun to not shoot
                     enemyGun.isInRange = false;
                 }
-
-                // and now, let's move the AI
-
-                // the goal is to move closer to the player. but the amt varies
-                Vector3 vTPWalk;
-
-                // the way this is implemented is to first find vector length
-                float magnitude = vectToPlayer.magnitude;
-
-                // it would want to move to a set radius around the player
-                // then we cast the vector to given distance to walk to player
-                vectToPlayer.Normalize();
-                vTPWalk = vectToPlayer * (magnitude - restingDistance) / magnitude;
-
-                // then we move an amt based on that vector, cast at a small dist
-                vTPWalk = vTPWalk * speed;
-                agent.SetDestination(transform.position + vTPWalk);
             }
+
+            // Movement happens regardless.
+
+            // we want a location along the path of AI to Player, but with modified location
+            // First, reverse vectToPlayer for vector to enemy
+            Vector3 VectToEnemy = -vectToPlayer;
+            // this neg vector will have magnitude range. Norm and remultiply it
+            VectToEnemy.Normalize();
+            VectToEnemy = VectToEnemy * enemyGun.range;
+            // and now, let's move the AI to player plus that vector
+            agent.SetDestination(player.transform.position + VectToEnemy);
         } else{
             // we are going to have the ai randomly roam to random locations
             // first, check if it is currently roaming.

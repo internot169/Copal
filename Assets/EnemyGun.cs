@@ -8,7 +8,7 @@ public class EnemyGun : MonoBehaviour
     [Header("Gun Stats")]
     public int gunDamage = 5;
     public float reloadTime = 1.0f;
-    public float range = 5.0f;
+    public float range = 4.0f;
     
     [Header("General Gun Information")]
     public Transform gunEnd;
@@ -98,7 +98,7 @@ public class EnemyGun : MonoBehaviour
 
         // this basically means that we will wait for the trail to disappear completely 
         // to shoot the player with damage. 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
 
         StartCoroutine(DealDamage(hit));
     }
@@ -112,7 +112,10 @@ public class EnemyGun : MonoBehaviour
 
         RaycastHit check;
         Physics.Raycast(positionOfHit, directionOfHit, out check, range + 1.0f);
+        Debug.Log(check.collider.gameObject);
         if (GameObject.ReferenceEquals(check.collider.gameObject, player)){
+            player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+        } else if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
         }
         

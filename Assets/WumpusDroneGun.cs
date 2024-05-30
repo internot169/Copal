@@ -108,7 +108,9 @@ public class WumpusDroneGun : MonoBehaviour
         Physics.Raycast(positionOfHit, directionOfHit, out check, Mathf.Infinity);
         // because slow field covers the entirety of player hitbox, count that as a hit to player
         // this code gets the parent gameobject of the hit object
-        if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
+        if (GameObject.ReferenceEquals(check.collider.gameObject, player)){
+            player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+        } else if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
         }
         
