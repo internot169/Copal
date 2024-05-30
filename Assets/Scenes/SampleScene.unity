@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunDamage: 5
   reloadTime: 5
-  range: 5
+  range: 4
   gunEnd: {fileID: 84513279}
   BulletTrail: {fileID: 855768409}
   isInRange: 0
@@ -3349,7 +3349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.6
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -3455,8 +3455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 3
-  restingDistance: 5
-  speed: 10
+  Speed: 5
   enemyGun: {fileID: 84513278}
   groundLayer:
     serializedVersion: 2
