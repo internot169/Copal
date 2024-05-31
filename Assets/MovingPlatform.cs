@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Transform startPos;
+    public float speed = 3.0f;
     public Transform endPos;
-    bool start = true;
-
-    void Awake()
-    {
-        transform.position = startPos.position;
-    }
+    public Transform startPos;
 
     void Update()
     {
-        /*float interpolationRatio = (float)elapsedFrames / interpolationFramesCount;
+        var step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, endPos.position, step);
 
-        Vector3 interpolatedPosition = Vector3.Lerp(transform.position, endPos.position, interpolationRatio);
-
-        elapsedFrames = (elapsedFrames + 1) % (interpolationFramesCount + 1);*/
-
-        if (start = true){
-            while (transform != endPos)
-            {
-                Vector3.MoveTowards(transform.position, endPos.position, 1f);
-            }
+        if (Vector3.Distance(transform.position, endPos.position) < 0.001f)
+        {
+            Transform holdData = startPos;
+            startPos = endPos;
+            endPos = holdData;
         }
     }
 }
