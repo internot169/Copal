@@ -98,7 +98,7 @@ public class AugmentManager : MonoBehaviour
         ChangeDroneAlt(false);
     }
 
-    public void ResetFieldAll(bool state){
+    public void ResetFieldAll(){
         ChangeDOTField(false);
         ChangeSlowField(false);
         ChangeVampField(false);

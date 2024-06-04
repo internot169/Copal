@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using TMPro;
+using JetBrains.Annotations;
 
 
 public class GameManager : MonoBehaviour
@@ -28,11 +29,18 @@ public class GameManager : MonoBehaviour
     private GameObject ArrowUI;
 
     private TextMeshProUGUI warning;
+
+    private TextMeshProUGUI cointext;
+
+    private GameObject ShopUI;
  
     void Start(){
         instance = this;
         Player = GameObject.Find("Player");
         ArrowUI = GameObject.Find("ArrowUI");
+        ShopUI = GameObject.Find("ShopUI");
+        cointext = GameObject.Find("Coins").GetComponent<TextMeshProUGUI>();
+        ShopUI.SetActive(false);
         ArrowUI.SetActive(false);
         warning = GameObject.Find("Warnings").GetComponent<TextMeshProUGUI>();
     }
@@ -47,12 +55,25 @@ public class GameManager : MonoBehaviour
         other.transform.position = new Vector3(random.spawnLocation.position.x, random.spawnLocation.position.y+5, random.spawnLocation.position.z);
     }
 
+    // various UI and shop things. 
     public void spend(int amount){
         if (coins == 0){
             lose(0);
         } else {
             coins -= amount;
         }
+    }
+
+    public void OpenShop(){
+        //update coins
+        cointext.text = "coins: " +coins;
+        ShopUI.SetActive(true);
+        ArrowUI.SetActive(false);
+    }
+
+    public void CloseShop(){
+        ShopUI.SetActive(false);
+        ArrowUI.SetActive(true);
     }
 
     public void win(int wumpus){
