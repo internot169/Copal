@@ -107,6 +107,6 @@ public class AugmentManager : MonoBehaviour
 
 
     public void modifyPlayerSpeed(float newSpeed){
-        gameObject.GetComponent<CrankyRigidBodyController>().MovementSpeed = newSpeed;
+        gameObject.GetComponent<CrankyRigidBodyController>()._speed = newSpeed;
     }
 }
