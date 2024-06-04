@@ -9,7 +9,7 @@ public class RayCastShoot : MonoBehaviour
     public int altFireDamage = 2;
     public float fireRate = 0.25f;
     public float altFireRate = 2f;
-    public float altFireAOE = 2.5f;
+    public float altFireAOE = 5f;
     public float weaponRange = 50f;
     public float hitForce = 100f;
     public Transform gunEnd;
@@ -92,7 +92,7 @@ public class RayCastShoot : MonoBehaviour
                     player.GetComponent<PlayerInfo>().Heal(10f);
                 }
 
-                Shootable health = hit.collider.GetComponent<Shootable>();
+                Shootable health = hit.collider.transform.parent.GetComponent<Shootable>();
 
                 if (health != null)
                 {
@@ -136,16 +136,14 @@ public class RayCastShoot : MonoBehaviour
 
                 foreach (var hitCollider in hitColliders)
                 {
+                    Debug.Log(hitCollider);
                     // check if is player
-                    PlayerInfo health = hitCollider.GetComponent<PlayerInfo>();
+                    PlayerInfo health = hitCollider.transform.parent.GetComponent<PlayerInfo>();
                     if (health != null){
-                        if (health != null)
-                        {
-                            health.TakeDamage(altFireDamage + alt_modify);
-                        }
+                        health.TakeDamage(altFireDamage + alt_modify);
                     }
                     else{
-                        Shootable bhealth = hitCollider.GetComponent<Shootable>();
+                        Shootable bhealth = hitCollider.transform.parent.GetComponent<Shootable>();
 
                         if (bhealth != null)
                         {

@@ -11,6 +11,8 @@ public class Enemy : Shootable
 
     public float Speed = 0.5f;
 
+    public float YOffset = 180.0f;
+
     public EnemyGun enemyGun;
 
     bool noticedPlayer = true;
@@ -35,9 +37,11 @@ public class Enemy : Shootable
     public int burn_tier;
     public int burn_timer;
     float apply_timer;
+    Rigidbody m_Rigidbody;
 
     void Start()
     {
+        m_Rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         agent.speed = Speed;
@@ -50,30 +54,14 @@ public class Enemy : Shootable
         Vector3 vectToPlayer = player.transform.position - transform.position;
 
         // two situations: Noticed player and not
-        if (noticedPlayer){
-            // if player is noticed and is in range
+        //if (noticedPlayer){
+
+        // if player is noticed and is in range
+
+        if (!enemyGun.isShooting){
             // ALWAYS be looking at the player
             transform.LookAt( player.transform );
-            transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
-
-            // player is in range
-            if (vectToPlayer.magnitude < enemyGun.range + 1.0f){
-                // this tells the gun to shoot
-                RaycastHit hit;
-                if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, enemyGun.range+1.0f)){
-                    enemyGun.isInRange = true;
-                    enemyGun.shot = hit;
-                    enemyGun.positionOfHit = enemyGun.gunEnd.position;
-                    enemyGun.directionOfHit = vectToPlayer;
-                }
-            } else{
-                if (enemyGun != null){
-                    // this tells the gun to not shoot
-                    enemyGun.isInRange = false;
-                }
-            }
-
-            // Movement happens regardless.
+            transform.eulerAngles = new Vector3(0, YOffset + transform.eulerAngles.y,0);
 
             // we want a location along the path of AI to Player, but with modified location
             // First, reverse vectToPlayer for vector to enemy
@@ -83,29 +71,50 @@ public class Enemy : Shootable
             VectToEnemy = VectToEnemy * enemyGun.range;
             // and now, let's move the AI to player plus that vector
             agent.SetDestination(player.transform.position + VectToEnemy);
-        } else{
-            // we are going to have the ai randomly roam to random locations
-            // first, check if it is currently roaming.
-
-            if (walkpointSet){
-                agent.SetDestination(destPoint);
-            } else if (Time.time > nextMove){
-                destPoint = GenerateRandomPoint();
-                walkpointSet = true;
-            }
-
-            // keep moving until the distance gets relatively close. 
-            // first, tell the agent to stop moving for a couple of iterations
-            // then, we unset walkpoint and wait until next iteration to 
-            // set the next walkpoint
-            if (Vector3.Distance(transform.position, destPoint) < 2 && Time.time > nextMove){
-                walkpointSet = false;
-                // tell it to stop for a while
-                nextMove = Time.time + 2.0f;
-                Debug.Log(nextMove);
-            }
-            
         }
+        
+        
+        // player is in range
+        if (vectToPlayer.magnitude < enemyGun.range + 1.0f){
+            // this tells the gun to shoot
+            RaycastHit hit;
+            if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, enemyGun.range+1.0f)){
+                enemyGun.isInRange = true;
+                enemyGun.shot = hit;
+                enemyGun.positionOfHit = enemyGun.gunEnd.position;
+                enemyGun.directionOfHit = vectToPlayer;
+            }
+        } else{
+            if (enemyGun != null){
+                // this tells the gun to not shoot
+                enemyGun.isInRange = false;
+            }
+        }
+
+        //}
+        //  else{
+        //     // we are going to have the ai randomly roam to random locations
+        //     // first, check if it is currently roaming.
+
+        //     if (walkpointSet){
+        //         agent.SetDestination(destPoint);
+        //     } else if (Time.time > nextMove){
+        //         destPoint = GenerateRandomPoint();
+        //         walkpointSet = true;
+        //     }
+
+        //     // keep moving until the distance gets relatively close. 
+        //     // first, tell the agent to stop moving for a couple of iterations
+        //     // then, we unset walkpoint and wait until next iteration to 
+        //     // set the next walkpoint
+        //     if (Vector3.Distance(transform.position, destPoint) < 2 && Time.time > nextMove){
+        //         walkpointSet = false;
+        //         // tell it to stop for a while
+        //         nextMove = Time.time + 2.0f;
+        //         Debug.Log(nextMove);
+        //     }
+            
+        // }
 
         if (currentHealth == 0){
             Object.Destroy(this.gameObject);
