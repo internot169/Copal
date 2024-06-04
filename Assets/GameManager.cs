@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int arrows = 0;
     public int coins = 0;
     public int roomNum = 0;
+    public int lives = 3;
     public TMP_Text roomText;
     public GameObject wumpusObj;
 
@@ -80,7 +81,11 @@ public class GameManager : MonoBehaviour
         score(wumpus);
     }
     public void lose(int wumpus){
-        score(wumpus);
+        if (lives <= 1){
+            score(wumpus);
+        }else{
+            lives-= 1;
+        }
     }
     public void score(int wumpus) {
         int score = 100 - turns + coins + (5 * arrows) + wumpus;
