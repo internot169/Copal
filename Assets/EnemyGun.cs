@@ -18,6 +18,7 @@ public class EnemyGun : MonoBehaviour
 
     [Header("Shooting information")]
     public bool isInRange = false;
+    public bool isShooting = false;
     public GameObject player;
     public RaycastHit shot;
 
@@ -35,10 +36,16 @@ public class EnemyGun : MonoBehaviour
     {
         // add to this the state flip to tell it. 
         // you should call this and do the timer within enemy. 
-        if (Time.time > nextFire && isInRange){
-            // this should also be removed since it's a timer
-            nextFire = reloadTime + Time.time;
-            Shoot(shot);
+        if (Time.time > nextFire){
+            // manually fix/restart movement if the time is good as well
+            isShooting = false;
+
+            if (isInRange){
+                isShooting = true;
+                // this should also be removed since it's a timer
+                nextFire = reloadTime + Time.time;
+                Shoot(shot);
+            }
         }
     }
 
@@ -98,7 +105,7 @@ public class EnemyGun : MonoBehaviour
 
         // this basically means that we will wait for the trail to disappear completely 
         // to shoot the player with damage. 
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(BulletTrail.time);
 
         StartCoroutine(DealDamage(hit));
     }
@@ -118,6 +125,8 @@ public class EnemyGun : MonoBehaviour
         } else if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
         }
+
+        isShooting = false;
         
         yield break;
     }
