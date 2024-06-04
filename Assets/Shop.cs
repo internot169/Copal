@@ -39,11 +39,7 @@ public class Shop : MonoBehaviour
     }
 
     public void BuyTrivia(){
-        if(gameManager.coins > TriviaCost){
-            gameManager.spend(TriviaCost);
-            //like how do i even do this....
-        }
-        gameManager.CloseShop();
+        // Secret
     }
 
     public void BuyAugment(){

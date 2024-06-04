@@ -1800,7 +1800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4709641571059818318, guid: 93559d826ee4c184f9eccb449f8e11d2, type: 3}
       propertyPath: m_Name
-      value: Trivia
+      value: Secret
       objectReference: {fileID: 0}
     - target: {fileID: 5115638360139118879, guid: 93559d826ee4c184f9eccb449f8e11d2, type: 3}
       propertyPath: m_Name
@@ -1808,7 +1808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7134898968347148696, guid: 93559d826ee4c184f9eccb449f8e11d2, type: 3}
       propertyPath: m_text
-      value: 'Trivia
+      value: 'Secret
 
 '
       objectReference: {fileID: 0}
