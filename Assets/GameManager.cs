@@ -6,10 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using TMPro;
 using JetBrains.Annotations;
-
+using System.Net.Http;
 
 public class GameManager : MonoBehaviour
 {   
+    private static readonly HttpClient client = new HttpClient();
+    private static readonly string url = "http://localhost:5000/addscore";
     public int turns = 0;
     public int arrows = 0;
     public int coins = 0;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     public GameObject wumpusObj;
 
     public static GameManager instance;
+
+    private bool lost = false;
 
     private bool fighting = false;
 
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
     // various UI and shop things. 
     public void spend(int amount){
         if (coins == 0){
-            lose(0);
+            lose();
         } else {
             coins -= amount;
         }
@@ -78,19 +82,43 @@ public class GameManager : MonoBehaviour
     }
 
     public void win(int wumpus){
+        // Display win screen
         score(wumpus);
     }
-    public void lose(int wumpus){
-        if (lives <= 1){
-            score(wumpus);
-        }else{
-            lives-= 1;
+    public bool lose(){
+        if (!lost){
+            if (lives <= 1){
+                score(0);
+                lost = true;
+                return true;
+            }else{
+                lives-= 1;
+                return false;
+            }
+        } else {
+            return true;
         }
     }
-    public void score(int wumpus) {
+    public async void score(int wumpus) {
         int score = 100 - turns + coins + (5 * arrows) + wumpus;
-        Debug.Log(score);
-        // Write to file, rank the scores, remove if not top 10, name, seed
+        
+        var values = new Dictionary<string, string>
+        {
+            { "password", "resin" },
+            { "name", "JS" },
+            { "score", score.ToString() },
+            { "turns", turns.ToString() },
+            { "coins", coins.ToString() },
+            { "arrows", arrows.ToString() },
+            { "wumpus", wumpus.ToString() }
+        };
+        
+        var content = new FormUrlEncodedContent(values);
+        try{
+            var response = await client.PostAsync(url, content);
+        } catch (HttpRequestException e){
+            Debug.Log(e.Message);
+        }
     }
     public void shoot(){
         //shoot wumpus;

@@ -1678,6 +1678,7 @@ MonoBehaviour:
   arrows: 0
   coins: 0
   roomNum: 0
+  lives: 3
   roomText: {fileID: 1780500317}
   wumpusObj: {fileID: 483831487}
 --- !u!1001 &955015159

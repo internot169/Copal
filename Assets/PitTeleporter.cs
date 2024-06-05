@@ -15,7 +15,7 @@ public class PitTeleporter : Teleporter
             base.traverseMetaLogic();
             base.next = temp;
         } else {
-            GameObject.Find("GameManager").GetComponent<GameManager>().lose(0);
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose();
         }
     }
 

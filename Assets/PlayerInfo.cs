@@ -73,5 +73,13 @@ public class PlayerInfo : MonoBehaviour
         }
         // increment timer. 
         TimeSinceHurt += 0.25 * Time.deltaTime;
+
+        if (currentHealth <= 0)
+        {
+            bool respawn = !GameObject.Find("GameManager").GetComponent<GameManager>().lose();
+            if (respawn){
+                Heal(Health);
+            }
+        }
     }
 }

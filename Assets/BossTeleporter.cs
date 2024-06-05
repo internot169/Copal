@@ -13,7 +13,7 @@ public class BossTeleporter : Teleporter
             base.traverseMetaLogic();
             // Wumpus move away
         } else {
-            GameObject.Find("GameManager").GetComponent<GameManager>().lose(0);
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose();
         }
     }
 
