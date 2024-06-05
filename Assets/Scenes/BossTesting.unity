@@ -4897,6 +4897,7 @@ GameObject:
   - component: {fileID: 2377369266970543889}
   - component: {fileID: 583922985762768775}
   - component: {fileID: 585016397663007070}
+  - component: {fileID: 8369369730258857841}
   m_Layer: 0
   m_Name: BossRender
   m_TagString: Untagged
@@ -4904,6 +4905,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8369369730258857841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369369730258857840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bbf14514aa6354382f917ecd8ad495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8383736403932439393
 Transform:
   m_ObjectHideFlags: 0
@@ -4933,7 +4946,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 3
   rb: {fileID: 512974680}
-  KnockBackForce: 15000
+  KnockBackForce: 50000
+  Player: {fileID: 0}
   StompArea: {fileID: 2945850440588959228}
   StompWarning: {fileID: 8101456167867395792}
 --- !u!4 &8952878193706594960
