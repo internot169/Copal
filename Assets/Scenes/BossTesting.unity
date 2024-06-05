@@ -5022,8 +5022,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124504433}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
 --- !u!64 &11276958049041977
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6116,7 +6114,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
