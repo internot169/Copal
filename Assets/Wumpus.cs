@@ -46,7 +46,7 @@ public class Wumpus : Shootable
 
     void ApplyForceUp(){
         Vector3 PureDirection = Player.transform.position - transform.position;
-        Vector3 KBDirection = new Vector3(PureDirection.x, 5f, PureDirection.z);
+        Vector3 KBDirection = new Vector3(PureDirection.x, 0.5f, PureDirection.z);
         rb.AddForce(KBDirection * KnockBackForce * Time.deltaTime);
     }
 

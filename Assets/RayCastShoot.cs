@@ -138,7 +138,7 @@ public class RayCastShoot : MonoBehaviour
                 {
                     Debug.Log(hitCollider);
                     // check if is player
-                     PlayerInfo health = hitCollider.transform.parent.GetComponent<PlayerInfo>();
+                    PlayerInfo health = hitCollider.transform.parent.GetComponent<PlayerInfo>();
                     if (health != null){
                         health.TakeDamage(altFireDamage + alt_modify);
                     }
