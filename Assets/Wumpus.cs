@@ -9,7 +9,7 @@ public class Wumpus : Shootable
     public Rigidbody rb;
     public float KnockBackForce;
 
-    GameObject Player;
+    public GameObject Player;
 
     UnityEngine.AI.NavMeshAgent agent;
 
@@ -43,20 +43,11 @@ public class Wumpus : Shootable
             gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
-    
-    void OnCollisionStay(Collision collision){
-        Collider collider = collision.collider;
-        GameObject player = collider.gameObject;
-        Debug.Log(player.name);
-        ApplyForce();
-        // do damage based on roaming, charging, and stomp
-        Player.GetComponent<PlayerInfo>().TakeDamage(20);
 
-    }
-
-    void ApplyForce(){
-        Vector3 direction = Player.transform.position - transform.position;
-        rb.AddForce(direction * KnockBackForce * Time.deltaTime);
+    void ApplyForceUp(){
+        Vector3 PureDirection = Player.transform.position - transform.position;
+        Vector3 KBDirection = new Vector3(PureDirection.x, 0.5f, PureDirection.z);
+        rb.AddForce(KBDirection * KnockBackForce * Time.deltaTime);
     }
 
     public IEnumerator Stomp(){
@@ -68,7 +59,7 @@ public class Wumpus : Shootable
         Debug.Log("Stomping");
         if (StompArea.GetComponent<Stomp>().playerIn == true){
             Player.GetComponent<PlayerInfo>().TakeDamage(20);
-            ApplyForce();
+            ApplyForceUp();
         }
     }
 
