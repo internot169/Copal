@@ -26,7 +26,6 @@ public class Teleporter : PlayerCollider
     // override the interact player script to do teleportation instead. 
     public override void InteractPlayer(Collider other)
     {
-        
         // show the UI. 
         if(isOn){
             // we need to free the player when we open this ui or something. 
@@ -45,13 +44,17 @@ public class Teleporter : PlayerCollider
             // not using messaging because I'm unfamiliar, since I come from java. 
             // I think its easier to update a pointer. 
             gameManager.UpdateTp(this);
+            gameManager.move(next.roomNum);
         }
     }
     
-    // all teleporters deal with moving the player, so this will change the player and doo everything. 
+    void OnTriggerEnter(Collider other)
+    {
+        InteractPlayer(other);
+    }
+
+    // all teleporters deal with moving the player, so this will change the player and do everything. 
     public virtual void MovePlayer(Collider other){
-        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
-        mg.roomNum = next.roomNum;
         // patch to make sure i stop clipping into the ground. 
         // we should use a different transform so its cleaner.
         // move the player to the room
@@ -62,12 +65,5 @@ public class Teleporter : PlayerCollider
         // rooms from being rendered, but means that we can save time on room changes when compared to scene.
         // only issue being clipping into other rooms, but we generally handle that gracefully. 
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
-        traverseMetaLogic();
-    }
-
-    public void traverseMetaLogic(){
-        GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
-        mg.coins++;
-        // Secret or do it with warnings
     }
 }

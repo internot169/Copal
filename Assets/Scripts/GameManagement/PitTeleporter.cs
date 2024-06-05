@@ -10,9 +10,9 @@ public class PitTeleporter : Teleporter
         Debug.Log("Received");
         if (correct){
             Room temp = base.next;
+            // Go back to the beginning
             base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
             base.MovePlayer(otherCollider);
-            base.traverseMetaLogic();
             base.next = temp;
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose();

@@ -10,7 +10,6 @@ public class BossTeleporter : Teleporter
         Debug.Log("Received");
         if (correct){
             base.MovePlayer(otherCollider);
-            base.traverseMetaLogic();
             // Wumpus move away
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose();

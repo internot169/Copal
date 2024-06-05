@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private static readonly HttpClient client = new HttpClient();
     private static readonly string url = "http://localhost:5000/addscore";
     public int turns = 0;
-    public int arrows = 0;
+    public int arrows = 3;
     public int coins = 0;
     public int roomNum = 0;
     public int lives = 3;
@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private GameObject ShopUI;
  
     void Start(){
+        arrows=3;
         instance = this;
         Player = GameObject.Find("Player");
         ArrowUI = GameObject.Find("ArrowUI");
@@ -53,11 +54,11 @@ public class GameManager : MonoBehaviour
         wumpusObj.SetActive(true);
         fighting = true;
     }
-    public void randomRoom(Collider other){
+    public void randomRoom(){
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
         roomNum = Random.Range(0, rooms.Length);
         Room random = rooms[roomNum];
-        other.transform.position = new Vector3(random.spawnLocation.position.x, random.spawnLocation.position.y+5, random.spawnLocation.position.z);
+        move(roomNum);
     }
 
     // various UI and shop things. 
@@ -120,20 +121,25 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
-    public void shoot(){
+    public void shoot(int roomNum){
         //shoot wumpus;
         Debug.Log("shoot");
-        // Decrease arrow
-        // move the player
-        // do the custom handling here.
-        if (tp is BossTeleporter){
-            bossFight();
+        if (arrows > 0){
+            arrows--;
+            
+            // move the player
+            // do the custom handling here.
+            if (tp is BossTeleporter){
+                bossFight();
+            }
         }
-        move();
+        move(roomNum);
     }
 
-    public void move(){
-        Debug.Log("move");
+    public void move(int room){
+        roomNum = room;
+        coins++;
+        
         // hide ui
         ArrowUI.SetActive(false);
         // hide cursor
@@ -143,6 +149,7 @@ public class GameManager : MonoBehaviour
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
         tp.MovePlayer(Player.GetComponent<Collider>());
+        tp = null;
     }
 
     public void Update(){
