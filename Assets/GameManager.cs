@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using TMPro;
 using JetBrains.Annotations;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -46,8 +47,15 @@ public class GameManager : MonoBehaviour
         warning = GameObject.Find("Warnings").GetComponent<TextMeshProUGUI>();
     }
     public void bossFight(){
-        wumpusObj.SetActive(true);
-        fighting = true;
+        // hide ui
+        ArrowUI.SetActive(false);
+        // hide cursor
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        // enable the camera
+        Player.GetComponentInChildren<MouseLook>().enabled = true;
+        SceneManager.LoadScene("BossTesting", LoadSceneMode.Additive);
+        
     }
     public void randomRoom(Collider other){
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
@@ -96,11 +104,13 @@ public class GameManager : MonoBehaviour
         //shoot wumpus;
         Debug.Log("shoot");
         // move the player
-        // do the custom handling here.
+        // do the custom handling here. 
         if (tp is BossTeleporter){
             bossFight();
+        }else{
+            // added else for safety. 
+            move();
         }
-        move();
     }
 
     public void move(){

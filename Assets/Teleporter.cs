@@ -70,6 +70,10 @@ public class Teleporter : PlayerCollider
     public void traverseMetaLogic(){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.coins++;
+        mg.turns++;
+        if(mg.turns > 100){
+            mg.lose(0);
+        }
         // Secret or do it with warnings
     }
 }

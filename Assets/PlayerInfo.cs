@@ -21,12 +21,15 @@ public class PlayerInfo : MonoBehaviour
 
     private GameObject DOTField;
 
+    private GameManager gm;
+
     void Start()
     {
         currentHealth = Health;
         ChangeRoom(1);
         DOTField = GameObject.Find("DOTApplier");
         slowField = GameObject.Find("SlowApplier");
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void ChangeRoom(int i){
