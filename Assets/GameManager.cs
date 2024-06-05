@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     public void shoot(){
         //shoot wumpus;
         Debug.Log("shoot");
+        // Decrease arrow
         // move the player
         // do the custom handling here.
         if (tp is BossTeleporter){

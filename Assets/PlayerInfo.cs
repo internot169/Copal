@@ -7,10 +7,8 @@ using System;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public int roomNum;
     public Slider HealthBar;
     public Text numberHealth;
-    public Text currentRoom;
     public float Health = 100.0f;
     public double TimeSinceHurt = 0f;
     public double TimeSinceHurtLimit = 0.25f;
@@ -24,14 +22,8 @@ public class PlayerInfo : MonoBehaviour
     void Start()
     {
         currentHealth = Health;
-        ChangeRoom(1);
         DOTField = GameObject.Find("DOTApplier");
         slowField = GameObject.Find("SlowApplier");
-    }
-
-    public void ChangeRoom(int i){
-        roomNum = i;
-        //currentRoom.text = "Room " + roomNum.ToString();
     }
 
     // Take damage script for other objects to interact. 

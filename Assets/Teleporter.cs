@@ -62,8 +62,6 @@ public class Teleporter : PlayerCollider
         // rooms from being rendered, but means that we can save time on room changes when compared to scene.
         // only issue being clipping into other rooms, but we generally handle that gracefully. 
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
-        // change the room for player. 
-        other.GetComponent<PlayerInfo>().ChangeRoom(next.roomNum);
         traverseMetaLogic();
     }
 
