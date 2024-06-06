@@ -1610,12 +1610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
-  - {fileID: 7217881123877930191, guid: 3449637eac9783545a49b61938ca24d0, type: 3}
-  - {fileID: 924946060923356491, guid: 153f0813e40dc314eb0d218b0275fbb1, type: 3}
-  - {fileID: 460532369976754462, guid: f9b7fa4bb234bd54bade5ed92dc80fc5, type: 3}
-  - {fileID: 5273428561995392405, guid: 5c616aa326c3e8a4abbdbc45a939ebe4, type: 3}
-  - {fileID: 5471556505656680923, guid: 2fad2937547a34949a543537c7c6a527, type: 3}
-  - {fileID: 886180545901621319, guid: 52c14ce1c1140a7498c03018137cb1aa, type: 3}
+  - {fileID: 3255497724698729766, guid: 0547d267e77084e4982d3473c85b66db, type: 3}
   roomLength: 40
   roomBuffer: 10
   rooms:
@@ -3758,6 +3753,10 @@ PrefabInstance:
     - target: {fileID: 2373592249231189960, guid: ec9e454b421a0924b8956d57a1c04df0, type: 3}
       propertyPath: m_Name
       value: PauseUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373592249231189960, guid: ec9e454b421a0924b8956d57a1c04df0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2623874155765561442, guid: ec9e454b421a0924b8956d57a1c04df0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -9,7 +9,10 @@ public class BossTeleporter : Teleporter
     public void receive(bool correct){
         Debug.Log("Received");
         if (correct){
-            base.MovePlayer(otherCollider);
+            next.gameObject.SetActive(true);
+            next.adjacencyCheck();
+            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+
             GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Wumpus", base.next.roomNum);
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose();
