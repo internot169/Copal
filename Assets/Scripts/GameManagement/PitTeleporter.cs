@@ -24,6 +24,6 @@ public class PitTeleporter : Teleporter
         otherCollider = other;
         Callback receiver;
         receiver = receive;
-        GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver);
+        StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
     }
 }

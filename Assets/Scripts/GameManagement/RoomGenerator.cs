@@ -6,12 +6,16 @@ public class RoomGenerator : MonoBehaviour
 {
     public GameObject roomPrefab;
     // TODO: Make it room specific
-    public float roomLength;
-    public float roomBuffer;
+    public float roomLength = 100f;
+    public float roomBuffer = 10f;
     public Room[] rooms = new Room[30];
-    int wumpusRoom;
+    public int wumpusRoom;
+    public int batRoom;
+    public int pitRoom;
     public void Awake(){
-        wumpusRoom = Random.Range(0, 30);
+        wumpusRoom = Random.Range(1, 30);
+        batRoom = Random.Range(1, 30);
+        pitRoom = Random.Range(1, 30);
         // Make the base room
         createRooms();
     }
@@ -20,6 +24,10 @@ public class RoomGenerator : MonoBehaviour
         int room = 0;
         if (mobType == "Bat"){
             room = Random.Range(0, 30);
+            while(room == currRoom || room == wumpusRoom || room == pitRoom){
+                room = rooms[room].connectedTo[Random.Range(0, 3)];
+            }
+            batRoom = room;
         } else if (mobType == "Wumpus"){
             int range = Random.Range(2, 4);
             // Randomly traverse the graph two rooms forward
@@ -27,6 +35,10 @@ public class RoomGenerator : MonoBehaviour
             {
                 room = rooms[room].connectedTo[Random.Range(0, 3)];
             }
+            while(room == currRoom || room == batRoom || room == pitRoom){
+                room = rooms[room].connectedTo[Random.Range(0, 3)];
+            }
+            wumpusRoom = room;
         }
         for (int i = 0; i < 30; i++)
         {
@@ -35,19 +47,15 @@ public class RoomGenerator : MonoBehaviour
                 // Remove old
                 if (rooms[i].doors[j].next.roomNum == currRoom){
                     GameObject obj = rooms[i].doors[j].gameObject;
+                    Room tempRoom = rooms[i].doors[j].next;
+                    
                     Destroy(obj.GetComponent<Teleporter>());
                     rooms[i].doors[j] = obj.AddComponent<Teleporter>();
+                    rooms[i].doors[j].next = tempRoom;
+                    rooms[i].doors[j].Awake();
                 }
                 // Add new
-                if (rooms[i].doors[j].next.roomNum == room){
-                    GameObject obj = rooms[i].doors[j].gameObject;
-                    Destroy(obj.GetComponent<Teleporter>());
-                    if (mobType == "Bat") {
-                        rooms[i].doors[j] = obj.AddComponent<BatTeleporter>();
-                    } else if (mobType == "Wumpus") {
-                        rooms[i].doors[j] = obj.AddComponent<BossTeleporter>();
-                    }
-                }
+                changeTeleporters(i, j, room);
             }
         }
     }
@@ -56,14 +64,11 @@ public class RoomGenerator : MonoBehaviour
         // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
         float nextRoomPos = 0f;
-
-        int wumpusRoom = Random.Range(0, 30);
-        int batRoom = -1;
-        int pitRoom = -1;
-        while (batRoom != wumpusRoom){
+        
+        while (batRoom == wumpusRoom){
             batRoom = Random.Range(0, 30);
         }
-        while (pitRoom != wumpusRoom && pitRoom != batRoom){
+        while (pitRoom == wumpusRoom || pitRoom == batRoom){
             pitRoom = Random.Range(0, 30);
         }
         
@@ -71,9 +76,12 @@ public class RoomGenerator : MonoBehaviour
         {
             GameObject ob = Instantiate(roomPrefab, new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
             nextRoomPos += roomLength + roomBuffer;
-            ob.name = "Room " + ((int) i + 1).ToString();
+            ob.name = "Room " + ((int) i).ToString();
+            if (i != 0){
+                ob.SetActive(false);
+            }
             rooms[i] = (Room) ob.GetComponent<Room>();
-            rooms[i].roomNum = i + 1;
+            rooms[i].roomNum = i;
             rooms[i].connectedTo = new int[3] {-1, -1, -1};
         }
         for (int i = 0; i < 30; i++)
@@ -82,8 +90,9 @@ public class RoomGenerator : MonoBehaviour
             rooms[i].doors[0].next = rooms[(i + 1) % 30];
             rooms[i].connectedTo[0] = (i + 1) % 30;
 
+            changeTeleporters(i, 0, (i + 1) % 30);
+            
             // Load the rest of the links randomly
-            // One feature is to include really necessary rooms at high-degree nodes
             for (int j = 1; j < 3; j++)
             {
                 // Pick a random room, add it to connectedTo
@@ -92,25 +101,54 @@ public class RoomGenerator : MonoBehaviour
                 while (roomAlreadyConnected(rand, rooms[i].connectedTo)){
                     rand = Random.Range(0, 30);
                 }
-                
-                // This should for all links to the specific room change the teleporter to the correct type
-                if (rand == wumpusRoom){
-                    GameObject obj = rooms[i].doors[j].gameObject;
-                    Destroy(obj.GetComponent<Teleporter>());
-                    rooms[i].doors[j] = obj.AddComponent<BossTeleporter>();
-                } else if (rand == batRoom){
-                    GameObject obj = rooms[i].doors[j].gameObject;
-                    Destroy(obj.GetComponent<Teleporter>());
-                    rooms[i].doors[j] = obj.AddComponent<BatTeleporter>();
-                } else if (rand == pitRoom) {
-                    GameObject obj = rooms[i].doors[j].gameObject;
-                    Destroy(obj.GetComponent<Teleporter>());
-                    rooms[i].doors[j] = obj.AddComponent<PitTeleporter>();
-                }
 
+                changeTeleporters(i, j, rand);
+                
                 rooms[i].doors[j].next = rooms[rand];
                 rooms[i].connectedTo[j] = rand;
             }
+        }
+    }
+
+    void changeTeleporters(int i, int j, int toCheck){
+        if (toCheck == wumpusRoom){
+            // Change the teleporter to a boss teleporter
+            GameObject obj = rooms[i].doors[j].gameObject;
+            Room tempRoom = rooms[i].doors[j].next;
+
+            // Destroy old teleporter
+            Destroy(obj.GetComponent<Teleporter>());
+
+            // Create new teleporter and assign attribute
+            rooms[i].doors[j] = obj.AddComponent<BossTeleporter>();
+            rooms[i].doors[j].next = tempRoom;
+            rooms[i].doors[j].Awake();
+        } else if (toCheck == batRoom){
+            // Change the teleporter to a boss teleporter
+            GameObject obj = rooms[i].doors[j].gameObject;
+            Room tempRoom = rooms[i].doors[j].next;
+
+            // Destroy old teleporter
+            Destroy(obj.GetComponent<Teleporter>());
+
+            // Create new teleporter and assign attribute
+            // Component Type changes based on teleporter type
+            rooms[i].doors[j] = obj.AddComponent<BatTeleporter>();
+            rooms[i].doors[j].next = tempRoom;
+            rooms[i].doors[j].Awake();
+        } else if (toCheck == pitRoom) {
+            // Change the teleporter to a boss teleporter
+            GameObject obj = rooms[i].doors[j].gameObject;
+            Room tempRoom = rooms[i].doors[j].next;
+
+            // Destroy old teleporter
+            Destroy(obj.GetComponent<Teleporter>());
+
+            // Create new teleporter and assign attribute
+            // Component Type changes based on teleporter type
+            rooms[i].doors[j] = obj.AddComponent<PitTeleporter>();
+            rooms[i].doors[j].next = tempRoom;
+            rooms[i].doors[j].Awake();
         }
     }
 

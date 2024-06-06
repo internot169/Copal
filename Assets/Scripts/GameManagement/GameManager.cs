@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
 {   
     private static readonly HttpClient client = new HttpClient();
     private static readonly string url = "http://localhost:5000/addscore";
+
     public int turns = 0;
     public int arrows = 3;
     public int coins = 0;
-    public int roomNum = 0;
+    private int roomNum = 0;
     public int lives = 3;
     public TMP_Text roomText;
     public GameObject wumpusObj;
@@ -31,26 +32,41 @@ public class GameManager : MonoBehaviour
 
     private GameObject Player;
 
-    private GameObject ArrowUI;
+    public GameObject pauseUI;
 
     private TextMeshProUGUI warning;
 
     private TextMeshProUGUI cointext;
 
     private GameObject ShopUI;
+
+    public void pauseGame(){
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+        Time.timeScale = 0;
+        Debug.Log("Paused");
+    }
+
+    public void playGame(){
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        Time.timeScale = 1;
+        Debug.Log("Play");
+    }
  
     void Start(){
         arrows=3;
         instance = this;
         Player = GameObject.Find("Player");
-        ArrowUI = GameObject.Find("ArrowUI");
+        pauseUI = GameObject.Find("ArrowUI");
         ShopUI = GameObject.Find("ShopUI");
         cointext = GameObject.Find("Coins").GetComponent<TextMeshProUGUI>();
         ShopUI.SetActive(false);
-        ArrowUI.SetActive(false);
+        pauseUI.SetActive(false);
         warning = GameObject.Find("Warnings").GetComponent<TextMeshProUGUI>();
     }
     public void bossFight(){
+        // load wumpus scene
         wumpusObj.SetActive(true);
         fighting = true;
     }
@@ -58,7 +74,7 @@ public class GameManager : MonoBehaviour
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
         roomNum = Random.Range(0, rooms.Length);
         Room random = rooms[roomNum];
-        move(roomNum);
+        move(roomNum, true);
     }
 
     // various UI and shop things. 
@@ -74,12 +90,12 @@ public class GameManager : MonoBehaviour
         //update coins
         cointext.text = "coins: " +coins;
         ShopUI.SetActive(true);
-        ArrowUI.SetActive(false);
+        pauseUI.SetActive(false);
     }
 
     public void CloseShop(){
         ShopUI.SetActive(false);
-        ArrowUI.SetActive(true);
+        pauseUI.SetActive(true);
     }
 
     public void win(int wumpus){
@@ -133,18 +149,26 @@ public class GameManager : MonoBehaviour
                 bossFight();
             }
         }
-        move(roomNum);
+        move(roomNum, true);
     }
 
-    public void move(int room){
+    public void move(int room, bool disable){
+        Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
+        rooms[roomNum].visited = true;
+        if (disable) {
+            rooms[roomNum].gameObject.SetActive(false);
+        }
+    
         roomNum = room;
-        coins++;
+        if (!rooms[roomNum].visited){
+            coins++;
+        }
+        turns++;
         
         // hide ui
-        ArrowUI.SetActive(false);
+        pauseUI.SetActive(false);
         // hide cursor
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        playGame();
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
@@ -159,6 +183,15 @@ public class GameManager : MonoBehaviour
                 win(50);
                 fighting = false;
             }
+        }
+
+        if (Input.GetKey(KeyCode.Escape)){
+            pauseGame();
+            pauseUI.SetActive(true);
+        }
+        else if (Input.GetKey(KeyCode.P)){
+            playGame();
+            pauseUI.SetActive(false);
         }
     }
 

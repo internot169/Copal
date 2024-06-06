@@ -13,15 +13,12 @@ public class Room : MonoBehaviour
     public Teleporter[] doors;
     public int[] connectedTo;
     public int[] inLinks;
-    public string info = "";
 
     public GameManager gameManager;
 
     // TODO: Visited var
     // Why not mark this in GM?
     
-    // Actually we totally should mark this in GM, so do that when 
-    // we actually have MVP fully going -YS
     public bool visited = false;
 
     // TODO: Make an active room system
@@ -49,8 +46,9 @@ public class Room : MonoBehaviour
             }else if(doors[i] is BossTeleporter){
                 warnings += "I smell a wumpus";
                 adjacent[2] = true;
-            }else{
-                warnings += "normal tp";
+            }else if (doors[i] is PitTeleporter){
+                warnings += "I feel a draft.";
+                adjacent[1] = true;
             }
             // add whitespace if not the end. 
             if (i != 2){

@@ -60,6 +60,7 @@ public class Trivia : MonoBehaviour
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.spend(count);
         triviaUI.SetActive(true);
+        mg.pauseGame();
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
             // TODO: pre req based on what is known
@@ -80,6 +81,7 @@ public class Trivia : MonoBehaviour
             }
             correct = false;
         }
+        mg.playGame();
         triviaUI.SetActive(false);
         if (correctlyAnswered >= needed){
             callback(true);

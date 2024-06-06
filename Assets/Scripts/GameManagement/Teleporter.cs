@@ -14,12 +14,9 @@ public class Teleporter : PlayerCollider
     // should be changed to false when we have detection for room end. 
     public bool isOn = true;
 
-    public GameObject ui;
-
     public GameManager gameManager;
 
     public void Awake(){
-        ui = GameObject.Find("ArrowUI");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -27,24 +24,23 @@ public class Teleporter : PlayerCollider
     public override void InteractPlayer(Collider other)
     {
         // show the UI. 
-        if(isOn){
+        if(isOn && other.name == "Player"){
             // we need to free the player when we open this ui or something. 
-            ui.SetActive(true);
-
+            gameManager.pauseUI.SetActive(true);
             // unlock cursor
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            gameManager.pauseGame();
             // disable the camera
             other.GetComponentInChildren<MouseLook>().enabled = false;
-            // move the player to the next room. 
-            // MovePlayer(other.transform);
-            // check the next rooms for obstacles
-            next.adjacencyCheck();
             // tell the gamemanager that you are teleporting off this door. 
             // not using messaging because I'm unfamiliar, since I come from java. 
             // I think its easier to update a pointer. 
             gameManager.UpdateTp(this);
-            gameManager.move(next.roomNum);
+            if (this is BossTeleporter || this is PitTeleporter || this is BatTeleporter){
+                gameManager.move(next.roomNum, false);
+                // Set inactive later
+            } else {
+                gameManager.move(next.roomNum, true);
+            }
         }
     }
     
@@ -64,6 +60,10 @@ public class Teleporter : PlayerCollider
         // the LOD system stops rendering anything not in the player's LOS, which means that the walls prevents other 
         // rooms from being rendered, but means that we can save time on room changes when compared to scene.
         // only issue being clipping into other rooms, but we generally handle that gracefully. 
+
+        next.gameObject.SetActive(true);
+        // check the next rooms for obstacles
+        next.adjacencyCheck();
         other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
     }
 }

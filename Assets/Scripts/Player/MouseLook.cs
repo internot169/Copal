@@ -19,11 +19,6 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-            Cursor.lockState = CursorLockMode.None;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
-
         float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
         rotationY += Input.GetAxis("Mouse Y") * sensitivityY * Time.deltaTime;
@@ -35,6 +30,7 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if (GetComponent<Rigidbody>())
             GetComponent<Rigidbody>().freezeRotation = true;
     }

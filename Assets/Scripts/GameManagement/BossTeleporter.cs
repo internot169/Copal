@@ -10,7 +10,7 @@ public class BossTeleporter : Teleporter
         Debug.Log("Received");
         if (correct){
             base.MovePlayer(otherCollider);
-            // Wumpus move away
+            GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Wumpus", base.next.roomNum);
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose();
         }
@@ -21,6 +21,7 @@ public class BossTeleporter : Teleporter
         otherCollider = other;
         Callback receiver;
         receiver = receive;
-        GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver);
+        GameObject trivia = GameObject.Find("Trivia");
+        StartCoroutine(trivia.GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
     }
 }
