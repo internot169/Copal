@@ -20,11 +20,9 @@ public class Coin : PlayerCollider
         // this inherits from a class that handles player interactions. 
         // When the player enters this object, the InteractPlayer script is called by the 
         // parent, which we override here. 
-        // here, this statement grabs the gameobject, and the PlayerInfo script within it. 
-        // It holds a reference to the gamemanager, which handles coin counts. 
-        // Since it's public, I'm directly incrementing the coins when it's collected. 
-        other.gameObject.GetComponent<PlayerInfo>().gameManager.coins ++;
+        // This code finds the gamemanager, then gets the script that its attached to, then increments the coins.
+        GameObject.Find("GameManager").GetComponent<GameManager>().coins ++;
         // then the coin destroys itself. 
-        Destroy();
+        Destroy(gameObject);
     }
 }
