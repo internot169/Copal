@@ -73,7 +73,7 @@ public class RoomGenerator : MonoBehaviour
         
         for (int i = 0; i < 30; i++)
         {
-            GameObject ob = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
+            GameObject ob = Instantiate(roomPrefabs[Random.Range(0, 6)], new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
             nextRoomPos += roomLength + roomBuffer;
             ob.name = "Room " + ((int) i).ToString();
             if (i != 0){

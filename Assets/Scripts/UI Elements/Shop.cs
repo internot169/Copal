@@ -12,7 +12,7 @@ public class Shop : MonoBehaviour
 
     [Header("prices")]
     public int ArrowCost = 3;
-    public int TriviaCost = 5;
+    public int SecretCost = 3;
 
     public int AugmentCost = 20;
 
@@ -29,21 +29,66 @@ public class Shop : MonoBehaviour
         
     }
 
+    public void receiveArrow(bool correct){
+        if (correct) {
+            gameManager.arrows += 2;
+        }
+        // pretty much setup for an exit button if you wanted to do it. 
+        gameManager.CloseShop();
+        // Log
+    }
+
     public void BuyArrow(){
         if(gameManager.coins > ArrowCost){
-            gameManager.spend(ArrowCost);
-            gameManager.arrows += 1;
+            Callback receiver;
+            receiver = receiveArrow;
+            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        }
+        
+    }
+
+    public void receiveSecret(bool correct){
+        if (correct){
+            int pick = Random.Range(0, 10);
+            string secret = "";
+            if (pick == 0){
+                secret = "Bat Room Number: " + gameManager.gameObject.GetComponent<RoomGenerator>().batRoom.ToString();
+            } else if (pick == 1) {
+                secret = "Pit Room Number: " + gameManager.gameObject.GetComponent<RoomGenerator>().pitRoom.ToString();
+            } else if (pick == 2){
+                secret = "Wumpus Room Number: " + gameManager.gameObject.GetComponent<RoomGenerator>().wumpusRoom.ToString();
+            } else if (pick == 3) {
+                secret = "Current Room Number: " + gameManager.currentRoom().roomNum.ToString();
+            } else if (pick == 4) {
+                secret = "Trying for a secret? ChatGPT will destroy you.";
+            } else if (pick == 5) {
+                secret = "You're a fool for buying this. Buy NVIDIA stock instead, I heard AI was really cool.";
+            } else if (pick == 6) {
+                secret = "Put down the videogames and go outside. Or, visit https://groq.com/. You'll thank me later.";
+            } else if (pick == 7) {
+                secret = "Anguilla's government is profiting from the AI boom! See, I'm good for the world.";
+            } else if (pick == 8) {
+                secret = "Making OpenAI API calls is for sure an AI app.";
+            } else if (pick == 9){
+                secret = "Sorry Microsoft, but I don't like Copilot";
+            } else if (pick == 10){
+                secret = "What's your AI strategy? I'm sure it's worse than mine.";
+            }
+        } 
+    }
+
+    public void BuySecret(){
+        if(gameManager.coins > SecretCost){
+            Callback receiver;
+            receiver = receiveSecret;
+            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
         }
         // pretty much setup for an exit button if you wanted to do it. 
         gameManager.CloseShop();
     }
-
-    public void BuyTrivia(){
-        // Secret
-    }
+    
 
     public void BuyAugment(){
-        // this is the worst system known to mankind. 
         // it just gives you a random augment and replaces whatever was there before. 
         if (gameManager.coins > AugmentCost){
             gameManager.spend(AugmentCost);
