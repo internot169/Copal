@@ -10,6 +10,7 @@ using System.Net.Http;
 
 public class GameManager : MonoBehaviour
 {   
+    public Logger logger;
     public string name = "";
 
     public MenuInfo info;
@@ -167,9 +168,11 @@ public class GameManager : MonoBehaviour
             // move the player
             // do the custom handling here.
             if (tp is BossTeleporter){
+                logger.log("Beep bop beep ... you hit me. Now, I'm angry. Unleashing backpropagation. Prepare to die.");
                 bossFight();
                 playGame();
             } else {
+                logger.log("Ha! Missed me! I might automate you away after all ...");
                 move(roomNum, true, tp);
             }
         }
@@ -223,10 +226,5 @@ public class GameManager : MonoBehaviour
             playGame();
             pauseUI.SetActive(false);
         }
-    }
-
-
-    public void UpdateWarnings(string warnings){
-        warning.SetText(warnings);
     }
 }

@@ -40,13 +40,13 @@ public class Room : MonoBehaviour
             // Instead of infinitely cascading larger tree explorations we just check door type.
             if (doors[i] is BatTeleporter){
                 // concat into the collector. 
-                warnings += "I smell a bat.";
+                warnings += "My agents are near ...";
                 adjacent[0] = true;
             }else if(doors[i] is BossTeleporter){
-                warnings += "I smell a wumpus";
+                warnings += "I'm nearby; catch me if you can.";
                 adjacent[2] = true;
             }else if (doors[i] is PitTeleporter){
-                warnings += "I feel a draft.";
+                warnings += "(AI Psychology bot) You feel a draft.";
                 adjacent[1] = true;
             }
             // add whitespace if not the end. 
@@ -55,7 +55,7 @@ public class Room : MonoBehaviour
             }
         }
         // update through gamemanager. 
-        gameManager.UpdateWarnings(warnings);
+        gameManager.logger.log(warnings);
         return adjacent;
     }
 
