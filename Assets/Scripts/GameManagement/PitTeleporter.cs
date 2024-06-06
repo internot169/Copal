@@ -22,6 +22,17 @@ public class PitTeleporter : Teleporter
     public override void MovePlayer(Collider other)
     {
         otherCollider = other;
+        StartCoroutine(ShowUI());
+    }
+
+    IEnumerator ShowUI(){
+        base.gameManager.PitUI.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        base.gameManager.PitUI.SetActive(false);
+        StartCoroutine(StartTrivia());
+    }
+
+    IEnumerator StartTrivia(){
         Callback receiver;
         receiver = receive;
         StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
