@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public TMP_Text roomText;
     public GameObject wumpusObj;
+    public Transform wumpusSpawnLoc;
 
     public static GameManager instance;
 
@@ -68,10 +69,11 @@ public class GameManager : MonoBehaviour
     public void bossFight(){
         // load wumpus scene
         wumpusObj.SetActive(true);
+        Player.transform.position = wumpusSpawnLoc.position;
         fighting = true;
     }
     public void randomRoom(){
-        Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
+        Room[] rooms = GetComponent<RoomGenerator>().rooms;
         roomNum = Random.Range(0, rooms.Length);
         Room random = rooms[roomNum];
         move(roomNum, true);
