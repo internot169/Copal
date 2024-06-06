@@ -15,6 +15,9 @@ public class Trivia : MonoBehaviour
     public TMP_Text[] choiceTexts;
 
     public Question[] questions;
+
+    public Question[] answered;
+
     void Awake(){
         LoadData();
     }
@@ -22,6 +25,7 @@ public class Trivia : MonoBehaviour
         var csvFile = Resources.Load<TextAsset>(path);
         var data = csvFile.text.Split('\n');
         questions = new Question[data.Length - 1];
+        answered = new Question[data.Length - 1];
         for (int i = 1; i < questions.Length; i++){
             var row = data[i].Split(',');
             questions[i] = new Question(row[0], row[1], row[2], row[3], row[4], row[5]);
@@ -29,8 +33,16 @@ public class Trivia : MonoBehaviour
     }
 
     int questionIndex = 0;
-    bool answered = false;
+    bool answeredQ = false;
     bool correct = false;
+    public string getUnknownAnswer(){
+        int index = Random.Range(0, questions.Length);
+        while (questions[index] == null){
+            index = Random.Range(0, questions.Length);
+        }
+        questions[index].known = true;
+        return questions[index].choices[questions[index].answer];
+    }
     public IEnumerator LoadTrivia(int count, int needed, Callback callback){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.spend(count);
@@ -38,23 +50,29 @@ public class Trivia : MonoBehaviour
         mg.pauseGame();
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
-            // TODO: pre req based on what is known
             questionIndex = Random.Range(0, questions.Length);
-            while (questions[questionIndex].hasAnswered){
+
+            while (questions[questionIndex] == null){
                 questionIndex = Random.Range(0, questions.Length);
             }
             questionText.text = questions[questionIndex].question;
-            questions[questionIndex].hasAnswered = true;
-            // TODO: randomize choices
+            answered[questionIndex] = questions[questionIndex];
+
+
+            // TODO: Make sure you know it else GPT above
+            // TODO: add GPT randomly
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
-            yield return new WaitUntil(() => answered);
-            answered = false;
+            
+            yield return new WaitUntil(() => answeredQ);
+            answeredQ = false;
             if (correct){
                 correctlyAnswered++;
             }
             correct = false;
+
+            questions[questionIndex] = null;            
         }
         mg.playGame();
         triviaUI.SetActive(false);
@@ -67,9 +85,8 @@ public class Trivia : MonoBehaviour
     }    
 
     public void Answer(int index){
-        answered = true;
+        answeredQ = true;
         if (index == questions[questionIndex].answer){
-            answered = true;
             correct = true;
         }
     }
