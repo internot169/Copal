@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI warning;
 
-    public TextMeshProUGUI cointext;
 
     public bool testmode;
 
@@ -105,13 +104,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void OpenShop(){
-        //update coins
-        cointext.text = "coins: " +coins;
         ShopUI.SetActive(true);
         pauseUI.SetActive(false);
     }
 
     public void CloseShop(){
+        turns++;
         ShopUI.SetActive(false);
         pauseUI.SetActive(true);
     }
