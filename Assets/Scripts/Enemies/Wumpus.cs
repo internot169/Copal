@@ -15,9 +15,12 @@ public class Wumpus : Shootable
     public GameObject StompArea;
 
     public GameObject StompWarning;
+
+    public int wumpusHealth = 100;
     // Start is called before the first frame update
     void Start()
     {
+        this.currentHealth = wumpusHealth;
         Player = GameObject.Find("Player");
         Player.GetComponent<PlayerInfo>().TimeSinceHurtLimit = 0f;
         StompWarning = GameObject.Find("StompWarn");

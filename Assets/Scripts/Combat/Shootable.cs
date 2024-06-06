@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class ShootableBox : Shootable
+public class Shootable : MonoBehaviour
 {
-    public int Health = 3;
-    public void Awake(){
-        this.currentHealth = Health;
-    }
-    public override void Damage(int damageAmount)
+    [Header("Shootable")]
+    //The box's current health point total
+    public int currentHealth = 3;
+
+    // virtual because Wumpus overrides it for parent inactive instead of self
+    public virtual void Damage(int damageAmount)
     {
         //subtract damage amount when Damage function is called
         currentHealth -= damageAmount;
