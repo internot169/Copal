@@ -13,7 +13,7 @@ public class CrankyRigidBodyController : MonoBehaviour
     [Tooltip("Acceleration the player has in mid-air")]
     public float AirborneAccel = 5.0f;
     [Tooltip("The velocity applied to the player when the jump button is pressed")]
-    public float JumpSpeed = 7.0f;
+    public float JumpSpeed = 14.0f;
     [Tooltip("Extra units added to the player's fudge height... if you're rocketting off ramps or feeling too loosely attached to the ground, increase this. If you're being yanked down to stuff too far beneath you, lower this.")]
     public float FudgeExtra = 0.5f; // extra height, can't modify this during runtime
     [Tooltip("Maximum slope the player can walk up")]
