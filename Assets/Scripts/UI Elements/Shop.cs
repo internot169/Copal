@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
     }
 
     public void BuyArrow(){
+        gameManager.turns++;
         if(gameManager.coins > ArrowCost){
             Callback receiver;
             receiver = receiveArrow;
@@ -78,6 +79,7 @@ public class Shop : MonoBehaviour
     }
 
     public void BuySecret(){
+        gameManager.turns++;
         if(gameManager.coins > SecretCost){
             Callback receiver;
             receiver = receiveSecret;
@@ -89,6 +91,7 @@ public class Shop : MonoBehaviour
     
 
     public void BuyAugment(){
+        gameManager.turns++;
         // it just gives you a random augment and replaces whatever was there before. 
         if (gameManager.coins > AugmentCost){
             gameManager.spend(AugmentCost);

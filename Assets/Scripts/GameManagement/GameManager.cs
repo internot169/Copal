@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void CloseShop(){
-        turns++;
         ShopUI.SetActive(false);
         pauseUI.SetActive(true);
     }
