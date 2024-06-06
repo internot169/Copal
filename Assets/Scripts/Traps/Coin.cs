@@ -16,7 +16,7 @@ public class Coin : PlayerCollider
         
     }
 
-    public override InteractPlayer(Collider other){
+    public override void InteractPlayer(Collider other){
         // this inherits from a class that handles player interactions. 
         // When the player enters this object, the InteractPlayer script is called by the 
         // parent, which we override here. 
