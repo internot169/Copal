@@ -23,6 +23,7 @@ public class AugmentManager : MonoBehaviour
         DroneField = GameObject.Find("DamageApplier");
         DOTField = GameObject.Find("DOTApplier");
         VampField = GameObject.Find("VampApplier");
+        ResetFieldAll();
     }
 
     // update is called once per frame after start
