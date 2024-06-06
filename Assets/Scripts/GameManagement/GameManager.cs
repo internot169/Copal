@@ -72,9 +72,7 @@ public class GameManager : MonoBehaviour
         fighting = true;
     }
     public void randomRoom(){
-        Room[] rooms = GetComponent<RoomGenerator>().rooms;
-        roomNum = Random.Range(0, rooms.Length);
-        Room random = rooms[roomNum];
+        roomNum = Random.Range(0, 30);
         move(roomNum, true);
     }
 
@@ -148,9 +146,10 @@ public class GameManager : MonoBehaviour
             // do the custom handling here.
             if (tp is BossTeleporter){
                 bossFight();
+            } else {
+                move(roomNum, true);
             }
         }
-        move(roomNum, true);
     }
 
     public void move(int room, bool disable){
@@ -166,15 +165,16 @@ public class GameManager : MonoBehaviour
         }
         turns++;
         
-        // hide ui
-        pauseUI.SetActive(false);
         // hide cursor
         playGame();
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
-        tp.MovePlayer(Player.GetComponent<Collider>());
-        tp = null;
+        // only if it is not being shot
+        if (tp != null){
+            tp.MovePlayer(Player.GetComponent<Collider>());
+            tp = null;
+        }
     }
 
     public void Update(){

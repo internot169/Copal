@@ -98,7 +98,7 @@ public class RoomGenerator : MonoBehaviour
                 // Pick a random room, add it to connectedTo
                 int rand = Random.Range(0, 30);
                 // Keep generating until find a room that has not been already connected to by this node
-                while (roomAlreadyConnected(rand, rooms[i].connectedTo)){
+                while (roomAlreadyConnected(rand, rooms[i].connectedTo) || rand == i){
                     rand = Random.Range(0, 30);
                 }
 

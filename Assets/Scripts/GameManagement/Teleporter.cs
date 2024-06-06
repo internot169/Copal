@@ -25,12 +25,7 @@ public class Teleporter : PlayerCollider
     {
         // show the UI. 
         if(isOn && other.name == "Player"){
-            // we need to free the player when we open this ui or something. 
-            gameManager.pauseUI.SetActive(true);
-            // unlock cursor
             gameManager.pauseGame();
-            // disable the camera
-            other.GetComponentInChildren<MouseLook>().enabled = false;
             // tell the gamemanager that you are teleporting off this door. 
             // not using messaging because I'm unfamiliar, since I come from java. 
             // I think its easier to update a pointer. 
