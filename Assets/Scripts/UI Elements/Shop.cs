@@ -32,10 +32,12 @@ public class Shop : MonoBehaviour
     public void receiveArrow(bool correct){
         if (correct) {
             gameManager.arrows += 2;
+            gameManager.logger.log("Bought 2 arrows");
+        } else {
+            gameManager.logger.log("Failed trivia, didn't buy arrows");
         }
         // pretty much setup for an exit button if you wanted to do it. 
         gameManager.CloseShop();
-        // Log
     }
 
     public void BuyArrow(){
@@ -75,7 +77,10 @@ public class Shop : MonoBehaviour
             } else if (pick == 10){
                 secret = "What's your AI strategy? I'm sure it's worse than mine.";
             }
-        } 
+            gameManager.logger.log(secret);
+        } else {
+            gameManager.logger.log("Failed trivia, didn't buy secret");
+        }
     }
 
     public void BuySecret(){
