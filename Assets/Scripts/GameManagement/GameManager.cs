@@ -10,6 +10,8 @@ using System.Net.Http;
 
 public class GameManager : MonoBehaviour
 {   
+    public static GameManager instance;
+
     private static readonly HttpClient client = new HttpClient();
     private static readonly string url = "http://localhost:5000/addscore";
 
@@ -19,17 +21,13 @@ public class GameManager : MonoBehaviour
     private int roomNum = 0;
     public int lives = 3;
     public TMP_Text roomText;
-    public GameObject wumpusObj;
+    public GameObject wumpusRoom;
+    public GameObject bossObject;
     public Transform wumpusSpawnLoc;
-
-    public static GameManager instance;
 
     private bool lost = false;
 
     private bool fighting = false;
-
-    // holding teleporter for movement on ui. 
-    private Teleporter tp;
 
     public GameObject Player;
 
@@ -67,18 +65,18 @@ public class GameManager : MonoBehaviour
 
     public void bossFight(){
         // load wumpus scene
-        wumpusObj.SetActive(true);
+        wumpusRoom.SetActive(true);
         Player.transform.position = wumpusSpawnLoc.position;
         fighting = true;
     }
     public void randomRoom(){
         roomNum = Random.Range(0, 30);
-        move(roomNum, true);
+        move(roomNum, true, null);
     }
 
     // various UI and shop things. 
     public void spend(int amount){
-        if (coins == 0){
+        if (coins - amount < 1){
             lose();
         } else {
             coins -= amount;
@@ -136,9 +134,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
-    public void shoot(int roomNum){
+    public void shoot(int roomNum, Teleporter tp){
         //shoot wumpus;
-        Debug.Log("shoot");
         if (arrows > 0){
             arrows--;
             
@@ -146,13 +143,14 @@ public class GameManager : MonoBehaviour
             // do the custom handling here.
             if (tp is BossTeleporter){
                 bossFight();
+                playGame();
             } else {
-                move(roomNum, true);
+                move(roomNum, true, tp);
             }
         }
     }
 
-    public void move(int room, bool disable){
+    public void move(int room, bool disable, Teleporter tp){
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
         rooms[roomNum].visited = true;
         if (disable) {
@@ -165,12 +163,12 @@ public class GameManager : MonoBehaviour
         }
         turns++;
         
-        // hide cursor
         playGame();
+
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
-        // only if it is not being shot
+        // only if it is not being moved randomly
         if (tp != null){
             tp.MovePlayer(Player.GetComponent<Collider>());
             tp = null;
@@ -181,7 +179,7 @@ public class GameManager : MonoBehaviour
         roomText.text = "Room " + roomNum.ToString();
         Inventory.text = "coins: " + coins+"\narrows: " + arrows + "\nlives: " + lives;
         if (fighting) {
-            if (wumpusObj.GetComponent<Shootable>().currentHealth <= 0){
+            if (bossObject.GetComponent<Shootable>().currentHealth <= 0){
                 win(50);
                 fighting = false;
             }
@@ -197,9 +195,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateTp(Teleporter teleporter){
-        tp = teleporter;
-    }
 
     public void UpdateWarnings(string warnings){
         warning.SetText(warnings);

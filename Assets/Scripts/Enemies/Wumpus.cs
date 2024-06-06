@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Wumpus : Shootable
 {   
-    public Rigidbody rb;
+    public Rigidbody playerRB;
     public float KnockBackForce;
 
     public GameObject Player;
@@ -47,7 +46,7 @@ public class Wumpus : Shootable
     void ApplyForceUp(){
         Vector3 PureDirection = Player.transform.position - transform.position;
         Vector3 KBDirection = new Vector3(PureDirection.x, 5f, PureDirection.z);
-        rb.AddForce(KBDirection * KnockBackForce * Time.deltaTime);
+        playerRB.AddForce(KBDirection * KnockBackForce * Time.deltaTime);
     }
 
     public IEnumerator Stomp(){

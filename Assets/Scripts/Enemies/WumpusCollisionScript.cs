@@ -31,6 +31,6 @@ public class WumpusCollisionScript : MonoBehaviour
     void ApplyForce(){
         Vector3 PureDirection = wumpus.Player.transform.position - transform.position;
         Vector3 KBDirection = new Vector3(PureDirection.x, 0.1f, PureDirection.z);
-        wumpus.rb.AddForce(KBDirection * wumpus.KnockBackForce * Time.deltaTime);
+        wumpus.playerRB.AddForce(KBDirection * wumpus.KnockBackForce * Time.deltaTime);
     }
 }

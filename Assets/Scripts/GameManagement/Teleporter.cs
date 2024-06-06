@@ -28,13 +28,12 @@ public class Teleporter : PlayerCollider
             gameManager.pauseGame();
             // tell the gamemanager that you are teleporting off this door. 
             // not using messaging because I'm unfamiliar, since I come from java. 
-            // I think its easier to update a pointer. 
-            gameManager.UpdateTp(this);
+            // I think its easier to update a pointer.
             if (this is BossTeleporter || this is PitTeleporter || this is BatTeleporter){
-                gameManager.move(next.roomNum, false);
+                gameManager.move(next.roomNum, false, this);
                 // Set inactive later
             } else {
-                gameManager.move(next.roomNum, true);
+                gameManager.move(next.roomNum, true, this);
             }
         }
     }

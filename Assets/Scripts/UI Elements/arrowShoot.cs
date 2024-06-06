@@ -24,11 +24,12 @@ public class ArrowShoot : MonoBehaviour
     }
 
     public void fire(int buttonIndex){
+        Room room = gameManager.currentRoom();
         int chosen = int.Parse(roomTexts[buttonIndex].text);
         for (int i = 0; i < 3; i++)
         {
             roomTexts[i].transform.parent.gameObject.SetActive(false);
         }
-        gameManager.shoot(chosen);
+        gameManager.shoot(chosen, room.doors[buttonIndex]);
     }
 }
