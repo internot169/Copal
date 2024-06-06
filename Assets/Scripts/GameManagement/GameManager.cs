@@ -45,7 +45,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text testUI;
 
     public GameObject ShopUI;
-    private TextMeshProUGUI Inventory;
+    public TextMeshProUGUI Inventory;
+
+    public GameObject BatUI;
+    public GameObject PitUI;
+    public GameObject WinUI;
+    public GameObject LoseUI;
 
     public Room currentRoom(){
         return GetComponent<RoomGenerator>().rooms[roomNum];
@@ -63,17 +68,20 @@ public class GameManager : MonoBehaviour
     }
  
     void Start(){
+        arrows = 3;
+        instance = this;
+        ShopUI.SetActive(false);
+        pauseUI.SetActive(false);
+        BatUI.SetActive(false);
+        PitUI.SetActive(false);
+        WinUI.SetActive(false);
+        LoseUI.SetActive(false);
+        Player.transform.position = currentRoom().spawnLocation.position;
         info = MenuInfo.instance;
         name = info.name;
         if (name == "test"){
             testmode = true;
         }
-        arrows = 3;
-        instance = this;
-        ShopUI.SetActive(false);
-        pauseUI.SetActive(false);
-        Inventory = GameObject.Find("Inventory").GetComponent<TextMeshProUGUI>();
-        Player.transform.position = currentRoom().spawnLocation.position;
     }
 
     public void bossFight(){
@@ -108,8 +116,14 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(true);
     }
 
+    public IEnumerator ShowBatUI(){
+        yield return null;
+    }
+
     public void win(int wumpus){
         // Display win screen
+        pauseGame();
+        WinUI.SetActive(true);
         score(wumpus);
     }
     public bool lose(){
@@ -117,12 +131,16 @@ public class GameManager : MonoBehaviour
             if (lives <= 1){
                 score(0);
                 lost = true;
+                pauseGame();
+                LoseUI.SetActive(true);
                 return true;
             } else {
                 lives-= 1;
                 return false;
             }
         } else {
+            pauseGame();
+            LoseUI.SetActive(true);
             return true;
         }
     }

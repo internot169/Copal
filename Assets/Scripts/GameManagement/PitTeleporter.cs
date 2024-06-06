@@ -36,5 +36,6 @@ public class PitTeleporter : Teleporter
         Callback receiver;
         receiver = receive;
         StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        yield return null;
     }
 }

@@ -21,5 +21,6 @@ public class BatTeleporter : Teleporter
     IEnumerator RandomRoomMove(Collider other){
         GameObject.Find("GameManager").GetComponent<GameManager>().randomRoom();
         GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Bat", base.next.roomNum);
+        yield return null;
     }
 }
