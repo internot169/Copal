@@ -104,6 +104,10 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(true);
     }
 
+    public IEnumerator ShowBatUI(){
+        yield return null;
+    }
+
     public void win(int wumpus){
         // Display win screen
         pauseGame();
