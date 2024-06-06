@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
         Inventory = GameObject.Find("Inventory").GetComponent<TextMeshProUGUI>();
+        Player.transform.position = currentRoom().spawnLocation.position;
     }
 
     public void bossFight(){

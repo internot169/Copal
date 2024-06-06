@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour
 {
-    public GameObject roomPrefab;
-    // TODO: Make it room specific
+    public GameObject[] roomPrefabs;
+    
     public float roomLength = 100f;
     public float roomBuffer = 10f;
     public Room[] rooms = new Room[30];
@@ -61,7 +61,6 @@ public class RoomGenerator : MonoBehaviour
     }
     
     public void createRooms(){
-        // TODO: CHANGE THE PREFAB BASED ON THE TYPE OF ROOM WE ARE LOADING
         // We're loading the rooms along the x axis
         float nextRoomPos = 0f;
         
@@ -74,7 +73,7 @@ public class RoomGenerator : MonoBehaviour
         
         for (int i = 0; i < 30; i++)
         {
-            GameObject ob = Instantiate(roomPrefab, new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
+            GameObject ob = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], new Vector3(nextRoomPos, 0, 0), Quaternion.identity);
             nextRoomPos += roomLength + roomBuffer;
             ob.name = "Room " + ((int) i).ToString();
             if (i != 0){
