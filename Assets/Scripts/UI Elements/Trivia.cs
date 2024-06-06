@@ -3,31 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-/*
-2. Trivia/Coins
-Game win
-3. Leaderboard + score
-Wumpus Move, Bat/Pit
-4. Check rubric for anything else
-5. Unit Tests
-
-Make stuff happen when in room with Wumpus
-
-Dynamic Room Gen
-
-TODO: Game End + Local leaderboard
-Bat/Pit
-Trivia/Coins
-Dynamic Room Size
-Shop as a Room + BUFFS
-Save State
-Unit Tests
-Make Wumpus Fight
-Tests + Music
-Level system + good looking prefab
-Minimap + wumpus fight
-*/
-
 public delegate void Callback(bool answer);
 
 public class Trivia : MonoBehaviour
