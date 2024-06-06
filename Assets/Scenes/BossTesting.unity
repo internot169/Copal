@@ -1610,7 +1610,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   next: {fileID: 0}
   isOn: 1
-  ui: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &1176739375
 MonoBehaviour:
@@ -3416,6 +3415,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 512974680}
+    - target: {fileID: 915997506836227823, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 512974673}
     - target: {fileID: 2350292609968669117, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.46887
