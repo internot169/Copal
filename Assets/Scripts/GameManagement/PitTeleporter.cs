@@ -8,11 +8,15 @@ public class PitTeleporter : Teleporter
 
     public void receive(bool correct){
         Debug.Log("Received");
+        Debug.Log(correct);
         if (correct){
             Room temp = base.next;
             // Go back to the beginning
             base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
-            base.MovePlayer(otherCollider);
+            next.gameObject.SetActive(true);
+            next.adjacencyCheck();
+            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+
             base.next = temp;
         } else {
             GameObject.Find("GameManager").GetComponent<GameManager>().lose();
