@@ -4946,6 +4946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2772983904593254556}
+  - component: {fileID: 3478468645358744762}
   m_Layer: 0
   m_Name: Enviro
   m_TagString: Untagged
@@ -4975,6 +4976,37 @@ Transform:
   - {fileID: 8388793752745227622}
   m_Father: {fileID: 1873036122815073862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3478468645358744762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173934236110796488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 4aa446afc3791e84e83e23138c1fb191, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &2051859375765942886
 GameObject:
   m_ObjectHideFlags: 0
@@ -11591,7 +11623,7 @@ PrefabInstance:
     - target: {fileID: 9052431038334845995, guid: 695831535356acf428cd357437103379, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 6250284804394831083, guid: 709414c55d6f03347943252b9c262091, type: 3}
+      objectReference: {fileID: 1001396812201132647, guid: 488fd788dd1d83447bd0d150b46861b4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13045,7 +13077,7 @@ PrefabInstance:
     - target: {fileID: 9052431038334845995, guid: 695831535356acf428cd357437103379, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 6250284804394831083, guid: 709414c55d6f03347943252b9c262091, type: 3}
+      objectReference: {fileID: 1001396812201132647, guid: 488fd788dd1d83447bd0d150b46861b4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
