@@ -10,6 +10,9 @@ using System.Net.Http;
 
 public class GameManager : MonoBehaviour
 {   
+    public string name = "";
+
+    public MenuInfo info;
     public static GameManager instance;
 
     private static readonly HttpClient client = new HttpClient();
@@ -37,6 +40,10 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI cointext;
 
+    public bool testmode;
+
+    public TMP_Text testUI;
+
     public GameObject ShopUI;
     private TextMeshProUGUI Inventory;
 
@@ -56,6 +63,11 @@ public class GameManager : MonoBehaviour
     }
  
     void Start(){
+        info = MenuInfo.instance;
+        name = info.name;
+        if (name == "test"){
+            testmode = true;
+        }
         arrows = 3;
         instance = this;
         ShopUI.SetActive(false);
@@ -119,7 +131,7 @@ public class GameManager : MonoBehaviour
         var values = new Dictionary<string, string>
         {
             { "password", "resin" },
-            { "name", "JS" },
+            { "name", name },
             { "score", score.ToString() },
             { "turns", turns.ToString() },
             { "coins", coins.ToString() },
@@ -188,6 +200,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape)){
             pauseGame();
             pauseUI.SetActive(true);
+            if (testmode){
+                testUI.gameObject.SetActive(true);
+            } else {
+                testUI.gameObject.SetActive(false);
+            }
         }
         else if (Input.GetKey(KeyCode.P)){
             playGame();
