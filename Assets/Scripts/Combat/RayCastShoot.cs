@@ -92,7 +92,10 @@ public class RayCastShoot : MonoBehaviour
                     player.GetComponent<PlayerInfo>().Heal(10f);
                 }
 
-                Shootable health = hit.collider.transform.parent.GetComponent<Shootable>();
+                Shootable health = hit.collider.transform.GetComponent<Shootable>();
+                if (health == null){
+                    health = hit.collider.transform.parent.GetComponent<Shootable>();
+                }
 
                 if (health != null)
                 {
