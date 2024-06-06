@@ -193,6 +193,8 @@ public class GameManager : MonoBehaviour
         
         playGame();
 
+        logger.log(GameObject.Find("Trivia").GetComponent<Trivia>().getUnknownAnswer());
+
         // enable the camera
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
@@ -205,7 +207,7 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         roomText.text = "Room " + roomNum.ToString();
-        Inventory.text = "coins: " + coins+"\narrows: " + arrows + "\nlives: " + lives;
+        Inventory.text = "Coins: " + coins+ "\nArrows: " + arrows + "\nLives: " + lives + "\nTurns: " + turns;
         if (fighting) {
             if (bossObject.GetComponent<Shootable>().currentHealth <= 0){
                 win(50);
