@@ -120,9 +120,9 @@ public class EnemyGun : MonoBehaviour
         RaycastHit check;
         Physics.Raycast(positionOfHit, directionOfHit, out check, range + 1.0f);
         Debug.Log(check.collider.gameObject);
-        if (GameObject.ReferenceEquals(check.collider.gameObject, player)){
+        if (check.collider.gameObject != null && GameObject.ReferenceEquals(check.collider.gameObject, player)){
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
-        } else if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
+        } else if (check.collider.gameObject.transform.parent != null && GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
         }
 
