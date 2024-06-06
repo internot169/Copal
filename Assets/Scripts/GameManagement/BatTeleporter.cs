@@ -13,7 +13,7 @@ public class BatTeleporter : Teleporter
 
     IEnumerator ShowUI(Collider other){
         base.gameManager.BatUI.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         base.gameManager.BatUI.SetActive(false);
         StartCoroutine(RandomRoomMove(other));
     }

@@ -27,7 +27,7 @@ public class PitTeleporter : Teleporter
 
     IEnumerator ShowUI(){
         base.gameManager.PitUI.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         base.gameManager.PitUI.SetActive(false);
         StartCoroutine(StartTrivia());
     }
