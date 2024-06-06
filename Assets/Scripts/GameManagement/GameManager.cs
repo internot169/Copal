@@ -31,41 +31,37 @@ public class GameManager : MonoBehaviour
     // holding teleporter for movement on ui. 
     private Teleporter tp;
 
-    private GameObject Player;
+    public GameObject Player;
 
     public GameObject pauseUI;
 
-    private TextMeshProUGUI warning;
+    public TextMeshProUGUI warning;
 
-    private TextMeshProUGUI cointext;
+    public TextMeshProUGUI cointext;
 
-    private GameObject ShopUI;
+    public GameObject ShopUI;
     private TextMeshProUGUI Inventory;
 
+    public Room currentRoom(){
+        return GetComponent<RoomGenerator>().rooms[roomNum];
+    }
     public void pauseGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
         Time.timeScale = 0;
-        Debug.Log("Paused");
     }
 
     public void playGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
         Time.timeScale = 1;
-        Debug.Log("Play");
     }
  
     void Start(){
-        arrows=3;
+        arrows = 3;
         instance = this;
-        Player = GameObject.Find("Player");
-        pauseUI = GameObject.Find("ArrowUI");
-        ShopUI = GameObject.Find("ShopUI");
-        cointext = GameObject.Find("Coins").GetComponent<TextMeshProUGUI>();
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
-        warning = GameObject.Find("Warnings").GetComponent<TextMeshProUGUI>();
         Inventory = GameObject.Find("Inventory").GetComponent<TextMeshProUGUI>();
     }
 
@@ -113,7 +109,7 @@ public class GameManager : MonoBehaviour
                 score(0);
                 lost = true;
                 return true;
-            }else{
+            } else {
                 lives-= 1;
                 return false;
             }
