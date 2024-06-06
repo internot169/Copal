@@ -140,13 +140,18 @@ public class RayCastShoot : MonoBehaviour
                 {
                     Debug.Log(hitCollider);
                     // check if is player
-                    PlayerInfo health = hitCollider.transform.parent.GetComponent<PlayerInfo>();
+                    PlayerInfo health = hitCollider.transform.GetComponent<PlayerInfo>();
+                    if (health == null && hit.collider.transform.parent != null){
+                        health = hit.collider.transform.parent.GetComponent<PlayerInfo>();
+                    }
                     if (health != null){
                         health.TakeDamage(altFireDamage + alt_modify);
                     }
                     else{
-                        Shootable bhealth = hitCollider.transform.parent.GetComponent<Shootable>();
-
+                        Shootable bhealth = hitCollider.transform.GetComponent<Shootable>();
+                        if (bhealth == null && hit.collider.transform.parent != null){
+                            bhealth = hit.collider.transform.parent.GetComponent<Shootable>();
+                        }
                         if (bhealth != null)
                         {
                             bhealth.Damage(altFireDamage + droneDamageAlt);
