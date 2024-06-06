@@ -92,6 +92,7 @@ public class RayCastShoot : MonoBehaviour
                     player.GetComponent<PlayerInfo>().Heal(10f);
                 }
 
+                // weird interaction with how they're organized in editor, requires this for enemy and wumpus
                 Shootable health = hit.collider.transform.GetComponent<Shootable>();
                 if (health == null){
                     health = hit.collider.transform.parent.GetComponent<Shootable>();

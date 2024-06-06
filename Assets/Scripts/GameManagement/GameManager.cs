@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI cointext;
 
     private GameObject ShopUI;
+    private TextMeshProUGUI Inventory;
 
     public void pauseGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.None;
@@ -65,7 +66,9 @@ public class GameManager : MonoBehaviour
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
         warning = GameObject.Find("Warnings").GetComponent<TextMeshProUGUI>();
+        Inventory = GameObject.Find("Inventory").GetComponent<TextMeshProUGUI>();
     }
+
     public void bossFight(){
         // load wumpus scene
         wumpusObj.SetActive(true);
@@ -180,6 +183,7 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         roomText.text = "Room " + roomNum.ToString();
+        Inventory.text = "coins: " + coins+"\narrows: " + arrows + "\nlives: " + lives;
         if (fighting) {
             if (wumpusObj.GetComponent<Shootable>().currentHealth <= 0){
                 win(50);
