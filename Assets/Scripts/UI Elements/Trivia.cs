@@ -17,6 +17,7 @@ public class Trivia : MonoBehaviour
     public Question[] questions;
 
     public Question[] answered;
+
     void Awake(){
         LoadData();
     }
@@ -39,7 +40,7 @@ public class Trivia : MonoBehaviour
         while (questions[index] == null){
             index = Random.Range(0, questions.Length);
         }
-
+        questions[index].known = true;
         return questions[index].choices[questions[index].answer];
     }
     public IEnumerator LoadTrivia(int count, int needed, Callback callback){
@@ -50,6 +51,7 @@ public class Trivia : MonoBehaviour
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
             questionIndex = Random.Range(0, questions.Length);
+
             while (questions[questionIndex] == null){
                 questionIndex = Random.Range(0, questions.Length);
             }
@@ -57,7 +59,8 @@ public class Trivia : MonoBehaviour
             answered[questionIndex] = questions[questionIndex];
 
 
-            // TODO: randomize choices
+            // TODO: Make sure you know it else GPT above
+            // TODO: add GPT randomly
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
