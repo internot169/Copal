@@ -47,11 +47,6 @@ public class GameManager : MonoBehaviour
     public GameObject ShopUI;
     private TextMeshProUGUI Inventory;
 
-    public GameObject BatUI;
-    public GameObject PitUI;
-    public GameObject WinUI;
-    public GameObject LoseUI;
-
     public Room currentRoom(){
         return GetComponent<RoomGenerator>().rooms[roomNum];
     }
@@ -78,10 +73,6 @@ public class GameManager : MonoBehaviour
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
         Inventory = GameObject.Find("Inventory").GetComponent<TextMeshProUGUI>();
-        BatUI.SetActive(false);
-        PitUI.SetActive(false);
-        WinUI.SetActive(false);
-        LoseUI.SetActive(false);
         Player.transform.position = currentRoom().spawnLocation.position;
     }
 
@@ -117,14 +108,8 @@ public class GameManager : MonoBehaviour
         pauseUI.SetActive(true);
     }
 
-    public IEnumerator ShowBatUI(){
-        yield return null;
-    }
-
     public void win(int wumpus){
         // Display win screen
-        pauseGame();
-        WinUI.SetActive(true);
         score(wumpus);
     }
     public bool lose(){
@@ -132,16 +117,12 @@ public class GameManager : MonoBehaviour
             if (lives <= 1){
                 score(0);
                 lost = true;
-                pauseGame();
-                LoseUI.SetActive(true);
                 return true;
             } else {
                 lives-= 1;
                 return false;
             }
         } else {
-            pauseGame();
-            LoseUI.SetActive(true);
             return true;
         }
     }
