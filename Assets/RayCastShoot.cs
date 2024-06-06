@@ -37,7 +37,7 @@ public class RayCastShoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        /*if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             // laserLine.enabled = true;
@@ -73,7 +73,7 @@ public class RayCastShoot : MonoBehaviour
                 StartCoroutine(drone.GetComponent<DroneCode>().SpawnDroneTrail(BulletTrail, hit.point, Vector3.zero));  
             }
             
-        }
+        }*/
         if (Input.GetButtonDown("AltFire") && Time.time > nextAltFire)
         {
             nextAltFire = Time.time + altFireRate;
