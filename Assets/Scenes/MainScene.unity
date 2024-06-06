@@ -1040,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.38019
+      value: 34.380177
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1114,7 +1114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5159300904151041876, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_margin.z
-      value: 109.098526
+      value: -0.99201584
       objectReference: {fileID: 0}
     - target: {fileID: 5159300904151041876, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_fontColor.b
@@ -1158,11 +1158,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 90.536
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 28.61
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,11 +1194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -698.1
+      value: -752.83
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 291.35
+      value: 280.65
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1939,8 +1939,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000011
-  m_Size: 0.85356176
+  m_Value: 1.0000015
+  m_Size: 0.85346365
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3252,6 +3252,10 @@ PrefabInstance:
       propertyPath: JumpSpeed
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 1149752237972532395, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
+      propertyPath: AirborneAccel
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
       propertyPath: BulletTrail
       value: 
@@ -3276,6 +3280,10 @@ PrefabInstance:
       propertyPath: predictionPoint
       value: 
       objectReference: {fileID: 1016660297}
+    - target: {fileID: 8041242697141182935, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
+      propertyPath: extendCableSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8181482744920085187, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4156,8 +4164,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 605058495}
   m_HandleRect: {fileID: 605058494}
   m_Direction: 0
-  m_Value: -0.00000089757583
-  m_Size: 0.915
+  m_Value: 0.0000022439415
+  m_Size: 0.9150001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
