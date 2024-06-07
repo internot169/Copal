@@ -100,9 +100,12 @@ public class GameManager : MonoBehaviour
         Player.transform.position = wumpusSpawnLoc.position;
         fighting = true;
     }
-    public void randomRoom(){
+
+    // this will pick a room and return it, such that bat Teleporter can use it. 
+    public Room randomRoom(){
         roomNum = Random.Range(0, 30);
         move(roomNum, true, null);
+        return GetComponent<RoomGenerator>().rooms[roomNum];
     }
 
     // various UI and shop things. 
