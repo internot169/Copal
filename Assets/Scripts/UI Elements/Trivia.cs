@@ -64,12 +64,11 @@ public class Trivia : MonoBehaviour
             }
             if (iterations >= (2 * questions.Length)){
                 // GPT question
+                // For now, just gets the zeroth question
             }
             questionText.text = questions[questionIndex].question;
 
 
-            // TODO: Make sure you know it else GPT above
-            // TODO: add GPT randomly
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
