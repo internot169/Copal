@@ -53,15 +53,6 @@ public class Trivia : MonoBehaviour
         for (int i = 0; i < count; i++){
             questionIndex = Random.Range(0, questions.Count);
 
-            int iterations = 0;
-            while ((questions[questionIndex].answered || !questions[questionIndex].known) && iterations < (2 * questions.Count)){
-                questionIndex = Random.Range(0, questions.Count);
-                iterations++;
-            }
-            if (iterations >= (2 * questions.Count)){
-                // GPT question
-                // For now, just gets the zeroth question
-            }
             questionText.text = questions[questionIndex].question;
 
 
