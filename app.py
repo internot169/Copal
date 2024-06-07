@@ -27,7 +27,7 @@ def leaderboard():
     return arr
 
 @app.route('/addscore', methods=['POST'])
-def login():
+def addscore():
     if(request.form['password'] == 'resin'):
         scores = {}
         try:
