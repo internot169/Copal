@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &7981890306618690347
 BoxCollider:
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6437910366597996174
 BoxCollider:
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &7580544925869673980
 BoxCollider:
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &4128253079333166733
 BoxCollider:
@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6103663709176837072
 BoxCollider:
@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &8406658160548883974
 BoxCollider:
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &3901380623303418774
 BoxCollider:
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6673373983796409439
 BoxCollider:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &2368937349731973386
 BoxCollider:
@@ -1989,7 +1989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &494096218815046318
 BoxCollider:
@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6963816505645717675
 BoxCollider:
@@ -2307,7 +2307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &7730194631718825483
 BoxCollider:
@@ -2481,7 +2481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &2948329844897636726
 BoxCollider:
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &8207742116186435069
 BoxCollider:
@@ -2805,7 +2805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6776116898345235702
 BoxCollider:
@@ -2948,7 +2948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &3834068736260651948
 BoxCollider:
@@ -3091,7 +3091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &554096245627275422
 BoxCollider:
@@ -3234,7 +3234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &8809088445598380696
 BoxCollider:
@@ -3377,7 +3377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &1786092263869432882
 BoxCollider:
@@ -3520,7 +3520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &4588970218136251271
 BoxCollider:
@@ -3695,7 +3695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &6630044740334520446
 BoxCollider:
@@ -3944,7 +3944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &4610757999633272036
 BoxCollider:
@@ -4193,7 +4193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &330289291593199728
 BoxCollider:
@@ -4398,7 +4398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &8888882509018060428
 BoxCollider:
@@ -4477,13 +4477,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8782294850962410137}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.4027467, y: 0, z: 0, w: 0.91531146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7760671243486872940}
-  m_LocalEulerAnglesHint: {x: 15.48, y: -21.23, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.5, y: 0, z: 0}
 --- !u!108 &9218134604715714163
 Light:
   m_ObjectHideFlags: 0
@@ -4666,7 +4666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
-  damage: 0
+  damage: 5
   time_length: 0
 --- !u!65 &2635772408680010871
 BoxCollider:

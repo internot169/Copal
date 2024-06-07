@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int arrows = 3;
     public int coins = 0;
     private int roomNum = 0;
-    public int lives = 3;
+    public int lives = 5;
     public TMP_Text roomText;
     public GameObject wumpusRoom;
     public GameObject bossObject;
@@ -45,7 +45,9 @@ public class GameManager : MonoBehaviour
 
 
     public bool testmode;
+    bool testing = false;
 
+    public TMP_Text testText;
     public GameObject testUI;
 
     public GameObject ShopUI;
@@ -134,6 +136,10 @@ public class GameManager : MonoBehaviour
         WinUI.SetActive(true);
         score(wumpus);
     }
+    public void lossTest(){
+        lose();
+    }
+
     public bool lose(){
         if (!lost){
             if (lives <= 1){
@@ -219,8 +225,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void Update(){
+        RoomGenerator rg = GetComponent<RoomGenerator>();
+        testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room" + rg.batRoom + "\n Pit Room" + rg.pitRoom + "\n Current Room: " + roomNum;
         roomText.text = "Room " + roomNum.ToString();
         Inventory.text = "Coins: " + coins+ "\nArrows: " + arrows + "\nLives: " + lives + "\nTurns: " + turns;
+
         if (fighting) {
             if (bossObject.GetComponent<Shootable>().currentHealth <= 0){
                 win(50);
@@ -233,11 +242,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape) && !paused && escape_released){
             pauseGame();
             pauseUI.SetActive(true);
-            if (testmode){
-                testUI.gameObject.SetActive(true);
-            } else {
-                testUI.gameObject.SetActive(false);
-            }
             // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
             escape_released = false;
         }
@@ -248,6 +252,15 @@ public class GameManager : MonoBehaviour
             // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
             escape_released = false;
         }
+
+        if (testmode && Input.GetKeyDown(KeyCode.T) && !testing && pauseUI.activeSelf){
+            testUI.gameObject.SetActive(true);
+            testing = true;
+        } else if (Input.GetKeyDown(KeyCode.T) && testing){
+            testUI.gameObject.SetActive(false);
+            testing = false;
+        }
+
         // when escape gets released, Input.GetKeyUp returns true for 1 frame. 
         // This will persist and reset the ability for the escape button to be repressed. 
         if (Input.GetKeyUp(KeyCode.Escape)){
@@ -260,13 +273,38 @@ public class GameManager : MonoBehaviour
         Room room = currentRoom();
         GameObject obj = room.doors[0].gameObject;
         Room tempRoom = room.doors[0].next;
-        // Destroy old teleporter
         Destroy(obj.GetComponent<Teleporter>());
-        // Create new teleporter and assign attribute
-        // Component Type changes based on teleporter type
         room.doors[0] = obj.AddComponent<BatTeleporter>();
         room.doors[0].next = tempRoom;
         room.doors[0].Awake();
         room.doors[0].MovePlayer(Player.GetComponent<Collider>());
+        playGame();
+        pauseUI.SetActive(false);
+    }
+
+    public void pitTest(){
+        Room room = currentRoom();
+        GameObject obj = room.doors[0].gameObject;
+        Room tempRoom = room.doors[0].next;
+        Destroy(obj.GetComponent<Teleporter>());
+        room.doors[0] = obj.AddComponent<PitTeleporter>();
+        room.doors[0].next = tempRoom;
+        room.doors[0].Awake();
+        room.doors[0].InteractPlayer(Player.GetComponent<Collider>());
+        playGame();
+        pauseUI.SetActive(false);
+    }
+
+    public void wumpusTest(){
+        Room room = currentRoom();
+        GameObject obj = room.doors[0].gameObject;
+        Room tempRoom = room.doors[0].next;
+        Destroy(obj.GetComponent<Teleporter>());
+        room.doors[0] = obj.AddComponent<BossTeleporter>();
+        room.doors[0].next = tempRoom;
+        room.doors[0].Awake();
+        room.doors[0].InteractPlayer(Player.GetComponent<Collider>());
+        playGame();
+        pauseUI.SetActive(false);
     }
 }
