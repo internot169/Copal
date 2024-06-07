@@ -46,6 +46,8 @@ public class Shop : MonoBehaviour
             Callback receiver;
             receiver = receiveArrow;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        } else {
+            gameManager.logger.log("Not enough coins to play trivia for Arrows.");
         }
         
     }
@@ -89,6 +91,8 @@ public class Shop : MonoBehaviour
             Callback receiver;
             receiver = receiveSecret;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        } else {
+            gameManager.logger.log("Not enough coins to play trivia for secret.");
         }
         // pretty much setup for an exit button if you wanted to do it. 
         gameManager.CloseShop();
@@ -107,40 +111,54 @@ public class Shop : MonoBehaviour
             if(pick == 0){
                 augments.ResetMainAll();
                 augments.ChangeDOTMain(true);
+                gameManager.logger.log("Bought DOT Main");
             }else if(pick == 1){
                 augments.ResetMainAll();
                 augments.ChangeSlowMain(true);
+                gameManager.logger.log("Bought Slow Main");
             }else if(pick == 2){
                 augments.ResetMainAll();
                 augments.ChangeVampMain(true);
+                gameManager.logger.log("Bought Vamp Main");
             }else if(pick == 3){
                 augments.ResetMainAll();
                 augments.ChangeDroneMain(true);
+                gameManager.logger.log("Bought Drone Main");
             }else if(pick == 4){
                 augments.ResetAltAll();
                 augments.ChangeDOTAlt(true);
+                gameManager.logger.log("Bought DOT Alt");
             }else if(pick == 5){
                 augments.ResetAltAll();
                 augments.ChangeSlowAlt(true);
+                gameManager.logger.log("Bought Slow Alt");
             }else if(pick == 6){
                 augments.ResetAltAll();
                 augments.ChangeVampAlt(true);
+                gameManager.logger.log("Bought Vamp Alt");
             }else if(pick == 7){
                 augments.ResetAltAll();
                 augments.ChangeDroneAlt(true);
+                gameManager.logger.log("Bought Drone Alt");
             }else if(pick == 8){
                 augments.ResetFieldAll();
                 augments.ChangeDOTField(true);
+                gameManager.logger.log("Bought DOT Field");
             }else if(pick == 9){
                 augments.ResetFieldAll();
                 augments.ChangeSlowField(true);
+                gameManager.logger.log("Bought Slow Field");
             }else if(pick == 10){
                 augments.ResetFieldAll();
                 augments.ChangeVampField(true);
+                gameManager.logger.log("Bought Vamp Field");
             }else if(pick == 11){
                 augments.ResetFieldAll();
                 augments.ChangeDroneField(true);
+                gameManager.logger.log("Bought Drone Field");
             }
+        }  else {
+            gameManager.logger.log("Not enough coins to buy Augment.");
         }
         gameManager.CloseShop();
     }

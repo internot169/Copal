@@ -6,6 +6,6 @@ public class Logger : MonoBehaviour
 {
     public TMP_Text logText;
     public void log(string text) {
-        logText.text = text + "\n" + logText;
+        logText.text = text + "\n" + logText.text;
     }
 }

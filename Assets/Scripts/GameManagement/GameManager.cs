@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour
 
     public void win(int wumpus){
         // Display win screen
-        pauseGame();
         WinUI.SetActive(true);
+        pauseGame();
         score(wumpus);
     }
     public void lossTest(){
@@ -145,8 +145,8 @@ public class GameManager : MonoBehaviour
             if (lives <= 1){
                 score(0);
                 lost = true;
-                pauseGame();
                 LoseUI.SetActive(true);
+                pauseGame();
                 return true;
             } else {
                 lives-= 1;
