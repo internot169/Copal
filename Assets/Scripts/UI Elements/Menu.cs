@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 public class Menu : MonoBehaviour
 {
+    // Main Menu code
     public GameObject mainMenu;
     public GameObject tutorialObj;
     public GameObject leaderboard;

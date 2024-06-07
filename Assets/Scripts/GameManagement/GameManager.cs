@@ -10,59 +10,72 @@ using System.Net.Http;
 
 public class GameManager : MonoBehaviour
 {   
+    // Reference to logger script
+    // Allows other scripts to log to conole
     public Logger logger;
+
+    // Get name from MenuInfo
     public string name = "";
 
+    // Is game scene paused
     bool paused = false;
 
+    // Status variables for shop
     bool escape_released = true;
     bool shop_open = false;
 
     public MenuInfo info;
-    public static GameManager instance;
 
-
+    // HTTP client for sending scores
     private static readonly HttpClient client = new HttpClient();
     private static readonly string url = "http://localhost:5000/addscore";
 
+    // Info for scoring
     public int turns = 0;
     public int arrows = 3;
     public int coins = 0;
     private int roomNum = 0;
     public int lives = 5;
+
+    // Text to update room number
     public TMP_Text roomText;
+
+    // Wumpus Room objects
     public GameObject wumpusRoom;
     public GameObject bossObject;
     public Transform wumpusSpawnLoc;
 
+    // Has the player lost?
     private bool lost = false;
 
+    // Player fighting state with Wumpus
     private bool fighting = false;
 
+    // GameObject for player
     public GameObject Player;
 
+    // GameObjects for UI
     public GameObject pauseUI;
-
-    public TextMeshProUGUI warning;
-
-
-    public bool testmode;
-    bool testing = false;
-
-    public TMP_Text testText;
-    public GameObject testUI;
-
     public GameObject ShopUI;
     public TextMeshProUGUI Inventory;
-
     public GameObject BatUI;
     public GameObject PitUI;
     public GameObject WinUI;
     public GameObject LoseUI;
 
+    // Test variables
+    public bool testmode;
+    bool testing = false;
+    public TMP_Text testText;
+    public GameObject testUI;
+
+    // Reference to current room
+    // Breaks abstraction because move() logic needs to be in GameManager
+    // So most logical place to update roomNum is here
     public Room currentRoom(){
         return GetComponent<RoomGenerator>().rooms[roomNum];
     }
+    // Pause the game, stop time
     public void pauseGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
@@ -70,6 +83,7 @@ public class GameManager : MonoBehaviour
         paused = true;
     }
 
+    // Resume the game, start time
     public void playGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
@@ -77,16 +91,22 @@ public class GameManager : MonoBehaviour
         paused = false;
     }
  
+    // Initialize variables
     void Start(){
         arrows = 3;
         instance = this;
+        // Set UI to inactive
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
         BatUI.SetActive(false);
         PitUI.SetActive(false);
         WinUI.SetActive(false);
         LoseUI.SetActive(false);
+
+        // Set player position to spawn location
         Player.transform.position = currentRoom().spawnLocation.position;
+
+        // Check testmode
         info = MenuInfo.instance;
         if (info == null){
             name = "test";
@@ -127,12 +147,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Open Shop UI
     public void OpenShop(){
         ShopUI.SetActive(true);
         pauseUI.SetActive(false);
         shop_open = true;
     }
 
+    // Close Shop UI
     public void CloseShop(){
         ShopUI.SetActive(false);
         pauseUI.SetActive(true);
@@ -140,18 +162,24 @@ public class GameManager : MonoBehaviour
     }
 
 
+    // Win the game
     public void win(int wumpus){
         // Display win screen
         WinUI.SetActive(true);
         pauseGame();
         score(wumpus);
     }
+    // Test function for loss with TestUI
+    // Needed because buttons cant use bool functions
     public void lossTest(){
         lose(true);
     }
 
+    // lose the game
     public bool lose(bool overrideLoss = false){
         if (!lost){
+            // If you have lost all lives or are overriding for test purposes
+            // Or are overriding for other loss
             if (lives <= 1 || overrideLoss){
                 score(0);
                 lost = true;
@@ -168,6 +196,7 @@ public class GameManager : MonoBehaviour
             return true;
         }
     }
+    // Post the score to the server
     public async void score(int wumpus) {
         int score = 100 - turns + coins + (5 * arrows) + wumpus;
         
@@ -189,13 +218,13 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
+    // Shoot the wumpus
     public void shoot(int roomNum, Teleporter tp){
         //shoot wumpus;
         if (arrows > 0){
             arrows--;
             
-            // move the player
-            // do the custom handling here.
+            // If correct, load wumpus Scene
             if (tp is BossTeleporter){
                 logger.log("Beep bop beep ... you hit me. Now, I'm angry. Unleashing backpropagation. Prepare to die.");
                 bossFight();
@@ -207,33 +236,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Undo player after moving between scenes
     public IEnumerator stopPlayerMovement(){
+        // Get the change in velocity over time
+        // IE acceleration
         Rigidbody otherRb = Player.GetComponent<Rigidbody>();
         Vector3 prevVelocity = otherRb.velocity;
         yield return new WaitForSecondsRealtime(0.1f);
         Vector3 currVelocity = otherRb.velocity;
 
+
+        // F= ma
         Vector3 diff = currVelocity - prevVelocity;
         Vector3 force = diff * otherRb.mass;
+        // Reverse forces
         otherRb.AddForce(-force);
         yield return null;
     }
     
+    // Move between rooms
     public void move(int room, bool disable, Teleporter tp){
+        // Get room array
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
+        // Set this room to visited, disable it
         rooms[roomNum].visited = true;
         if (disable) {
             rooms[roomNum].gameObject.SetActive(false);
         }
     
+        // Change room number
         roomNum = room;
         if (!rooms[roomNum].visited){
             coins++;
         }
         turns++;
         
+        // Restart time
         playGame();
 
+        // Show an unknown answer to the trivia
         logger.log(GameObject.Find("Trivia").GetComponent<Trivia>().getUnknownAnswer());
 
         // enable the camera
@@ -247,12 +288,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Unpause the game from UI
     public void Unpause(){
         pauseUI.SetActive(false);
         playGame();
     }
 
+    // Runs every frame
     public void Update(){
+        // Update texts
         RoomGenerator rg = GetComponent<RoomGenerator>();
         testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room: " + rg.batRoom + "\n Pit Room: " + rg.pitRoom + "\n Current Room: " + roomNum;
         roomText.text = "Room " + roomNum.ToString();
@@ -303,6 +347,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Test functions
+    // Sets the first teleporter to whatever you are trying to trigger
+    // Triggers that teleporter
     public void batTest(){
         Room room = currentRoom();
         GameObject obj = room.doors[0].gameObject;

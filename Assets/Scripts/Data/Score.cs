@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Score
 {
+    // Data for score
     public string name {get; set;}
     public int score {get; set;}
     public int coins {get; set;}
