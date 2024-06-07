@@ -58,6 +58,6 @@ public class Teleporter : PlayerCollider
         next.gameObject.SetActive(true);
         // check the next rooms for obstacles
         next.adjacencyCheck();
-        other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+        other.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y, next.spawnLocation.position.z);
     }
 }

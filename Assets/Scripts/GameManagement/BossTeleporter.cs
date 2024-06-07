@@ -11,7 +11,7 @@ public class BossTeleporter : Teleporter
         if (correct){
             next.gameObject.SetActive(true);
             next.adjacencyCheck();
-            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y, next.spawnLocation.position.z);
 
             GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Wumpus", base.next.roomNum);
         } else {
