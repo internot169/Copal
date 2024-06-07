@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 public delegate void Callback(bool answer);
 
@@ -22,9 +23,13 @@ public class Trivia : MonoBehaviour
     void Awake(){
         LoadData();
     }
+    public List<Question> readJsonArray(string json){
+        List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(json);
+        return questions;
+    }
     void LoadData(){
         var file = Resources.Load<TextAsset>(path);
-        List<Question> list = JsonUtility.FromJson<List<Question>>(file.text);
+        List<Question> list = readJsonArray(file.text);
         questions = new Question[list.Count];
         for (int i = 0; i < questions.Length; i++){
             questions[i] = list[i];
@@ -36,12 +41,11 @@ public class Trivia : MonoBehaviour
     bool correct = false;
     public string getUnknownAnswer(){
         int index = Random.Range(0, questions.Length);
-        while (questions[index] == null){
+        while (questions[index].answered || questions[index].known){
             index = Random.Range(0, questions.Length);
         }
         questions[index].known = true;
-        // TODO: Change this to hint
-        return questions[index].choices[questions[index].answer];
+        return questions[index].choices[questions[index].lorePrereq];
     }
     public IEnumerator LoadTrivia(int count, int needed, Callback callback){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -52,15 +56,17 @@ public class Trivia : MonoBehaviour
         for (int i = 0; i < count; i++){
             questionIndex = Random.Range(0, questions.Length);
 
-            while (questions[questionIndex] == null){
+            int iterations = 0;
+            while ((questions[questionIndex].answered || !questions[questionIndex].known) && iterations < (2 * questions.Length)){
                 questionIndex = Random.Range(0, questions.Length);
+                iterations++;
+            }
+            if (iterations >= (2 * questions.Length)){
+                // GPT question
             }
             questionText.text = questions[questionIndex].question;
-            answered[questionIndex] = questions[questionIndex];
 
 
-            // TODO: Make sure you know it else GPT above
-            // TODO: add GPT randomly
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
@@ -70,9 +76,7 @@ public class Trivia : MonoBehaviour
             if (correct){
                 correctlyAnswered++;
             }
-            correct = false;
-
-            questions[questionIndex] = null;            
+            correct = false;       
         }
         mg.playGame();
         triviaUI.SetActive(false);
