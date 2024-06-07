@@ -68,6 +68,12 @@ public class GameManager : MonoBehaviour
         paused = true;
     }
 
+    // method made for unpause x in the top right. 
+    public void Unpause(){
+        pauseUI.SetActive(false);
+        playGame();
+    }
+
     public void playGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
@@ -226,7 +232,7 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         RoomGenerator rg = GetComponent<RoomGenerator>();
-        testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room" + rg.batRoom + "\n Pit Room" + rg.pitRoom + "\n Current Room: " + roomNum;
+        // testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room" + rg.batRoom + "\n Pit Room" + rg.pitRoom + "\n Current Room: " + roomNum;
         roomText.text = "Room " + roomNum.ToString();
         Inventory.text = "Coins: " + coins+ "\nArrows: " + arrows + "\nLives: " + lives + "\nTurns: " + turns;
 
