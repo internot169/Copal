@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
     bool paused = false;
 
     bool escape_released = true;
+    bool shop_open = false;
 
     public MenuInfo info;
     public static GameManager instance;
+
 
     private static readonly HttpClient client = new HttpClient();
     private static readonly string url = "http://localhost:5000/addscore";
@@ -123,11 +125,13 @@ public class GameManager : MonoBehaviour
     public void OpenShop(){
         ShopUI.SetActive(true);
         pauseUI.SetActive(false);
+        shop_open = true;
     }
 
     public void CloseShop(){
         ShopUI.SetActive(false);
         pauseUI.SetActive(true);
+        shop_open = false;
     }
 
 
@@ -245,17 +249,22 @@ public class GameManager : MonoBehaviour
 
         // will only check once per frame. 
         // thus, there is no case of it flickering on and off. 
-        if (Input.GetKey(KeyCode.Escape) && !paused && escape_released){
+        if (Input.GetKey(KeyCode.Escape) && !paused && escape_released && !shop_open){
             pauseGame();
             pauseUI.SetActive(true);
             // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
             escape_released = false;
         }
         // check or no check for paused, either is fine. 
-        else if (Input.GetKey(KeyCode.Escape) && paused && escape_released){
+        else if (Input.GetKey(KeyCode.Escape) && paused && escape_released && !shop_open){
             playGame();
             pauseUI.SetActive(false);
             // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
+            escape_released = false;
+        }
+        // another check built for closing shop with escape. 
+        else if (Input.GetKey(KeyCode.Escape) && escape_released && shop_open){
+            CloseShop();
             escape_released = false;
         }
 

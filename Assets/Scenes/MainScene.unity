@@ -1186,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.380222
+      value: 34.379887
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2927,8 +2927,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.8535617
+  m_Value: 1.0000215
+  m_Size: 0.85356176
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4279,25 +4279,9 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
-      propertyPath: fireRate
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
-      propertyPath: altFireAOE
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
       propertyPath: BulletTrail
       value: 
       objectReference: {fileID: 129887842}
-    - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
-      propertyPath: altFireRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1991055963345298993, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
-      propertyPath: weaponRange
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2511715408388993322, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
       propertyPath: m_Mass
       value: 1
