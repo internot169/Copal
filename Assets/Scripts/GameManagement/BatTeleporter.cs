@@ -5,18 +5,20 @@ using UnityEngine;
 public class BatTeleporter : Teleporter
 {
 
-    // just change the moveplayer script, the checks are otherwise same. 
+    // override the player movement script to handle custom teleporation
     public override void MovePlayer(Collider other)
     {
         StartCoroutine(ShowUI(other));
     }
 
+    // don't need UI to pop up, so if it's active and interacting with player then just move. 
     public override void InteractPlayer(Collider other) {
         if(isOn && other.name == "Player"){
             MovePlayer(other);
         }
     }
 
+    // show the ui about bats for a second, then move the player. 
     IEnumerator ShowUI(Collider other){
         base.gameManager.BatUI.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
@@ -24,6 +26,7 @@ public class BatTeleporter : Teleporter
         StartCoroutine(RandomRoomMove(other));
     }
 
+    // script to move the player to a random city. 
     IEnumerator RandomRoomMove(Collider other){
         // saves the picked random room, 
         Room dest = GameObject.Find("GameManager").GetComponent<GameManager>().randomRoom();
