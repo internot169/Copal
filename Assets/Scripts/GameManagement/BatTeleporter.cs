@@ -19,6 +19,9 @@ public class BatTeleporter : Teleporter
     }
 
     // show the ui about bats for a second, then move the player. 
+    // We interact with gameManager here, but it's limited.
+    // Breaking abstraction is mainly to allow shoot to call move()
+    // and to pause/play the game and update turns
     IEnumerator ShowUI(Collider other){
         base.gameManager.BatUI.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
