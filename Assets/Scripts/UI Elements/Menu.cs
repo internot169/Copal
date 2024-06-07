@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
     private static readonly string url = "http://localhost:5000/";
 
     public List<Score> readJsonArray(string json){
+        // Newtonsoft takes care of file integrity
         List<Score> scores = JsonConvert.DeserializeObject<List<Score>>(json);
         return scores;
     }

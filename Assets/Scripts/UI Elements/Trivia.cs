@@ -21,6 +21,7 @@ public class Trivia : MonoBehaviour
         LoadData();
     }
     public List<Question> readJsonArray(string json){
+        // Newtonsoft checks file integrity already, so this is taken care of
         List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(json);
         return questions;
     }
