@@ -8,7 +8,7 @@ using UnityEngine;
 public class AugmentManager : MonoBehaviour
 {
     // game objects that are needed
-    GameObject weapon;
+    public GameObject weapon;
     GameObject SlowField;
     GameObject DroneField;
     GameObject DOTField;
@@ -18,7 +18,6 @@ public class AugmentManager : MonoBehaviour
     void Start()
     {
         // find and assign each of the game objects by name
-        weapon = GameObject.Find("Gun");
         SlowField = GameObject.Find("SlowApplier");
         DroneField = GameObject.Find("DamageApplier");
         DOTField = GameObject.Find("DOTApplier");

@@ -46,6 +46,8 @@ public class Shop : MonoBehaviour
             Callback receiver;
             receiver = receiveArrow;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        } else {
+            gameManager.logger.log("Not enough coins to play trivia for Arrows.");
         }
         
     }
@@ -89,6 +91,8 @@ public class Shop : MonoBehaviour
             Callback receiver;
             receiver = receiveSecret;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+        } else {
+            gameManager.logger.log("Not enough coins to play trivia for secret.");
         }
         // pretty much setup for an exit button if you wanted to do it. 
         gameManager.CloseShop();
@@ -153,6 +157,8 @@ public class Shop : MonoBehaviour
                 augments.ChangeDroneField(true);
                 gameManager.logger.log("Bought Drone Field");
             }
+        }  else {
+            gameManager.logger.log("Not enough coins to buy Augment.");
         }
         gameManager.CloseShop();
     }

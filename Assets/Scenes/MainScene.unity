@@ -1174,7 +1174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.379204
+      value: 34.380196
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2781,7 +2781,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000696
+  m_Value: 1.0000005
   m_Size: 0.85356176
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2829,6 +2829,11 @@ CanvasRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2079151076946557131, guid: 93559d826ee4c184f9eccb449f8e11d2, type: 3}
   m_PrefabInstance: {fileID: 955015159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &833937262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7358822314602784980, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
+  m_PrefabInstance: {fileID: 1146170032}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &849054433
 GameObject:
@@ -4147,6 +4152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6096025743890411766, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 833937262}
     - target: {fileID: 8041242697141182935, guid: f0057d049bd05954cae8d44414e199f4, type: 3}
       propertyPath: predictionPoint
       value: 
