@@ -45,7 +45,8 @@ public class PlayerInfo : MonoBehaviour
 
     // heal the player up to full hp. 
     public void Heal(float healing){
-        currentHealth = Math.Min(health, currentHealth+healing);
+        // make sure that health doesn't heal over max hp. 
+        currentHealth = Math.Min(Health, currentHealth+healing);
         // update the bar. 
         HealthBar.value = currentHealth;
         numberHealth.text = currentHealth.ToString();
