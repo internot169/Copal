@@ -345,6 +345,14 @@ PrefabInstance:
       propertyPath: playerRB
       value: 
       objectReference: {fileID: 1146170033}
+    - target: {fileID: 915997506836227823, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: KnockBackForce
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1152621272251296004, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2350292609968669117, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -710
@@ -385,13 +393,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4217660435989147149, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_Radius
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217660435989147149, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4606808974937319763, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
       propertyPath: m_Name
       value: WumpusRoom
       objectReference: {fileID: 0}
     - target: {fileID: 4606808974937319763, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716896347682739080, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735434082105502476, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_VoxelSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5735434082105502476, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 880afc6268307084fb3d89e47b56effc, type: 2}
+    - target: {fileID: 7903383547858975585, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316366902848527094, guid: d12f6437015ae6d4fa58998b864ec6e4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1186,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.379887
+      value: 34.3802
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2927,8 +2963,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000215
-  m_Size: 0.85356176
+  m_Value: 1
+  m_Size: 0.8533825
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
