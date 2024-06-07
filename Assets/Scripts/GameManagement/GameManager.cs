@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
     public GameObject WinUI;
     public GameObject LoseUI;
 
-    bool testing = false;
-
     public Room currentRoom(){
         return GetComponent<RoomGenerator>().rooms[roomNum];
     }
