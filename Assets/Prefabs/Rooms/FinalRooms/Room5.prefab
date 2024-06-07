@@ -1340,7 +1340,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 3
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 3f1fa3baf96f91b41ba8796093bf27ed, type: 2}
   m_BuildHeightMesh: 0
@@ -1664,7 +1664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -54.09999
+      value: -52.02
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2264,7 +2264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -68.29999
+      value: -64.91
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2796,7 +2796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -61.399994
+      value: -58.14
       objectReference: {fileID: 0}
     - target: {fileID: 4463776703673723383, guid: 900b20cc3cc287a45a6419f511194437, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2866,7 +2866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6990002099542540231, guid: 9caef109fd64bec44a7c98ec17611c77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -74.7
+      value: -72.17
       objectReference: {fileID: 0}
     - target: {fileID: 6990002099542540231, guid: 9caef109fd64bec44a7c98ec17611c77, type: 3}
       propertyPath: m_LocalRotation.w
