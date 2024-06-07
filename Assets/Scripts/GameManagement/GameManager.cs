@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public bool testmode;
     bool testing = false;
 
+    public TMP_Text testText;
     public GameObject testUI;
 
     public GameObject ShopUI;
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
     public GameObject PitUI;
     public GameObject WinUI;
     public GameObject LoseUI;
+
+    bool testing = false;
 
     public Room currentRoom(){
         return GetComponent<RoomGenerator>().rooms[roomNum];
@@ -220,8 +223,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void Update(){
+        RoomGenerator rg = GetComponent<RoomGenerator>();
+        testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room" + rg.batRoom + "\n Pit Room" + rg.pitRoom + "\n Current Room: " + roomNum;
         roomText.text = "Room " + roomNum.ToString();
         Inventory.text = "Coins: " + coins+ "\nArrows: " + arrows + "\nLives: " + lives + "\nTurns: " + turns;
+
         if (fighting) {
             if (bossObject.GetComponent<Shootable>().currentHealth <= 0){
                 win(50);
