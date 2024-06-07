@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
     // Initialize variables
     void Start(){
         arrows = 3;
-        instance = this;
         // Set UI to inactive
         ShopUI.SetActive(false);
         pauseUI.SetActive(false);
