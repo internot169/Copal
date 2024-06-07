@@ -169,7 +169,7 @@ public class RayCastShoot : MonoBehaviour
         if (Input.GetButtonDown("AltFire") && altFireRate < nextAltFire)
         {
             // reset the timer as it jsut fired. 
-            nextAltFire = 0
+            nextAltFire = 0;
 
             // if the character has the vampirism modifier for the alternate fire, 
             if (has_alt_vamp){
