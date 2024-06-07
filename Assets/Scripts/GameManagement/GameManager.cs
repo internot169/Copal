@@ -249,6 +249,15 @@ public class GameManager : MonoBehaviour
             // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
             escape_released = false;
         }
+
+        if (testmode && Input.GetKeyDown(KeyCode.T) && !testing && pauseUI.activeSelf){
+            testUI.gameObject.SetActive(true);
+            testing = true;
+        } else if (Input.GetKeyDown(KeyCode.T) && testing){
+            testUI.gameObject.SetActive(false);
+            testing = false;
+        }
+
         // when escape gets released, Input.GetKeyUp returns true for 1 frame. 
         // This will persist and reset the ability for the escape button to be repressed. 
         if (Input.GetKeyUp(KeyCode.Escape)){
