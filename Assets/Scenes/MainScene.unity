@@ -628,13 +628,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 849054433}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 849054436}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Unpause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1134,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 183
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1170,11 +1170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -82.999985
+      value: -91.50002
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.380196
+      value: 34.37974
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2781,8 +2781,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000005
-  m_Size: 0.85356176
+  m_Value: 1.0000316
+  m_Size: 0.8535617
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5257,8 +5257,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 605058495}
   m_HandleRect: {fileID: 605058494}
   m_Direction: 0
-  m_Value: -0.00000089757583
-  m_Size: 0.915
+  m_Value: 1
+  m_Size: 0.9999996
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5615,18 +5615,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1062259671}
     m_Modifications:
-    - target: {fileID: 444471293177009332, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_Color.b
-      value: 0.53333336
-      objectReference: {fileID: 0}
-    - target: {fileID: 444471293177009332, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_Color.g
-      value: 0.89411765
-      objectReference: {fileID: 0}
-    - target: {fileID: 444471293177009332, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_Color.r
-      value: 0.4509804
-      objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5707,21 +5695,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3995354377716781621, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4087233804037437451, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_Name
       value: Trivia
-      objectReference: {fileID: 0}
-    - target: {fileID: 4087233804037437451, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6387217420577517766, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

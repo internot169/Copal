@@ -45,7 +45,7 @@ public class Shop : MonoBehaviour
         if(gameManager.coins > ArrowCost){
             Callback receiver;
             receiver = receiveArrow;
-            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver, false));
         } else {
             gameManager.logger.log("Not enough coins to play trivia for Arrows.");
         }
@@ -90,7 +90,7 @@ public class Shop : MonoBehaviour
         if(gameManager.coins > SecretCost){
             Callback receiver;
             receiver = receiveSecret;
-            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver));
+            StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver, false));
         } else {
             gameManager.logger.log("Not enough coins to play trivia for secret.");
         }

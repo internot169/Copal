@@ -224,6 +224,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Unpause(){
+        pauseUI.SetActive(false);
+        playGame();
+    }
+
     public void Update(){
         RoomGenerator rg = GetComponent<RoomGenerator>();
         testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room: " + rg.batRoom + "\n Pit Room: " + rg.pitRoom + "\n Current Room: " + roomNum;

@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.5471698, b: 0.17565252, a: 1}
+  m_Color: {r: 0.4509804, g: 0.89411765, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c5d3c030e7f2b4ca923f92b2cd1b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: trivia
+  path: triviav3
   triviaUI: {fileID: 6387217420577517766}
   questionText: {fileID: 2269937449994629258}
   choiceTexts:
@@ -713,7 +713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4154720055059952169
 RectTransform:
   m_ObjectHideFlags: 0

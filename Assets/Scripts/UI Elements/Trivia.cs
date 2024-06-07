@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 public delegate void Callback(bool answer);
 
 public class Trivia : MonoBehaviour
 {
-    public string path;
+    public string path = "triviav3";
 
     public GameObject triviaUI;
 
@@ -21,14 +23,18 @@ public class Trivia : MonoBehaviour
     void Awake(){
         LoadData();
     }
+    public List<Question> readJsonArray(string json){
+        List<Question> questions = JsonConvert.DeserializeObject<List<Question>>(json);
+        return questions;
+    }
     void LoadData(){
-        var csvFile = Resources.Load<TextAsset>(path);
-        var data = csvFile.text.Split('\n');
-        questions = new Question[data.Length - 1];
-        answered = new Question[data.Length - 1];
-        for (int i = 1; i < questions.Length; i++){
-            var row = data[i].Split(',');
-            questions[i] = new Question(row[0], row[1], row[2], row[3], row[4], row[5]);
+        var file = Resources.Load<TextAsset>(path);
+        Debug.Log((string) file.text);
+        List<Question> list = readJsonArray((string) file.text);
+        questions = new Question[list.Count];
+        for (int i = 0; i < questions.Length; i++){
+            list[i].setup();
+            questions[i] = list[i];
         }
     }
 
@@ -37,14 +43,13 @@ public class Trivia : MonoBehaviour
     bool correct = false;
     public string getUnknownAnswer(){
         int index = Random.Range(0, questions.Length);
-        while (questions[index] == null){
+        while (questions[index].answered || questions[index].known){
             index = Random.Range(0, questions.Length);
         }
         questions[index].known = true;
-        // TODO: Make this lore prereq
-        return questions[index].choices[questions[index].answer];
+        return questions[index].lorePrereq;
     }
-    public IEnumerator LoadTrivia(int count, int needed, Callback callback){
+    public IEnumerator LoadTrivia(int count, int needed, Callback callback, bool play = true){
         GameManager mg = GameObject.Find("GameManager").GetComponent<GameManager>();
         mg.spend(count);
         triviaUI.SetActive(true);
@@ -53,12 +58,15 @@ public class Trivia : MonoBehaviour
         for (int i = 0; i < count; i++){
             questionIndex = Random.Range(0, questions.Length);
 
-            while (questions[questionIndex] == null){
+            int iterations = 0;
+            while ((questions[questionIndex].answered || !questions[questionIndex].known) && iterations < (2 * questions.Length)){
                 questionIndex = Random.Range(0, questions.Length);
+                iterations++;
+            }
+            if (iterations >= (2 * questions.Length)){
+                // GPT question
             }
             questionText.text = questions[questionIndex].question;
-            // TODO: get rid of this and make it an answered boolean
-            answered[questionIndex] = questions[questionIndex];
 
 
             // TODO: Make sure you know it else GPT above
@@ -72,11 +80,11 @@ public class Trivia : MonoBehaviour
             if (correct){
                 correctlyAnswered++;
             }
-            correct = false;
-
-            questions[questionIndex] = null;            
+            correct = false;          
         }
-        mg.playGame();
+        if (play){  
+            mg.playGame();
+        }
         triviaUI.SetActive(false);
         if (correctlyAnswered >= needed){
             callback(true);
