@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         if (name == "test"){
             testmode = true;
         }
+        logger.log("You're mine now ... You have 5 lives, 3 arrows, and 0 coins. Good luck. You'll need it.");
     }
 
     public void bossFight(){
@@ -137,12 +138,12 @@ public class GameManager : MonoBehaviour
         score(wumpus);
     }
     public void lossTest(){
-        lose();
+        lose(true);
     }
 
-    public bool lose(){
+    public bool lose(bool overrideLoss = false){
         if (!lost){
-            if (lives <= 1){
+            if (lives <= 1 || overrideLoss){
                 score(0);
                 lost = true;
                 LoseUI.SetActive(true);
@@ -298,6 +299,7 @@ public class GameManager : MonoBehaviour
         room.doors[0].InteractPlayer(Player.GetComponent<Collider>());
         playGame();
         pauseUI.SetActive(false);
+        testUI.SetActive(false);
     }
 
     public void wumpusTest(){
@@ -311,5 +313,20 @@ public class GameManager : MonoBehaviour
         room.doors[0].InteractPlayer(Player.GetComponent<Collider>());
         playGame();
         pauseUI.SetActive(false);
+        testUI.SetActive(false);
+    }
+
+    public void wumpusShootTest(){
+        Room room = currentRoom();
+        GameObject obj = room.doors[0].gameObject;
+        Room tempRoom = room.doors[0].next;
+        Destroy(obj.GetComponent<Teleporter>());
+        room.doors[0] = obj.AddComponent<BossTeleporter>();
+        room.doors[0].next = tempRoom;
+        room.doors[0].Awake();
+        shoot(room.doors[0].next.roomNum, room.doors[0]);
+        playGame();
+        pauseUI.SetActive(false);
+        testUI.SetActive(false);
     }
 }

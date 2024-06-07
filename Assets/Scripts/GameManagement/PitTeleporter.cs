@@ -19,7 +19,7 @@ public class PitTeleporter : Teleporter
 
             base.next = temp;
         } else {
-            GameObject.Find("GameManager").GetComponent<GameManager>().lose();
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose(true);
         }
     }
 

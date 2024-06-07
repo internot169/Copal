@@ -15,7 +15,7 @@ public class BossTeleporter : Teleporter
 
             GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Wumpus", base.next.roomNum);
         } else {
-            GameObject.Find("GameManager").GetComponent<GameManager>().lose();
+            GameObject.Find("GameManager").GetComponent<GameManager>().lose(true);
         }
     }
 
