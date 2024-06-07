@@ -41,6 +41,7 @@ public class Trivia : MonoBehaviour
             index = Random.Range(0, questions.Length);
         }
         questions[index].known = true;
+        // TODO: Make this lore prereq
         return questions[index].choices[questions[index].answer];
     }
     public IEnumerator LoadTrivia(int count, int needed, Callback callback){
@@ -56,6 +57,7 @@ public class Trivia : MonoBehaviour
                 questionIndex = Random.Range(0, questions.Length);
             }
             questionText.text = questions[questionIndex].question;
+            // TODO: get rid of this and make it an answered boolean
             answered[questionIndex] = questions[questionIndex];
 
 
