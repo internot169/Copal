@@ -78,11 +78,12 @@ public class Enemy : Shootable
         if (vectToPlayer.magnitude < enemyGun.range + 1.0f){
             // this tells the gun to shoot
             RaycastHit hit;
-            if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, vectToPlayer, out hit, enemyGun.range+1.0f)){
+            Vector3 GunToPlayer = player.transform.position - enemyGun.gunEnd.position;
+            if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, GunToPlayer.normalized, out hit, enemyGun.range+1.0f)){
                 enemyGun.isInRange = true;
                 enemyGun.shot = hit;
                 enemyGun.positionOfHit = enemyGun.gunEnd.position;
-                enemyGun.directionOfHit = vectToPlayer;
+                enemyGun.directionOfHit = GunToPlayer.normalized;
             }
         } else{
             if (enemyGun != null){

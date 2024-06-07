@@ -254,6 +254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemyTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 4868946534525785945, guid: 0d6da991a55be7345b8b37ce52ca791e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6661025692961397040, guid: 0d6da991a55be7345b8b37ce52ca791e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.71

@@ -236,7 +236,7 @@ MonoBehaviour:
   reloadTime: 3
   range: 2
   gunEnd: {fileID: 792359900404563439}
-  BulletTrail: {fileID: 3999909786552700818, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
+  BulletTrail: {fileID: 6777016464231817411}
   isInRange: 0
   isShooting: 0
   player: {fileID: 0}
@@ -253,6 +253,10 @@ PrefabInstance:
     - target: {fileID: 4193517361653631144, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
       propertyPath: m_Name
       value: MeleeEnemyTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 4193517361653631144, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5533428636817201715, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,5 +306,10 @@ PrefabInstance:
 --- !u!4 &2685539921009145186 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5533428636817201715, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
+  m_PrefabInstance: {fileID: 7606091945065574225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &6777016464231817411 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 3999909786552700818, guid: 6a4e5e865eb454b42ab37f7f13247514, type: 3}
   m_PrefabInstance: {fileID: 7606091945065574225}
   m_PrefabAsset: {fileID: 0}
