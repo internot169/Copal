@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,6 +19,16 @@ public class Teleporter : PlayerCollider
 
     public void Awake(){
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    public void AssignNumbers(){
+        TextMeshPro[] texts = GetComponentsInChildren<TextMeshPro>();
+        foreach (TextMeshPro meshes in texts){
+            Debug.Log(meshes);
+            Debug.Log(next.roomNum);
+            meshes.text = "" + next.roomNum;
+            
+        }
     }
 
     // override the interact player script to do teleportation instead. 

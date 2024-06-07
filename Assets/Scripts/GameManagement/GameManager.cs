@@ -230,7 +230,6 @@ public class GameManager : MonoBehaviour
 
         // will only check once per frame. 
         // thus, there is no case of it flickering on and off. 
-        Debug.Log(escape_released);
         if (Input.GetKey(KeyCode.Escape) && !paused && escape_released){
             pauseGame();
             pauseUI.SetActive(true);
