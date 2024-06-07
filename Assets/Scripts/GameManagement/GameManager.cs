@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public Logger logger;
     public string name = "";
 
+    bool paused = false;
+
+    bool escape_released = true;
+
     public MenuInfo info;
     public static GameManager instance;
 
@@ -59,12 +63,14 @@ public class GameManager : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
         Time.timeScale = 0;
+        paused = true;
     }
 
     public void playGame(){
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
         Time.timeScale = 1;
+        paused = false;
     }
  
     void Start(){
@@ -215,7 +221,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Escape)){
+        // will only check once per frame. 
+        // thus, there is no case of it flickering on and off. 
+        Debug.Log(escape_released);
+        if (Input.GetKey(KeyCode.Escape) && !paused && escape_released){
             pauseGame();
             pauseUI.SetActive(true);
             if (testmode){
@@ -223,10 +232,20 @@ public class GameManager : MonoBehaviour
             } else {
                 testUI.gameObject.SetActive(false);
             }
+            // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
+            escape_released = false;
         }
-        else if (Input.GetKey(KeyCode.P)){
+        // check or no check for paused, either is fine. 
+        else if (Input.GetKey(KeyCode.Escape) && paused && escape_released){
             playGame();
             pauseUI.SetActive(false);
+            // since the escape key was just pressed, mark it as being unable to be used until the key gets released. 
+            escape_released = false;
+        }
+        // when escape gets released, Input.GetKeyUp returns true for 1 frame. 
+        // This will persist and reset the ability for the escape button to be repressed. 
+        if (Input.GetKeyUp(KeyCode.Escape)){
+            escape_released = true;
         }
     }
 }
