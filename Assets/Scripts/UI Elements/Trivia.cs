@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Text.Json;
 using Newtonsoft.Json;
 
 public delegate void Callback(bool answer);
