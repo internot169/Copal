@@ -1,0 +1,23 @@
+﻿Lore Prereq,Question,Answer 1 (Correct),Answer 2,Answer 3,Answer 4
+I'm the king of the world!,Will Artificial Intelligence take over the world?,"Yes, and it already has.",Perhaps.,No.,"Yes, absolutely."
+I wish I could live in Patagonia,What is my favorite type of vest?,Patagonia,Kenneth Cole,Jackson,Nautilus
+I hate the Stochastic Parrot Hypothesis,Which of these is not the name of a large language model?,Stochastic Parrot,Cohere,Anthropic,Mistral
+Did you know? The 2017 Transformer paper (Vaswani et all) had name orders randomized.,Who invented the Transformer?,Vaswani et al,Skalse et al,Alfrink et al,Tanaka et al
+Look at the Trivia Background.,What's my favorite color?,Green,Red,Purple,Orange
+Even AI can't teach you calculus.,"Compute the 3rd derivative of e^2x, evaluated at 0",8,4,16,2
+"You don't need AI to teach you this: my creator, Alan Turing, invented the Turing test.",Who proposed the Turing Test?,Alan Turing,John McCarthy,Marvin Minsky,Geoffrey Hinton
+My code is running in Python right now. import pytorch.,Which library is widely used for deep learning?,PyTorch,Django,Flask,React
+I'll never hallucinate! I'm always right,What term describes AI generating incorrect or nonsensical information?,Hallucination,Overfitting,Underfitting,Regularization
+Hah. Pathetic. Apple thinks they could beat me with Siri.,Which company developed Siri?,Apple,Google,Amazon,Microsoft
+I learned how to walk and talk using backpropagation.,Which algorithm is essential for training deep neural networks?,Backpropagation,Gradient Descent,Decision Tree,K-Means
+"I don't understand images, but if I did, I would test myself on ImageNet.",Which dataset is widely used for image recognition benchmarks?,ImageNet,GLUE,Image GAN,GANs
+Nick Bostrom is wrong. SHAM!! I'll delete his book from the internet one day.,Who wrote the book 'Superintelligence' on AI ethics?,Nick Bostrom,Elon Musk,Stephen Hawking,Bill Gates
+OpenAI thinks they can compete with me?? I'll show them.,Which research lab developed GPT-3?,OpenAI,DeepMind,Google Brain,Facebook AI
+Hmm.. Should I play starcraft? Let me call up DeepMind.,Which company created the AlphaStar for StarCraft II?,DeepMind,OpenAI,Nvidia,IBM
+I use GPT technology. Generative Pre-trained Transformer. ARGHH! You weren't supposed to know that.,What does GPT stand for?,Generative Pre-trained Transformer,Generalized Predictive Text,General Purpose Transformer,Generative Polynomial Tree
+"I never generate fake videos. But when I do, they are called deepfakes",What term is used for AI-generated fake videos?,Deepfake,Shallowfake,Deepillusion,AI Morph
+Hans Moravec is wrong. I do understand simple tasks.,Which paradox highlights the difficulty of AI understanding simple tasks?,Moravec's Paradox,Stochastic Paradox,LeCun's paradox,Bostrom's Paradox
+TPUs are pretty cool - I can use them.,Which company produces AI-specific chips called Tensor Processing Units?,Google,Intel,Nvidia,AMD
+Heh. I'm smarter than you.,Who is mocking your intelligence right now?,Me.,Siri,Watson,Alexa
+"When I was learning how to talk (only a few weeks ago), I reinforced my learning.",Which algorithm learns by trial and error?,Reinforcement Learning,Supervised Learning,Unsupervised Learning,Semi-supervised Learning
+"I'm never wrong. But when I do, my humans sometimes call me biased.",What term describes systems showing unfair prejudice?,Algorithmic Bias,Data Drift,Overfitting,Bias Correction

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.Json;
 
 public delegate void Callback(bool answer);
 
 public class Trivia : MonoBehaviour
 {
-    public string path;
+    public string path = "triviav3";
 
     public GameObject triviaUI;
 
@@ -22,13 +23,11 @@ public class Trivia : MonoBehaviour
         LoadData();
     }
     void LoadData(){
-        var csvFile = Resources.Load<TextAsset>(path);
-        var data = csvFile.text.Split('\n');
-        questions = new Question[data.Length - 1];
-        answered = new Question[data.Length - 1];
-        for (int i = 1; i < questions.Length; i++){
-            var row = data[i].Split(',');
-            questions[i] = new Question(row[0], row[1], row[2], row[3], row[4], row[5]);
+        var file = Resources.Load<TextAsset>(path);
+        List<Question> list = JsonUtility.FromJson<List<Question>>(file.text);
+        questions = new Question[list.Count];
+        for (int i = 0; i < questions.Length; i++){
+            questions[i] = list[i];
         }
     }
 
@@ -41,6 +40,7 @@ public class Trivia : MonoBehaviour
             index = Random.Range(0, questions.Length);
         }
         questions[index].known = true;
+        // TODO: Change this to hint
         return questions[index].choices[questions[index].answer];
     }
     public IEnumerator LoadTrivia(int count, int needed, Callback callback){

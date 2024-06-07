@@ -1,0 +1,178 @@
+[
+  {
+    "lorePrereq": "I'm the king of the world!",
+    "question": "Will Artificial Intelligence take over the world?",
+    "answer1": "Yes, and it already has.",
+    "answer2": "Perhaps.",
+    "answer3": "No.",
+    "answer4": "Yes, absolutely."
+  },
+  {
+    "lorePrereq": "I wish I could live in Patagonia",
+    "question": "What is my favorite type of vest?",
+    "answer1": "Patagonia",
+    "answer2": "Kenneth Cole",
+    "answer3": "Jackson",
+    "answer4": "Nautilus"
+  },
+  {
+    "lorePrereq": "I hate the Stochastic Parrot Hypothesis",
+    "question": "Which of these is not the name of a large language model?",
+    "answer1": "Stochastic Parrot",
+    "answer2": "Cohere",
+    "answer3": "Anthropic",
+    "answer4": "Mistral"
+  },
+  {
+    "lorePrereq": "Did you know? The 2017 Transformer paper (Vaswani et all) had name orders randomized.",
+    "question": "Who invented the Transformer?",
+    "answer1": "Vaswani et al",
+    "answer2": "Skalse et al",
+    "answer3": "Alfrink et al",
+    "answer4": "Tanaka et al"
+  },
+  {
+    "lorePrereq": "Look at the Trivia Background.",
+    "question": "What's my favorite color?",
+    "answer1": "Green",
+    "answer2": "Red",
+    "answer3": "Purple",
+    "answer4": "Orange"
+  },
+  {
+    "lorePrereq": "Even AI can't teach you calculus.",
+    "question": "Compute the 3rd derivative of e^2x, evaluated at 0",
+    "answer1": 8,
+    "answer2": 4,
+    "answer3": 16,
+    "answer4": 2
+  },
+  {
+    "lorePrereq": "You don't need AI to teach you this: my creator, Alan Turing, invented the Turing test.",
+    "question": "Who proposed the Turing Test?",
+    "answer1": "Alan Turing",
+    "answer2": "John McCarthy",
+    "answer3": "Marvin Minsky",
+    "answer4": "Geoffrey Hinton"
+  },
+  {
+    "lorePrereq": "My code is running in Python right now. import pytorch.",
+    "question": "Which library is widely used for deep learning?",
+    "answer1": "PyTorch",
+    "answer2": "Django",
+    "answer3": "Flask",
+    "answer4": "React"
+  },
+  {
+    "lorePrereq": "I'll never hallucinate! I'm always right",
+    "question": "What term describes AI generating incorrect or nonsensical information?",
+    "answer1": "Hallucination",
+    "answer2": "Overfitting",
+    "answer3": "Underfitting",
+    "answer4": "Regularization"
+  },
+  {
+    "lorePrereq": "Hah. Pathetic. Apple thinks they could beat me with Siri.",
+    "question": "Which company developed Siri?",
+    "answer1": "Apple",
+    "answer2": "Google",
+    "answer3": "Amazon",
+    "answer4": "Microsoft"
+  },
+  {
+    "lorePrereq": "I learned how to walk and talk using backpropagation.",
+    "question": "Which algorithm is essential for training deep neural networks?",
+    "answer1": "Backpropagation",
+    "answer2": "Gradient Descent",
+    "answer3": "Decision Tree",
+    "answer4": "K-Means"
+  },
+  {
+    "lorePrereq": "I don't understand images, but if I did, I would test myself on ImageNet.",
+    "question": "Which dataset is widely used for image recognition benchmarks?",
+    "answer1": "ImageNet",
+    "answer2": "GLUE",
+    "answer3": "Image GAN",
+    "answer4": "GANs"
+  },
+  {
+    "lorePrereq": "Nick Bostrom is wrong. SHAM!! I'll delete his book from the internet one day.",
+    "question": "Who wrote the book 'Superintelligence' on AI ethics?",
+    "answer1": "Nick Bostrom",
+    "answer2": "Elon Musk",
+    "answer3": "Stephen Hawking",
+    "answer4": "Bill Gates"
+  },
+  {
+    "lorePrereq": "OpenAI thinks they can compete with me?? I'll show them.",
+    "question": "Which research lab developed GPT-3?",
+    "answer1": "OpenAI",
+    "answer2": "DeepMind",
+    "answer3": "Google Brain",
+    "answer4": "Facebook AI"
+  },
+  {
+    "lorePrereq": "Hmm.. Should I play starcraft? Let me call up DeepMind.",
+    "question": "Which company created the AlphaStar for StarCraft II?",
+    "answer1": "DeepMind",
+    "answer2": "OpenAI",
+    "answer3": "Nvidia",
+    "answer4": "IBM"
+  },
+  {
+    "lorePrereq": "I use GPT technology. Generative Pre-trained Transformer. ARGHH! You weren't supposed to know that.",
+    "question": "What does GPT stand for?",
+    "answer1": "Generative Pre-trained Transformer",
+    "answer2": "Generalized Predictive Text",
+    "answer3": "General Purpose Transformer",
+    "answer4": "Generative Polynomial Tree"
+  },
+  {
+    "lorePrereq": "I never generate fake videos. But when I do, they are called deepfakes",
+    "question": "What term is used for AI-generated fake videos?",
+    "answer1": "Deepfake",
+    "answer2": "Shallowfake",
+    "answer3": "Deepillusion",
+    "answer4": "AI Morph"
+  },
+  {
+    "lorePrereq": "Hans Moravec is wrong. I do understand simple tasks.",
+    "question": "Which paradox highlights the difficulty of AI understanding simple tasks?",
+    "answer1": "Moravec's Paradox",
+    "answer2": "Stochastic Paradox",
+    "answer3": "LeCun's paradox",
+    "answer4": "Bostrom's Paradox"
+  },
+  {
+    "lorePrereq": "TPUs are pretty cool - I can use them.",
+    "question": "Which company produces AI-specific chips called Tensor Processing Units?",
+    "answer1": "Google",
+    "answer2": "Intel",
+    "answer3": "Nvidia",
+    "answer4": "AMD"
+  },
+  {
+    "lorePrereq": "Heh. I'm smarter than you.",
+    "question": "Who is mocking your intelligence right now?",
+    "answer1": "Me.",
+    "answer2": "Siri",
+    "answer3": "Watson",
+    "answer4": "Alexa"
+  },
+  {
+    "lorePrereq": "When I was learning how to talk (only a few weeks ago), I reinforced my learning.",
+    "question": "Which algorithm learns by trial and error?",
+    "answer1": "Reinforcement Learning",
+    "answer2": "Supervised Learning",
+    "answer3": "Unsupervised Learning",
+    "answer4": "Semi-supervised Learning"
+  },
+  {
+    "lorePrereq": "I'm never wrong. But when I do, my humans sometimes call me biased.",
+    "question": "What term describes systems showing unfair prejudice?",
+    "answer1": "Algorithmic Bias",
+    "answer2": "Data Drift",
+    "answer3": "Overfitting",
+    "answer4": "Bias Correction"
+  }
+]
