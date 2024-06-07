@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.37958
+      value: 34.38019
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2963,8 +2963,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000434
-  m_Size: 0.85352385
+  m_Value: 1.0000011
+  m_Size: 0.85356164
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4510,9 +4510,9 @@ MonoBehaviour:
   m_Content: {fileID: 269328646}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 0
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
   m_Viewport: {fileID: 918783366}
