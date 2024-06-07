@@ -7,7 +7,7 @@ public class RoomGenerator : MonoBehaviour
     public GameObject[] roomPrefabs;
     
     public float roomLength = 100f;
-    public float roomBuffer = 100f;
+    public float roomBuffer = 10f;
     public Room[] rooms = new Room[30];
     public int wumpusRoom;
     public int batRoom;

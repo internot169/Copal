@@ -9,7 +9,7 @@ public delegate void Callback(bool answer);
 
 public class Trivia : MonoBehaviour
 {
-    public string path = "triviav3";
+    public string path;
 
     public GameObject triviaUI;
 
