@@ -1186,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.38015
+      value: 34.379887
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2927,8 +2927,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000037
-  m_Size: 0
+  m_Value: 1.0000215
+  m_Size: 0.85356176
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5771,27 +5771,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2071739611341639459, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5844,6 +5844,26 @@ PrefabInstance:
     - target: {fileID: 4087233804037437451, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
       propertyPath: m_Name
       value: Trivia
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127487681879654271, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127487681879654271, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127487681879654271, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127487681879654271, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6387217420577517766, guid: 0fc64df0c13e0fb48a49ef8420a628b6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
