@@ -30,7 +30,8 @@ public class BatTeleporter : Teleporter
         // check the next rooms for obstacles
         dest.adjacencyCheck();
         other.transform.position = new Vector3(dest.spawnLocation.position.x, dest.spawnLocation.position.y+5, dest.spawnLocation.position.z);
-        GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Bat", base.next.roomNum);
+        // get the current room from game manager, then move the bat from this room. 
+        GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Bat", base.gameManager.currentRoom().roomNum);
         yield return null;
     }
 }
