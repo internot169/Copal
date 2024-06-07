@@ -24,8 +24,9 @@ public class WumpusCollisionScript : MonoBehaviour
         Debug.Log(player.name);
         ApplyForce();
         // do damage based on roaming, charging, and stomp
-        wumpus.Player.GetComponent<PlayerInfo>().TakeDamage(20);
-
+        wumpus.Player.GetComponent<PlayerInfo>().TakeDamage(20);    
+        // clamp the velocity so player doesnt get thrown into the abyss  
+        wumpus.Player.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, wumpus.KnockBackForce);
     }
 
     void ApplyForce(){
