@@ -5,54 +5,61 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    // reference to gm and player, assigned on start. 
     GameManager gameManager;
 
     GameObject Player;
 
+    // prices, just default values
+    // can and likely are reassigned in editor. 
     [Header("prices")]
     public int ArrowCost = 3;
     public int SecretCost = 3;
 
     public int AugmentCost = 20;
 
-
+    // assign the pointers upon start
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // this method is called after ending the trivia. It will update arrows
+    // or not and log the results.
     public void receiveArrow(bool correct){
+        // if correct
         if (correct) {
+            // log the arrows in gm and print out to the logger
             gameManager.arrows += 2;
             gameManager.logger.log("Bought 2 arrows");
         } else {
+            // otherwise, just do a printout and don't update values. 
             gameManager.logger.log("Failed trivia, didn't buy arrows");
         }
-        // pretty much setup for an exit button if you wanted to do it. 
+        // close the shop. 
         gameManager.CloseShop();
     }
 
+    // this method enters the trivia game to attempt to buy an arrow
     public void BuyArrow(){
+        // buying takes a turn. 
         gameManager.turns++;
+        // if can buy, then start the trivia game and create a callback. 
         if(gameManager.coins > ArrowCost){
             Callback receiver;
             receiver = receiveArrow;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver, false));
         } else {
+            // otherwise, log that there's not enough money. 
             gameManager.logger.log("Not enough coins to play trivia for Arrows.");
         }
         
     }
 
+    // this is a callback that actually give a secret. 
     public void receiveSecret(bool correct){
+        // depending on result, give a secret or log a failure. 
         if (correct){
             int pick = Random.Range(0, 10);
             string secret = "";
@@ -79,27 +86,34 @@ public class Shop : MonoBehaviour
             } else if (pick == 10){
                 secret = "What's your AI strategy? I'm sure it's worse than mine.";
             }
+            // give the secret in the logs. 
             gameManager.logger.log(secret);
         } else {
+            // log failure. 
             gameManager.logger.log("Failed trivia, didn't buy secret");
         }
     }
 
+    // method for buttons to call when buying a secret. 
     public void BuySecret(){
+        // buying costs a turn. 
         gameManager.turns++;
+        // create callback if you can buy, and then start trivia game to buy. 
         if(gameManager.coins > SecretCost){
             Callback receiver;
             receiver = receiveSecret;
             StartCoroutine(GameObject.Find("Trivia").GetComponent<Trivia>().LoadTrivia(3, 2, receiver, false));
         } else {
+            // otherwise, log a failure to buy. 
             gameManager.logger.log("Not enough coins to play trivia for secret.");
         }
-        // pretty much setup for an exit button if you wanted to do it. 
+        // close the shop. 
         gameManager.CloseShop();
     }
     
-
+    // method to buy augments. 
     public void BuyAugment(){
+        // buying costs a turn. 
         gameManager.turns++;
         // it just gives you a random augment and replaces whatever was there before. 
         if (gameManager.coins > AugmentCost){
@@ -108,6 +122,7 @@ public class Shop : MonoBehaviour
             int pick = Random.Range(0, 11);
             // I have no idea how better to do this, apart from switch statement I guess. 
             // however this does get simplified to switch in compiler so it doesn't matter at all. 
+            // from the random number picked, resets that class of augment and gives you the new one. 
             if(pick == 0){
                 augments.ResetMainAll();
                 augments.ChangeDOTMain(true);
@@ -158,8 +173,10 @@ public class Shop : MonoBehaviour
                 gameManager.logger.log("Bought Drone Field");
             }
         }  else {
+            // log failure to buy. 
             gameManager.logger.log("Not enough coins to buy Augment.");
         }
+        // close the shop
         gameManager.CloseShop();
     }
 }
