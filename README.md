@@ -19,6 +19,8 @@
 
 Go to Assets/Scripts to see our code
 
+Ignore .meta files
+
  
 /Data
 
