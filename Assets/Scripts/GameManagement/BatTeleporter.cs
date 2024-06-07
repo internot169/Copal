@@ -25,10 +25,13 @@ public class BatTeleporter : Teleporter
     }
 
     IEnumerator RandomRoomMove(Collider other){
+        // saves the picked random room, 
         Room dest = GameObject.Find("GameManager").GetComponent<GameManager>().randomRoom();
+        // does the stuff on this room that base tp does. Since this is differnt from the base destination(potentially), it's handled differently. 
         dest.gameObject.SetActive(true);
         // check the next rooms for obstacles
         dest.adjacencyCheck();
+        // move the player to the destination room
         other.transform.position = new Vector3(dest.spawnLocation.position.x, dest.spawnLocation.position.y+5, dest.spawnLocation.position.z);
         // get the current room from game manager, then move the bat from this room. 
         GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Bat", base.gameManager.currentRoom().roomNum);
