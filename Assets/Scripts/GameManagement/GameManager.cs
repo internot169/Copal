@@ -136,6 +136,10 @@ public class GameManager : MonoBehaviour
         WinUI.SetActive(true);
         score(wumpus);
     }
+    public void lossTest(){
+        lose();
+    }
+    
     public bool lose(){
         if (!lost){
             if (lives <= 1){
