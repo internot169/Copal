@@ -48,7 +48,7 @@ public class Teleporter : PlayerCollider
             }
         }
     }
-    
+
     void OnTriggerEnter(Collider other)
     {
         InteractPlayer(other);

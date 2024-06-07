@@ -202,6 +202,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public IEnumerator stopPlayerMovement(){
+        Rigidbody otherRb = Player.GetComponent<Rigidbody>();
+        Vector3 prevVelocity = otherRb.velocity;
+        yield return new WaitForSecondsRealtime(0.1f);
+        Vector3 currVelocity = otherRb.velocity;
+
+        Vector3 diff = currVelocity - prevVelocity;
+        Vector3 force = diff * otherRb.mass;
+        otherRb.AddForce(-force);
+        yield return null;
+    }
+    
     public void move(int room, bool disable, Teleporter tp){
         Room[] rooms = GameObject.Find("GameManager").GetComponent<RoomGenerator>().rooms;
         rooms[roomNum].visited = true;
@@ -223,6 +235,7 @@ public class GameManager : MonoBehaviour
         Player.GetComponentInChildren<MouseLook>().enabled = true;
         // tell the teleporter it came from to move the player
         // only if it is not being moved randomly
+        StartCoroutine(stopPlayerMovement());
         if (tp != null){
             tp.MovePlayer(Player.GetComponent<Collider>());
             tp = null;
