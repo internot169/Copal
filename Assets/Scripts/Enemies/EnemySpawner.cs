@@ -18,9 +18,12 @@ public class EnemySpawner : MonoBehaviour
         // grab turn count from game manager, then scale count according to turn count. 
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         count += gm.turns * 2;
+
+        // spawn the number of enemies. 
         for (int i = 0; i < count; i++){
-            //pick position:
+            //pick position within a circular range of the player spawner. 
             float x = Random.Range(-range, range);
+            // the flat plane is the XZ plane in unity. Y is the height(so to speak).
             float z = Random.Range(-range, range);
 
             //TODO: make sure to offset y if we want that. 
