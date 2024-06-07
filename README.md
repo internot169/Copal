@@ -202,7 +202,7 @@ Ryan Li - rli@eastsideprep.org
 
 Rishay Puri - rpuri@eastsideprep.org
 
-Jack Goetzmann - jgoetzmann*eastsideprep.org
+Jack Goetzmann - jgoetzmann@eastsideprep.org
 
   
   
