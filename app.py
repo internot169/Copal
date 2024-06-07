@@ -1,28 +1,30 @@
-from markupsafe import escape
-from flask import Flask, request, render_template
+from flask import Flask, request
 import json
 
 app = Flask(__name__)
 
 @app.route("/")
 def leaderboard():
-    scores = {}
+    arr = []
     try:
         with open('scores.json', 'r') as f:
-            scores = json.load(f)
-        arr = []
+            arr = json.loads(f.read())
 
-        for key in scores:
-            arr.append({'name': scores[key]['name'], 
-                        'score': scores[key]['score'], 
-                        'turns': scores[key]['turns'], 
-                        'coins': scores[key]['coins'], 
-                        'arrows': scores[key]['arrows'], 
-                        'wumpus': scores[key]['wumpus']})
-            
-        return render_template('index.html', scores=arr)
+        temp_arr = []
+        for i in arr:
+            temp_arr.append({
+                'name': i,
+                'score': arr[i]['score'],
+                'turns': arr[i]['turns'],
+                'coins': arr[i]['coins'],
+                'arrows': arr[i]['arrows'],
+                'wumpus': arr[i]['wumpus']
+            })
+        arr = temp_arr
+        #TODO: Sort by score and pick top 10
     except:
-        return render_template('index.html', scores=[])
+        print('Error reading scores.json')
+    return arr
 
 @app.route('/addscore', methods=['POST'])
 def login():
