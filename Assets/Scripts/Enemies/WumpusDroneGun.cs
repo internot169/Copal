@@ -15,7 +15,6 @@ public class WumpusDroneGun : MonoBehaviour
     public TrailRenderer BulletTrail;
     private float nextFire;
 
-
     [Header("Shooting information")]
     public bool isInRange = false;
     public GameObject player;
@@ -63,8 +62,10 @@ public class WumpusDroneGun : MonoBehaviour
         // this is where it shoots from, you should change if you want diff logic. 
         Vector3 rayOrigin = transform.position;
         
+        // generate trail
         TrailRenderer trail = Instantiate(BulletTrail, transform.position, Quaternion.identity);
 
+        // start coroutine to warn player w/trail
         StartCoroutine(WarnPlayer(trail, hit.point, hit.normal, true, hit));
     }
 
@@ -72,48 +73,60 @@ public class WumpusDroneGun : MonoBehaviour
     // shoot the bullet. 
     private IEnumerator WarnPlayer(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact, RaycastHit hit)
     {
+        // Essentially the same logic as the player gun.
+        // First, determine the start location of the shot. 
         Vector3 startPosition = Trail.transform.position;
+        // calculate the distance from the enemy to the location of the shot. 
         float distance = Vector3.Distance(Trail.transform.position, HitPoint);
+        // remaining distance for later. 
         float remainingDistance = distance;
 
+        // while the trail has not crossed the destination, 
         while (remainingDistance > 0)
-        {
+        {   
+            // move it closer based on the remaining distance and the distance. 
             Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
 
+            // update the remaining distance
             remainingDistance -= 200f * Time.deltaTime;
 
+            // pause and move closer the next frame. 
             yield return null;
         }
+        // then make sure that it's exactly at the hit point. 
+        // the loop can (and probably will due to floating point) take you past the position of the hit. 
+        // thus, move it back to ensure that it's correct. 
         Trail.transform.position = HitPoint;
 
-        // trail.time for now, should make a new trail for this. 
-        // should theoretically wait for the time it takes for it to destroy, if it doesn't
-        // add a timer under that does 
-
-        // this basically means that we will wait for the trail to disappear completely 
-        // to shoot the player with damage. 
+        // then, wait for a bit so the player has time to move. 
+        // this is the same time as the trail lasts for. 
         yield return new WaitForSeconds(2);
 
+        // after the trail disappears, recalculate the hit. 
         StartCoroutine(DealDamage(hit));
     }
 
     // deals damage after giving warning. 
     private IEnumerator DealDamage(RaycastHit hit)
     {
-        // I think this holds the hit from the beginning. 
-        // Consider recalculating the raycast at this moment, which means you need to pass
-        // in values from the beginning of the shot. 
-
+        // create a new raycasthit, check. 
         RaycastHit check;
+        // then, populate check with another raycast hit that checks if the player is still within range of the shot. 
         Physics.Raycast(positionOfHit, directionOfHit, out check, Mathf.Infinity);
-        // because slow field covers the entirety of player hitbox, count that as a hit to player
-        // this code gets the parent gameobject of the hit object
+        // this if statement is to ensure that the gameobject that check finds and the player are the same
         if (GameObject.ReferenceEquals(check.collider.gameObject, player)){
+            // if so, then make the player take damage. 
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
+        // due to weird interactions, one should check the parent as well. 
+        // since objects (like the drone) can also be hit, should check them as well and use them to process hits. 
         } else if (GameObject.ReferenceEquals(check.collider.gameObject.transform.parent.gameObject, player)){
+            // once again, make the player take damage if the player is hit. 
             player.GetComponent<PlayerInfo>().TakeDamage(gunDamage);
         }
         
+        // end the script. 
+        // it's necessary to use this to end on this exact frame. 
+        // yield return null would last for 1 more frame, and this script should end as soon as the shot is complete. 
         yield break;
     }
 }

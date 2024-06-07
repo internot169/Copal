@@ -39,7 +39,7 @@ public class CrankyRigidBodyController : MonoBehaviour
     private byte doJump;
 
     private Vector3 groundNormal; // average normal of the ground i'm standing on
-    private bool touchingDynamic; // if we're touching a dynamic object, don't prevent idle sliding
+    private bool touchingDynamic; // if we're touching a dynamic object, don't prevent the player from sliding down. 
     private bool groundedLastFrame; // was i grounded last frame? used for fudging
     private List<GameObject> collisions; // the objects i'm colliding with
     private Dictionary<int, ContactPoint[]> contactPoints; // all of the collision contact points
@@ -50,8 +50,10 @@ public class CrankyRigidBodyController : MonoBehaviour
     private float bottomCapsuleSphereOrigin; // transform.position.y - this variable = the y coord for the origin of the capsule's bottom sphere
     private float capsuleRadius;
 
+
     void Awake()
-    {  
+    {   
+        // upon creation, zero everything. 
         movement = Vector3.zero;
 
         grounded = false;
@@ -63,24 +65,31 @@ public class CrankyRigidBodyController : MonoBehaviour
         contactPoints = new Dictionary<int, ContactPoint[]>();
 
         // do our calculations so we don't have to do them every frame
+        // this saves time later as values are reused. 
         CapsuleCollider capsule = (CapsuleCollider)GetComponent<Collider>();
         halfPlayerHeight = capsule.height * 0.5f;
         fudgeCheck = halfPlayerHeight + FudgeExtra;
         bottomCapsuleSphereOrigin = halfPlayerHeight - capsule.radius;
         capsuleRadius = capsule.radius;
 
+        // make a physics material to assign to the player
+        // this makes the player react more predicatbly.  
         PhysicMaterial controllerMat = new PhysicMaterial();
         controllerMat.bounciness = 0.0f;
         controllerMat.dynamicFriction = 0.0f;
         controllerMat.staticFriction = 0.0f;
         controllerMat.bounceCombine = PhysicMaterialCombine.Minimum;
         controllerMat.frictionCombine = PhysicMaterialCombine.Minimum;
+        // assign the material to the player. 
         capsule.material = controllerMat;
 
         // just in case this wasn't set in the inspector
         GetComponent<Rigidbody>().freezeRotation = true;
     }
 
+    // this tries to update at a fixed rate. 
+    // normal Update() will update depending on PC capabilities. 
+    // this makes it more consisten. 
     void FixedUpdate()
     {
         // check if we're grounded
@@ -88,10 +97,15 @@ public class CrankyRigidBodyController : MonoBehaviour
         grounded = false;
         groundNormal = Vector3.zero;
 
+        // check the points at which the player contacts the ground. 
         foreach (ContactPoint[] contacts in contactPoints.Values)
             for (int i = 0; i < contacts.Length; i++)
+                // for every contact, do a calculation to check the angle at which the bottom of the player matches the object. 
+                // if this angle is less than 45, then consider the player grounded. 
+                // this helps the player walk up stairs. 
                 if (contacts[i].point.y <= GetComponent<Rigidbody>().position.y - bottomCapsuleSphereOrigin && Physics.Raycast(contacts[i].point + Vector3.up, Vector3.down, out hit, 1.1f, ~0) && Vector3.Angle(hit.normal, Vector3.up) <= MaximumSlope)
-                {
+                {   
+                    // mark as grounded, but add the to the normal vector to be perpendicular to the slope. 
                     grounded = true;
                     groundNormal += hit.normal;
 
@@ -100,12 +114,13 @@ public class CrankyRigidBodyController : MonoBehaviour
         if (grounded)
         {
             // average the summed normals
+            // basically gives an approximation of what "up" means. 
             groundNormal.Normalize();
-
+            // reset jumping state. 
             if (doJump == 3)
                 doJump = 0;
         }
-
+        // otherwise, then mid jump. 
         else if (doJump == 2)
             doJump = 3;
 
@@ -114,27 +129,30 @@ public class CrankyRigidBodyController : MonoBehaviour
         inputY = Input.GetAxis("Vertical");
 
         // limit the length to 1.0f
+        // this makes calculations more consistent. 
         float length = Mathf.Sqrt(inputX * inputX + inputY * inputY);
-
+        
+        // cast the inputs down if the length is over 1. 
+        // essentially normalizing. 
         if (length > 1.0f)
         {
             inputX /= length;
             inputY /= length;
         }
-
+        // this is checking falling. 
         if (grounded && doJump != 3)
         {
             if (falling)
             {
                 // we just landed from a fall
                 falling = false;
-                this.DoFallDamage(Mathf.Abs(fallSpeed));
             }
 
             // align our movement vectors with the ground normal (ground normal = up)
             Vector3 newForward = transform.forward;
             Vector3.OrthoNormalize(ref groundNormal, ref newForward);
 
+            // normalize the speed of movement with this alignment. 
             Vector3 targetSpeed = Vector3.Cross(groundNormal, newForward) * inputX * _speed + newForward * inputY * _speed;
 
             length = targetSpeed.magnitude;
@@ -162,6 +180,7 @@ public class CrankyRigidBodyController : MonoBehaviour
             {
                 // jump button was pressed, do jump      
                 movement.y = JumpSpeed - GetComponent<Rigidbody>().velocity.y;
+                // mark jump state.  
                 doJump = 2;
             }
 
@@ -170,6 +189,7 @@ public class CrankyRigidBodyController : MonoBehaviour
                 movement.y -= Physics.gravity.y * Time.deltaTime;
 
             GetComponent<Rigidbody>().AddForce(new Vector3(movement.x, movement.y, movement.z), ForceMode.VelocityChange);
+            // mark that we are grounded. 
             groundedLastFrame = true;
         }
 
@@ -178,6 +198,7 @@ public class CrankyRigidBodyController : MonoBehaviour
             // not grounded, so check if we need to fudge and do air accel
 
             // fudging
+            // this basically allows us to more cleanly jump and fall. 
             if (groundedLastFrame && doJump != 3 && !falling)
             {
                 // see if there's a surface we can stand on beneath us within fudgeCheck range
@@ -189,13 +210,13 @@ public class CrankyRigidBodyController : MonoBehaviour
                     if (doJump == 1)
                     {
                         movement.y += JumpSpeed;
+                        // mark jump states again
                         doJump = 2;
+                        // since this was jump attempt, come back and check again next frame. 
                         return;
                     }
 
                     // we can't go straight down, so do another raycast for the exact distance towards the surface
-                    // i tried doing exsec and excsc to avoid doing another raycast, but my math sucks and it failed horribly
-                    // if anyone else knows a reasonable way to implement a simple trig function to bypass this raycast, please contribute to the thead!
                     if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - bottomCapsuleSphereOrigin, transform.position.z), -hit.normal, out hit, hit.distance, ~0))
                     {
                         GetComponent<Rigidbody>().AddForce(hit.normal * -hit.distance, ForceMode.VelocityChange);
@@ -209,12 +230,13 @@ public class CrankyRigidBodyController : MonoBehaviour
             if (!falling)
                 falling = true;
 
+            // save this reference for later. 
             fallSpeed = GetComponent<Rigidbody>().velocity.y;
 
             // air accel
+            // allows a bit of air strafing for landing better. 
             if (!Mathf.Approximately(inputX + inputY, 0.0f))
             {
-                // note, this will probably malfunction if you set the air accel too high... this code should be rewritten if you intend to do so
 
                 // get direction vector
                 movement = transform.TransformDirection(new Vector3(inputX * AirborneAccel * Time.deltaTime, 0.0f, inputY * AirborneAccel * Time.deltaTime));
@@ -248,7 +270,7 @@ public class CrankyRigidBodyController : MonoBehaviour
                     GetComponent<Rigidbody>().AddForce(new Vector3(movement.x, 0.0f, movement.z), ForceMode.VelocityChange);
                 }
             }
-
+            // since we were definently airborne, then mark this so we don't fudge next frame. 
             groundedLastFrame = false;
         }
     }
@@ -258,12 +280,6 @@ public class CrankyRigidBodyController : MonoBehaviour
         // check for input here
         if (groundedLastFrame && Input.GetButtonDown("Jump"))
             doJump = 1;
-    }
-
-    void DoFallDamage(float fallSpeed) // fallSpeed will be positive
-    {
-        // do your fall logic here using fallSpeed to determine how hard we hit the ground
-        //Debug.Log("Hit the ground at " + fallSpeed.ToString() + " units per second");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -305,6 +321,7 @@ public class CrankyRigidBodyController : MonoBehaviour
         contactPoints.Remove(collision.gameObject.GetInstanceID());
     }
 
+    // reference methods for other scripts
     public bool Grounded
     {
         get

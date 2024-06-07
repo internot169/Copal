@@ -6,12 +6,6 @@ using UnityEngine;
 // other various things to add more clear inheritance. 
 public class PlayerCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // all of these should act as triggers, so detect for it. 
     void OnTriggerEnter (Collider other)
     {
@@ -25,11 +19,5 @@ public class PlayerCollider : MonoBehaviour
     public virtual void InteractPlayer(Collider other)
     {
         return;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
