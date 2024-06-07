@@ -15,7 +15,7 @@ public class PitTeleporter : Teleporter
             base.next = GameObject.Find("RoomGenerator").GetComponent<RoomGenerator>().rooms[0];
             next.gameObject.SetActive(true);
             next.adjacencyCheck();
-            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y+5, next.spawnLocation.position.z);
+            otherCollider.transform.position = new Vector3(next.spawnLocation.position.x, next.spawnLocation.position.y, next.spawnLocation.position.z);
 
             base.next = temp;
         } else {
