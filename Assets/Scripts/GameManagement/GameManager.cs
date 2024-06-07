@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
             testmode = true;
         }
         logger.log("You're mine now ... You have 5 lives, 3 arrows, and 0 coins. Good luck. You'll need it.");
+
+        if (testmode){
+            coins = 500;
+            arrows = 50;
+        }
     }
 
     public void bossFight(){
@@ -288,6 +293,7 @@ public class GameManager : MonoBehaviour
             testUI.gameObject.SetActive(false);
             testing = false;
         }
+
 
         // when escape gets released, Input.GetKeyUp returns true for 1 frame. 
         // This will persist and reset the ability for the escape button to be repressed. 

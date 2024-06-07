@@ -6,17 +6,6 @@ using UnityEngine;
 // class to apply the the warnscale effect to unity
 public class ChargeWarnScale : MonoBehaviour
 {
-    // start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // scaling the dimensions
     public void Scale(float ZDimension)
