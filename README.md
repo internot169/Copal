@@ -114,7 +114,6 @@ Ignore .meta files
 /Combat
 
 -   This stores player combat scripts, which allow it to fight enemies
-- 
   
 
 ## Setup
