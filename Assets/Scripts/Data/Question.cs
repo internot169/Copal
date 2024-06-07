@@ -17,7 +17,7 @@ public class Question
     public void setup(){
         this.choices = new string[]{answer1, answer2, answer3, answer4};
         int index = Random.Range(0, choices.Length);
-        swap(choices, index, answer);
+        swap(choices, answer, index);
         answer = index;
     }
     
