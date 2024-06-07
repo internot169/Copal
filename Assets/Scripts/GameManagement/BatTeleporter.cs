@@ -25,7 +25,11 @@ public class BatTeleporter : Teleporter
     }
 
     IEnumerator RandomRoomMove(Collider other){
-        GameObject.Find("GameManager").GetComponent<GameManager>().randomRoom();
+        Room dest = GameObject.Find("GameManager").GetComponent<GameManager>().randomRoom();
+        dest.gameObject.SetActive(true);
+        // check the next rooms for obstacles
+        dest.adjacencyCheck();
+        other.transform.position = new Vector3(dest.spawnLocation.position.x, dest.spawnLocation.position.y+5, dest.spawnLocation.position.z);
         GameObject.Find("GameManager").GetComponent<RoomGenerator>().moveMob("Bat", base.next.roomNum);
         yield return null;
     }
