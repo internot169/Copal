@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public bool testmode;
 
-    public TMP_Text testUI;
+    public GameObject testUI;
 
     public GameObject ShopUI;
     public TextMeshProUGUI Inventory;
@@ -84,7 +84,11 @@ public class GameManager : MonoBehaviour
         LoseUI.SetActive(false);
         Player.transform.position = currentRoom().spawnLocation.position;
         info = MenuInfo.instance;
-        name = info.name;
+        if (info == null){
+            name = "test";
+        } else {
+            name = info.name;
+        }
         if (name == "test"){
             testmode = true;
         }
@@ -247,5 +251,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape)){
             escape_released = true;
         }
+    }
+
+    // Test functions
+    public void batTest(){
+        Room room = currentRoom();
+        GameObject obj = room.doors[0].gameObject;
+        Room tempRoom = room.doors[0].next;
+        // Destroy old teleporter
+        Destroy(obj.GetComponent<Teleporter>());
+        // Create new teleporter and assign attribute
+        // Component Type changes based on teleporter type
+        room.doors[0] = obj.AddComponent<BatTeleporter>();
+        room.doors[0].next = tempRoom;
+        room.doors[0].Awake();
+        room.doors[0].MovePlayer(Player.GetComponent<Collider>());
     }
 }

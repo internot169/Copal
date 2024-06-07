@@ -11,6 +11,12 @@ public class BatTeleporter : Teleporter
         StartCoroutine(ShowUI(other));
     }
 
+    public override void InteractPlayer(Collider other) {
+        if(isOn && other.name == "Player"){
+            MovePlayer(other);
+        }
+    }
+
     IEnumerator ShowUI(Collider other){
         base.gameManager.BatUI.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
