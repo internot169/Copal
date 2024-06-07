@@ -5,42 +5,43 @@ using UnityEngine.AI;
 
 public class Enemy : Shootable
 {
+    // indicates player
     GameObject player;
 
+    // indicates current navmeshagent on enemy prefab
     NavMeshAgent agent;
 
+    // indicates normal speed of agent
     public float Speed = 0.5f;
 
+    // indicates the turn amount to offset the original mesh
     public float YOffset = 180.0f;
 
+    // indicates enemy script
     public EnemyGun enemyGun;
 
-    bool noticedPlayer = true;
-
+    // layers of navigation
     [Header("Navigation")]
     [SerializeField] LayerMask groundLayer;
     LayerMask playerLayer;
 
-    Vector3 destPoint;
-    bool walkpointSet = false;
-    int pauseiteration = 0;
-    float scale = 2.5f;
-    float nextMove;
-    [SerializeField] float range;
-    // Start is called before the first frame update
-
+    // items to indicate augment impacts on enemy
     [Header("AugmentModifications")]
     [Header("Slow")]
+    // amount and timer of slow
     public int slow_tier;
     public int slow_timer;
     [Header("Burn")]
+    // amount and timer of burn
     public int burn_tier;
     public int burn_timer;
-    float apply_timer;
+    
+    // current enemy rigidbody
     Rigidbody m_Rigidbody;
 
     void Start()
     {
+        // grab the components to use alter and set speed/accel
         m_Rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
@@ -51,13 +52,10 @@ public class Enemy : Shootable
     // Update is called once per frame
     void Update()
     {   
+        // grabs vector to player
         Vector3 vectToPlayer = player.transform.position - transform.position;
 
-        // two situations: Noticed player and not
-        //if (noticedPlayer){
-
-        // if player is noticed and is in range
-
+        // if not currently shooting
         if (!enemyGun.isShooting){
             // ALWAYS be looking at the player
             transform.LookAt( player.transform );
@@ -70,6 +68,7 @@ public class Enemy : Shootable
             VectToEnemy.Normalize();
             VectToEnemy = VectToEnemy * enemyGun.range;
             // and now, let's move the AI to player plus that vector
+            // AKA that vector away from player
             agent.SetDestination(player.transform.position + VectToEnemy);
         }
         
@@ -77,80 +76,41 @@ public class Enemy : Shootable
         // player is in range
         if (vectToPlayer.magnitude < enemyGun.range + 1.0f){
             // this tells the gun to shoot
+            // raycast hit to location, use in phys.raycast
             RaycastHit hit;
+            // vector of gunpoint to position
             Vector3 GunToPlayer = player.transform.position - enemyGun.gunEnd.position;
+            // if has gun + can hit player
             if (enemyGun != null && Physics.Raycast(enemyGun.gunEnd.position, GunToPlayer.normalized, out hit, enemyGun.range+1.0f)){
+                // tell gun its in range
                 enemyGun.isInRange = true;
+                // identify the shot taken
                 enemyGun.shot = hit;
+                // identify position of shot origin
                 enemyGun.positionOfHit = enemyGun.gunEnd.position;
+                // identify the direction the shot is going
                 enemyGun.directionOfHit = GunToPlayer.normalized;
             }
-        } else{
+        } else{ // otherwise (not in range)
             if (enemyGun != null){
                 // this tells the gun to not shoot
                 enemyGun.isInRange = false;
             }
         }
 
-        //}
-        //  else{
-        //     // we are going to have the ai randomly roam to random locations
-        //     // first, check if it is currently roaming.
-
-        //     if (walkpointSet){
-        //         agent.SetDestination(destPoint);
-        //     } else if (Time.time > nextMove){
-        //         destPoint = GenerateRandomPoint();
-        //         walkpointSet = true;
-        //     }
-
-        //     // keep moving until the distance gets relatively close. 
-        //     // first, tell the agent to stop moving for a couple of iterations
-        //     // then, we unset walkpoint and wait until next iteration to 
-        //     // set the next walkpoint
-        //     if (Vector3.Distance(transform.position, destPoint) < 2 && Time.time > nextMove){
-        //         walkpointSet = false;
-        //         // tell it to stop for a while
-        //         nextMove = Time.time + 2.0f;
-        //         Debug.Log(nextMove);
-        //     }
-            
-        // }
-
+        // if current health is zero
         if (currentHealth == 0){
+            // delete it
             Object.Destroy(this.gameObject);
         }
     }
 
-    // void SearchForDest()
-    // {
-    //     // pick spot to roam
-    //     float Z = Random.Range(-range, range);
-    //     float X = Random.Range(-range, range);
-
-    //     destPoint = new Vector3(transform.position.x + X, transform.position.y, transform.position.z + Z);
-
-    //     if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
-    //     {
-    //         walkpointSet = true;
-    //     }
-    // }
-    
-    Vector3 GenerateRandomPoint(){
-        // select a random degree
-        float angle = Random.Range(0f, 2f * Mathf.PI);
-        Vector3 direction = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
-        NavMeshHit NavHit;
-        if(NavMesh.SamplePosition(direction, out NavHit, 100 , NavMesh.AllAreas))
-        {
-            direction = NavHit.position;
-        }
-        return direction * scale;
-    }
-
+    // when slowed
     public void MarkSlows()
     {
+        // add/reset timer
         slow_timer = 10;
+        // if not maxed tier add a tier
         if(slow_tier < 10)
         {
             slow_tier += 1;
@@ -159,7 +119,9 @@ public class Enemy : Shootable
 
     public void MarkBurns()
     {
+        // add/reset timer
         burn_timer = 10;
+        // if not maxed tier add a tier
         if(burn_tier < 10)
         {
             burn_tier += 1;
