@@ -938,6 +938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129470377}
   - component: {fileID: 129470378}
+  - component: {fileID: 129470379}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -1056,6 +1057,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &129470379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129470376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddc50585280eee48a8e82bc408c9ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: e632e61d39327064fbc67a790164bbeb, type: 3}
+  - {fileID: 8300000, guid: 6e5b0a998a7c2164fb74e455882c7098, type: 3}
+  - {fileID: 8300000, guid: 93712c824196eaf41ab6e504e3c3d63c, type: 3}
+  - {fileID: 8300000, guid: da8bd694089d9ac4085f1d557ac07c7c, type: 3}
+  - {fileID: 8300000, guid: 315e4432f359fda42b3322bf38263ee8, type: 3}
+  - {fileID: 8300000, guid: 6e1f9306609550245a05d950aa5e7402, type: 3}
+  - {fileID: 8300000, guid: f28fcc5353292f2468522995516f1e50, type: 3}
+  - {fileID: 8300000, guid: 06129efa9937b2d4587502fc59f80a7f, type: 3}
+  audioSource: {fileID: 129470378}
 --- !u!96 &129887842 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 457875225222616110, guid: 4945d9a944fe7b74d87c59f99cae3683, type: 3}
@@ -1350,7 +1373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.380188
+      value: 34.380123
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3091,8 +3114,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000005
-  m_Size: 0.85353637
+  m_Value: 1.0000054
+  m_Size: 0.85353
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

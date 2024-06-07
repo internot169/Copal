@@ -21,6 +21,8 @@ public class BatTeleporter : Teleporter
         base.gameManager.BatUI.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
         base.gameManager.BatUI.SetActive(false);
+        base.gameManager.currentRoom().visited = true;
+        base.gameManager.currentRoom().gameObject.SetActive(false);
         StartCoroutine(RandomRoomMove(other));
     }
 
