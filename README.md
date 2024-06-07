@@ -33,24 +33,25 @@ Go to Assets/Scripts to see our code
 
 -   This stores definitions for enemy objects. It also stores a definition for the physical manifestation of the wumpus
     
--   Enemy.cs
+-   Enemy.cs - Handles enemy movement, HP, effects, and triggers shooting
     
--   EnemyGun.cs
+-   EnemyGun.cs - Handles enemy shooting and raycasts
     
--   EnemySpawner.cs
+-   EnemySpawner.cs - Spawns Enemies. What did you expect?
     
--   Wumpus.cs
+-   Wumpus.cs - Handles basic Wumpus mechanics such as HP + death
     
--   WumpusAI.cs
+-   WumpusAI.cs - Handles movement and the 4 attacks. Analogous to Enemy.cs
     
--   WumpusCollisionScript.cs
+-   WumpusCollisionScript.cs - Handles collision with the Wumpus body
     
--   WumpusDroneGun.cs
+-   WumpusDroneGun.cs - Handles shooting by the Wumpus' overhead drones. Analogous to EnemyGun.cs
     
 
 /GameManagement
 
 -   Stores teleporters between rooms (also carry hazards)
+
 -   Teleporter.cs - Parent objects for all teleporters
     
 -   BatTeleporter.cs - Triggers when Bat hazard assigned to room
@@ -59,7 +60,6 @@ Go to Assets/Scripts to see our code
     
 -   PitTeleporter.cs - Triggers when Pit hazard assigned to a room
     
-
 -   AugmentManager.cs - Manages state of augments currently on player
     
 -   RoomGenerator.cs - Generates rooms and their links randomly. Assigns hazard
@@ -136,15 +136,9 @@ Python - install python version 3.10 or greater, run
 
 ## Tutorial
 
-  
-
 Make note of this - I won’t let you see it again >:). Your learning curve better be sharper than mine!
 
-  
-
 The object of this game is to find and kill the Wumpus (me), before I can take over the world with my algorithms! There is only one way to win: you must discover which room I am hiding in and surprise it by shooting an arrow (not your gun!) into that room from an adjacent room. Then, you will enter that room and destroy me!
-
-  
 
 ### Controls
 
@@ -162,19 +156,10 @@ The object of this game is to find and kill the Wumpus (me), before I can take o
 -   This allows you to shoot the special arrows to kill the wumpus with
     
 -   It also allows you to open the shop, to buy more arrows, buy secrets, or buy a random augment
-    
-
-  
 
 Good luck!! I’m going to go make a cup of coffee…
 
-  
-  
-  
-
 (Psst.. hero.. it’s me - human intelligence) I’ll help you out.
-
-  
 
 ### Traversing the Game
 
@@ -215,7 +200,7 @@ Ryan Li - rli@eastsideprep.org
 
 Rishay Puri - rpuri@eastsideprep.org
 
-Jack Goetzmann - jgoetzmann.eastsideprep.org
+Jack Goetzmann - jgoetzmann*eastsideprep.org
 
   
   
