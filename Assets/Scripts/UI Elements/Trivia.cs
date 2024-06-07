@@ -15,9 +15,7 @@ public class Trivia : MonoBehaviour
     public TMP_Text questionText;
     public TMP_Text[] choiceTexts;
 
-    public Question[] questions;
-
-    public Question[] answered;
+    public List<Question> questions;
 
     void Awake(){
         LoadData();
@@ -29,11 +27,9 @@ public class Trivia : MonoBehaviour
     void LoadData(){
         var file = Resources.Load<TextAsset>(path);
         Debug.Log((string) file.text);
-        List<Question> list = readJsonArray((string) file.text);
-        questions = new Question[list.Count];
-        for (int i = 0; i < questions.Length; i++){
-            list[i].setup();
-            questions[i] = list[i];
+        questions = readJsonArray((string) file.text);
+        for (int i = 0; i < questions.Count; i++){
+            questions[i].setup();
         }
     }
 
@@ -41,9 +37,9 @@ public class Trivia : MonoBehaviour
     bool answeredQ = false;
     bool correct = false;
     public string getUnknownAnswer(){
-        int index = Random.Range(0, questions.Length);
+        int index = Random.Range(0, questions.Count);
         while (questions[index].answered || questions[index].known){
-            index = Random.Range(0, questions.Length);
+            index = Random.Range(0, questions.Count);
         }
         questions[index].known = true;
         return questions[index].lorePrereq;
@@ -55,21 +51,20 @@ public class Trivia : MonoBehaviour
         mg.pauseGame();
         int correctlyAnswered = 0;
         for (int i = 0; i < count; i++){
-            questionIndex = Random.Range(0, questions.Length);
+            questionIndex = Random.Range(0, questions.Count);
 
             int iterations = 0;
-            while ((questions[questionIndex].answered || !questions[questionIndex].known) && iterations < (2 * questions.Length)){
-                questionIndex = Random.Range(0, questions.Length);
+            while ((questions[questionIndex].answered || !questions[questionIndex].known) && iterations < (2 * questions.Count)){
+                questionIndex = Random.Range(0, questions.Count);
                 iterations++;
             }
-            if (iterations >= (2 * questions.Length)){
+            if (iterations >= (2 * questions.Count)){
                 // GPT question
+                // For now, just gets the zeroth question
             }
             questionText.text = questions[questionIndex].question;
 
 
-            // TODO: Make sure you know it else GPT above
-            // TODO: add GPT randomly
             for (int j = 0; j < choiceTexts.Length; j++){
                 choiceTexts[j].text = questions[questionIndex].choices[j];
             }
