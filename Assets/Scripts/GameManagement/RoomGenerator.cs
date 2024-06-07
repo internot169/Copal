@@ -90,6 +90,8 @@ public class RoomGenerator : MonoBehaviour
             rooms[i].connectedTo[0] = (i + 1) % 30;
 
             changeTeleporters(i, 0, (i + 1) % 30);
+            // have it update its numbers
+            rooms[i].doors[0].AssignNumbers();
             
             // Load the rest of the links randomly
             for (int j = 1; j < 3; j++)
@@ -102,9 +104,11 @@ public class RoomGenerator : MonoBehaviour
                 }
 
                 changeTeleporters(i, j, rand);
+                // have it update its numbers
                 
                 rooms[i].doors[j].next = rooms[rand];
                 rooms[i].connectedTo[j] = rand;
+                rooms[i].doors[j].AssignNumbers();
             }
         }
     }
