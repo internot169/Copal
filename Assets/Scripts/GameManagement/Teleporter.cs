@@ -41,9 +41,10 @@ public class Teleporter : PlayerCollider
         if(isOn && other.name == "Player"){
             gameManager.pauseGame();
             // tell the gamemanager that you are teleporting off this door. 
-            // not using messaging because I'm unfamiliar, since I come from java. 
-            // I think its easier to update a pointer.
             // custom handling for the boss and pit teleporters. 
+            // We interact with gameManager here, but it's limited.
+            // Breaking abstraction is mainly to allow shoot to call move()
+            // and to pause/play the game and update turns
             if (this is BossTeleporter || this is PitTeleporter){
                 gameManager.move(next.roomNum, false, this);
                 // Set inactive later

@@ -11,6 +11,9 @@ public class BossTeleporter : Teleporter
     public void receive(bool correct){
         Debug.Log("Received");
         // if trivia is correct, then move to next room, and move the wumpus. 
+        // We interact with gameManager here, but it's limited.
+        // Breaking abstraction is mainly to allow shoot to call move()
+        // and to pause/play the game and update turns
         if (correct){
             next.gameObject.SetActive(true);
             next.adjacencyCheck();

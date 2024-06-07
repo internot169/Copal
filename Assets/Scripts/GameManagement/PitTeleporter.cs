@@ -11,6 +11,9 @@ public class PitTeleporter : Teleporter
     public void receive(bool correct){
         Debug.Log("Received");
         Debug.Log(correct);
+        // We interact with gameManager here, but it's limited.
+        // Breaking abstraction is mainly to allow shoot to call move()
+        // and to pause/play the game and update turns
         // if the answer is correct, send to the right room and treat normally. 
         if (correct){
             Room temp = base.next;
