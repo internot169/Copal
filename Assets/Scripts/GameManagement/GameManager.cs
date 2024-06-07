@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         RoomGenerator rg = GetComponent<RoomGenerator>();
-        testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room" + rg.batRoom + "\n Pit Room" + rg.pitRoom + "\n Current Room: " + roomNum;
+        testText.text = "Wumpus Room: " + rg.wumpusRoom + "\n Bat Room: " + rg.batRoom + "\n Pit Room: " + rg.pitRoom + "\n Current Room: " + roomNum;
         roomText.text = "Room " + roomNum.ToString();
         Inventory.text = "Coins: " + coins+ "\nArrows: " + arrows + "\nLives: " + lives + "\nTurns: " + turns;
 
