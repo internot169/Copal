@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_in: 0
+  damage: 10
+  time_length: 0
 --- !u!54 &529326115218897655
 Rigidbody:
   m_ObjectHideFlags: 0
