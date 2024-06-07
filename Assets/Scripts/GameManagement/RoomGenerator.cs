@@ -123,7 +123,7 @@ public class RoomGenerator : MonoBehaviour
             rooms[i].doors[j].next = tempRoom;
             rooms[i].doors[j].Awake();
         } else if (toCheck == batRoom){
-            // Change the teleporter to a boss teleporter
+            // Change the teleporter to a bat teleporter
             GameObject obj = rooms[i].doors[j].gameObject;
             Room tempRoom = rooms[i].doors[j].next;
 
@@ -136,7 +136,7 @@ public class RoomGenerator : MonoBehaviour
             rooms[i].doors[j].next = tempRoom;
             rooms[i].doors[j].Awake();
         } else if (toCheck == pitRoom) {
-            // Change the teleporter to a boss teleporter
+            // Change the teleporter to a [pit] teleporter
             GameObject obj = rooms[i].doors[j].gameObject;
             Room tempRoom = rooms[i].doors[j].next;
 
