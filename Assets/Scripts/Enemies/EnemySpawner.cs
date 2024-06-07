@@ -10,9 +10,14 @@ public class EnemySpawner : MonoBehaviour
     public int count;
     [Tooltip("the radius within which to spawn")]
     public float range;
+
+    public GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
+        // grab turn count from game manager, then scale count according to turn count. 
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        count += gm.turns * 2;
         for (int i = 0; i < count; i++){
             //pick position:
             float x = Random.Range(-range, range);
