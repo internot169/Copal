@@ -7,11 +7,6 @@ public class Trap : PlayerCollider
     // Start is called before the first frame update
 
     public bool player_in = false;
-    void Start()
-    {
-        
-    }
-
     // if interacting with player, then player is inside. 
     // Allow children to handle differently based on case. 
     public override void InteractPlayer(Collider other)
@@ -23,16 +18,9 @@ public class Trap : PlayerCollider
 
     public void OnTriggerExit(Collider other)
     {
-        // change this to player please
-        // I believe in you Yile
+        // on exit, mark player as not inside. 
         if(other.name == "Player"){
             player_in = false;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("the radius within which to spawn")]
     public float range;
 
+    // reference to game manager to get the turn count. 
     public GameManager gm;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
             // the flat plane is the XZ plane in unity. Y is the height(so to speak).
             float z = Random.Range(-range, range);
 
-            //TODO: make sure to offset y if we want that. 
             Instantiate(prefab, new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z), Quaternion.identity);
         }
     }
