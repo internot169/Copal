@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int arrows = 3;
     public int coins = 0;
     private int roomNum = 0;
-    public int lives = 3;
+    public int lives = 5;
     public TMP_Text roomText;
     public GameObject wumpusRoom;
     public GameObject bossObject;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
     public void lossTest(){
         lose();
     }
-    
+
     public bool lose(){
         if (!lost){
             if (lives <= 1){
