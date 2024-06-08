@@ -106,15 +106,14 @@ public class GameManager : MonoBehaviour
         Player.transform.position = currentRoom().spawnLocation.position;
 
         // Check testmode
-        info = MenuInfo.instance;
+        info = GameObject.Find("MenuInfo").GetComponent<MenuInfo>();
         if (info == null){
             name = "test";
         } else {
             name = info.name;
         }
-        if (name == "test"){
-            testmode = true;
-        }
+        testmode = true;
+        Debug.Log("it is true");
         logger.log("You're mine now ... You have 5 lives, 3 arrows, and 0 coins. Good luck. You'll need it.");
 
         if (testmode){

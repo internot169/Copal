@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34.38019
+      value: -615.4121
       objectReference: {fileID: 0}
     - target: {fileID: 8212628001840077427, guid: 9bcb57fad58bc9b4f8553a6e32a3b23d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2963,8 +2963,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520448619}
   m_HandleRect: {fileID: 520448618}
   m_Direction: 2
-  m_Value: 1.0000011
-  m_Size: 0.85356164
+  m_Value: 46.632687
+  m_Size: 0.8535615
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3126,16 +3126,15 @@ MonoBehaviour:
   wumpusSpawnLoc: {fileID: 754054907}
   Player: {fileID: 1004664761}
   pauseUI: {fileID: 1348486099}
-  warning: {fileID: 1705870254}
-  testmode: 0
-  testText: {fileID: 1362961866}
-  testUI: {fileID: 629322698}
   ShopUI: {fileID: 800967120}
   Inventory: {fileID: 1409635001}
   BatUI: {fileID: 210650175}
   PitUI: {fileID: 1506279900}
   WinUI: {fileID: 1683834153}
   LoseUI: {fileID: 576776915}
+  testmode: 0
+  testText: {fileID: 1362961866}
+  testUI: {fileID: 629322698}
 --- !u!114 &849054437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4761,7 +4760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.6, y: 122.55002}
+  m_AnchoredPosition: {x: -1.6, y: 96.6}
   m_SizeDelta: {x: 200, y: 35.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362961866
@@ -5415,7 +5414,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 605058494}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
